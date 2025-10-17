@@ -36,6 +36,18 @@ button{
   cursor: pointer;
   transition: background .3s ease-in-out;
 }
+.btn-primary-outlined-lg-2{
+  background: var(--color-white);
+  color: var(--color-accent-1);
+  font-family: var(--secondary-font);
+  padding: .75em 3em;
+  border-radius: .35rem;
+  border: 3px solid var(--color-accent-1);
+  font-weight: 600;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: background .3s ease-in-out;
+}
 .btn-primary-outlined-lg:hover {
   background: #f3f3f3;
   border-color: var(--color-primary-h);

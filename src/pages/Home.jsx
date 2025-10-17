@@ -7,20 +7,21 @@ import WhyUs from '../components/WhyUs';
 import BestSelling from '../components/BestSelling';
 import EcoFriendly from '../components/EcoFriendly';
 import DiscountClub from '../components/DiscountClub';
+import Newsletter from '../components/Newsletter';
 
 
 const Home = () => {
     return(
         <>
-        <Topbar/>
-        <Navbar/>
-        <Hero/>
-        <BestCategory/>
-        <WhyUs/>
-        <BestSelling/>
-        <EcoFriendly/>
-        <DiscountClub/>
-
+            <Topbar/>
+            <Navbar/>
+            <Hero/>
+            <BestCategory/>
+            <WhyUs/>
+            <BestSelling/>
+            <EcoFriendly/>
+            <DiscountClub/>
+            <Newsletter/>
         </>
     )
 }

@@ -49,7 +49,7 @@ const DiscountClub = () => {
                 </p>
 
                 <div className="mt-6">
-                    <button className="btn-primary-outlined-lg-2 hover:shadow-lg transition-all duration-300">Subscribe Now !</button>
+                    <button className="btn-primary-outlined-lg-2 hover:shadow-lg transition-all duration-300">Join Now !</button>
                 </div>
             </aside>
           

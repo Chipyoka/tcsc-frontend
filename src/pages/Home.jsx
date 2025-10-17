@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import BestCategory from '../components/BestCategory';
 import WhyUs from '../components/WhyUs';
-
+import BestSelling from '../components/BestSelling';
 
 
 const Home = () => {
@@ -15,9 +15,7 @@ const Home = () => {
         <Hero/>
         <BestCategory/>
         <WhyUs/>
-        <div>
-           
-        </div>
+        <BestSelling/>
 
         </>
     )

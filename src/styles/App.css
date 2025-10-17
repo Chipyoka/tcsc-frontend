@@ -1,11 +1,11 @@
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--secondary-font);
-  font-weight: 700;
   line-height: 1.25;
 }
 
 button{
   margin: .15em;
+  font-family: var(--secondary-font);
 }
 .btn-primary-lg{
   background: var(--color-primary);
@@ -44,11 +44,11 @@ button{
   background: var(--color-primary);
   color: var(--color-white);
   font-family: var(--secondary-font);
-  padding: .5em 2em;
+  padding: .5em 1.5em;
   border-radius: .35rem;
   border: 3px solid var(--color-primary);
   font-weight: 400;
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   cursor: pointer;
   transition: background .3s ease-in-out;
 }
@@ -61,11 +61,11 @@ button{
   background: var(--color-white);
   color: var(--color-primary);
   font-family: var(--secondary-font);
-  padding: .5em 2em;
+  padding: .5em 1.5em;
   border-radius: .35rem;
   border: 3px solid var(--color-primary);
   font-weight: 400;
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   cursor: pointer;
   transition: background .3s ease-in-out;
 }
@@ -76,10 +76,6 @@ button{
 
 a, a:visited, a:focus, a:active{
   text-decoration: none;
-}
-
-p{
-  font-weight: 500;
 }
 
 .container-x{
@@ -116,4 +112,14 @@ p{
 .rotate-y{
   display: inline-block; 
   transform: rotate(6deg);
+}
+
+/* Hides scrollbar but allows scrolling */
+.no-scrollbar {
+  -ms-overflow-style: none !important;  /* IE and Edge */
+  scrollbar-width: none !important;     /* Firefox */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none !important;             /* Chrome, Safari, Opera */
 }

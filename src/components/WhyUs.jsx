@@ -11,7 +11,7 @@ const WhyUs = () => {
                     <img src={Package} alt="" className="w-[100px]" />
                 </div>
                 <div>
-                    <h3 className="text-white text-xl">Enjoy Fast Delivery</h3>
+                    <h3 className="text-white text-xl font-bold">Enjoy Fast Delivery</h3>
                     <p className="text-white text-md">Get your products delivered to your doorstep in no time.</p>
                 </div>
             </div>
@@ -20,7 +20,7 @@ const WhyUs = () => {
                     <img src={Offer} alt="" className="w-[120px]" />
                 </div>
                 <div>
-                    <h3 className="text-white text-xl">Discount Club Offers</h3>
+                    <h3 className="text-white text-xl font-bold">Discount Club Offers</h3>
                     <p className="text-white text-md">Join our club and enjoy exclusive discounts on your favorite products.</p>
                 </div>
             </div>
@@ -29,7 +29,7 @@ const WhyUs = () => {
                     <img src={Sprayer} alt="" className="w-[66px]" />
                 </div>
                 <div>
-                    <h3 className="text-white text-xl">Assorted Products</h3>
+                    <h3 className="text-white text-xl font-bold">Assorted Products</h3>
                     <p className="text-white text-md">Explore a wide range of products tailored to your needs.</p>
                 </div>
             </div>

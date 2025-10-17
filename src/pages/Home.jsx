@@ -2,6 +2,7 @@
 import Topbar from '../components/Topbar';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
+import BestCategory from '../components/BestCategory';
 
 
 
@@ -11,6 +12,7 @@ const Home = () => {
         <Topbar/>
         <Navbar/>
         <Hero/>
+        <BestCategory/>
         <div>
            
         </div>

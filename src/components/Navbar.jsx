@@ -17,7 +17,7 @@ const Navbar = () => {
 
             {/* search */}
             <div className="w-[60%]">
-            <div className="flex items-center gap-2 bg-white border-2 border-gray-300 rounded-sm px-3 py-4 w-full max-w-lg focus-within:shadow-sm focus-within:border-[var(--color-primary)] focus-within:border-[var(--color-primary)]">
+            <div className="flex items-center gap-2 bg-white border-2 border-gray-300 rounded-lg px-3 py-4 w-full max-w-lg focus-within:shadow-sm focus-within:border-[var(--color-primary)] focus-within:border-[var(--color-primary)]">
                 <Search className="w-6 h-6 text-gray-500" />
                 <input
                     type="search"

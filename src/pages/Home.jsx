@@ -5,6 +5,7 @@ import Hero from '../components/Hero';
 import BestCategory from '../components/BestCategory';
 import WhyUs from '../components/WhyUs';
 import BestSelling from '../components/BestSelling';
+import EcoFriendly from '../components/EcoFriendly';
 
 
 const Home = () => {
@@ -16,6 +17,7 @@ const Home = () => {
         <BestCategory/>
         <WhyUs/>
         <BestSelling/>
+        <EcoFriendly/>
 
         </>
     )

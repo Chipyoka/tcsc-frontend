@@ -8,6 +8,7 @@ import BestSelling from '../components/BestSelling';
 import EcoFriendly from '../components/EcoFriendly';
 import DiscountClub from '../components/DiscountClub';
 import Newsletter from '../components/Newsletter';
+import Footer from '../components/Footer';
 
 
 const Home = () => {
@@ -22,6 +23,7 @@ const Home = () => {
             <EcoFriendly/>
             <DiscountClub/>
             <Newsletter/>
+            <Footer/>
         </>
     )
 }

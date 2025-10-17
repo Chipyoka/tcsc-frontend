@@ -78,11 +78,9 @@ button{
 
 a, a:visited, a:focus, a:active{
   text-decoration: none;
-  color: var(--color-black);
 }
 
 p{
-  color: var(--color-black);
   font-weight: 500;
 }
 
@@ -96,4 +94,8 @@ p{
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+*{
+  transition: all 0.3s ease-in-out;
 }

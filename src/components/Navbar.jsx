@@ -22,7 +22,7 @@ const Navbar = () => {
                 <input
                     type="search"
                     name="search"
-                    placeholder="Find products..."
+                    placeholder="Find a product..."
                     className="flex-1 outline-none text-sm text-gray-700 placeholder-gray-400"
                 />
             </div>

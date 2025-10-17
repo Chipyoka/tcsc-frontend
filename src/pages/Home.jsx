@@ -1,4 +1,3 @@
-
 import Topbar from '../components/Topbar';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
@@ -9,10 +8,10 @@ import EcoFriendly from '../components/EcoFriendly';
 import DiscountClub from '../components/DiscountClub';
 import Newsletter from '../components/Newsletter';
 import Footer from '../components/Footer';
-
+import ScrollToTop from '../components/ScrollToTop';
 
 const Home = () => {
-    return(
+    return (
         <>
             <Topbar/>
             <Navbar/>
@@ -24,6 +23,7 @@ const Home = () => {
             <DiscountClub/>
             <Newsletter/>
             <Footer/>
+            <ScrollToTop/>
         </>
     )
 }

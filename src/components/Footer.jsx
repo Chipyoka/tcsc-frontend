@@ -28,9 +28,11 @@ const Footer = () => {
                 </div>
                 <div className="text-white flex flex-col md:flex-row justify-between items-start gap-24 max-w-full md:max-w-3/4">
                     <div>
-                        <h4 className="text-2xl font-medium mb-6">Products</h4>
+                        <h4 className="text-2xl font-medium mb-6">Company</h4>
                         <ul className="flex flex-col gap-y-4 w-full">
                             <li className="hover:underline"><a href="">Shop</a></li>
+                            <li className="hover:underline"><a href="">The Discount Club</a></li>
+                            <li className="hover:underline"><a href="">Blog</a></li>
                             <li className="hover:underline"><a href="">About</a></li>
                         </ul>
                     </div>
@@ -63,7 +65,7 @@ const Footer = () => {
                     </div>
                 </div>
             </footer>
-            <div className="bg-black px-16 py-4 text-white flex justify-between items-center text-sm">
+            <div className="bg-black px-16 py-4 text-white flex flex-col md:flex-row gap-4 justify-between items-center text-sm">
                 <p>Copyright © 2025 All Rights Reserved.</p>
                 <p>🪄 Magic by: <strong className="hover:underline"><a href="https://chipyoka.vercel.app/" target="_blank" >Moontipo</a></strong></p>
             </div>

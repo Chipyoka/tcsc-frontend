@@ -1,9 +1,12 @@
 import { useState } from "react";
+import {useNavigate} from 'react-router-dom';
 import Logo from '../assets/images/logo-l.png';
 import { Search, UserCircle, ShoppingCart, Menu, X, ChevronRight } from "lucide-react";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const navigate = useNavigate();
 
   const navLinks = [
     "Disinfectants",
@@ -47,7 +50,7 @@ const Navbar = () => {
             <ShoppingCart className="w-9 h-9 text-[var(--color-primary)]" />
           </div>
           <div>
-            <button className="btn-primary-outlined-sm">Signup</button>
+            <button className="btn-primary-outlined-sm" onClick={() => {navigate('/login')}}>Signup</button>
           </div>
         </div>
       </nav>
@@ -125,7 +128,7 @@ const Navbar = () => {
 
           {/* Signup button */}
           <li>
-            <button className="btn-primary-sm w-full mt-4">Signup</button>
+            <button className="btn-primary-sm w-full mt-4" onClick={() => {navigate('/login')}}>Signup</button>
           </li>
         </ul>
       </div>

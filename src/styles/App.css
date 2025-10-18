@@ -132,7 +132,7 @@ a, a:visited, a:focus, a:active{
     transform: rotate(0deg) !important;
   }
 
-  .btn-primary-sm, .btn-primary-lg, .btn-primary-lg-2{
+  .btn-primary-sm, .btn-primary-lg, .btn-primary-lg-2, .btn-primary-outlined-lg-2 {
     padding: .75em 1.5em !important;
     font-size: 1.05rem;
   }

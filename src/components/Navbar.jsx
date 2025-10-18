@@ -27,7 +27,7 @@ const Navbar = () => {
 
         {/* search */}
         <div className="w-[60%]">
-          <div className="flex items-center gap-2 bg-white border-2 border-gray-300 rounded-lg px-3 py-4 w-full max-w-lg focus-within:shadow-sm focus-within:border-[var(--color-primary)]">
+          <div className="flex items-center gap-2 bg-white border-2 border-gray-300 rounded-lg px-3 py-3 w-full max-w-lg focus-within:shadow-sm focus-within:border-[var(--color-primary)]">
             <Search className="w-6 h-6 text-gray-500" />
             <input
               type="search"
@@ -62,7 +62,7 @@ const Navbar = () => {
       </div>
 
       {/* ---------------- Mobile Navbar ---------------- */}
-      <nav className="flex md:hidden justify-between items-center bg-[var(--color-white)] px-6 py-4 shadow-sm">
+      <nav className="sticky top-0 z-50 w-full md:hidden flex justify-between items-center bg-[var(--color-white)] px-6 py-4 shadow-sm">
         {/* Logo */}
         <div className="flex items-center">
           <img src={Logo} alt="TCSC Logo" className="w-36" />
@@ -84,10 +84,13 @@ const Navbar = () => {
 
       {/* Mobile Slide-in Menu */}
       <div
-        className={`fixed top-0 right-0 h-full w-full bg-[var(--color-white)] shadow-lg transform transition-transform duration-300 z-50
+        className={`fixed top-0 right-0 h-full w-full bg-[var(--color-white)] shadow-lg transform transition-transform duration-300 z-100
           ${menuOpen ? "translate-x-0" : "translate-x-full"}`}
       >
-        <div className="flex justify-end p-4">
+        <div className="flex justify-between p-4 mb-6">
+                 <div className="flex items-center">
+          <img src={Logo} alt="TCSC Logo" className="w-36" />
+            </div>
           <button onClick={() => setMenuOpen(false)}>
             <ChevronRight className="w-9 h-9 text-[var(--color-primary)]" />
           </button>

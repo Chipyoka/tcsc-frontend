@@ -4,6 +4,15 @@ import Logo from '../assets/images/logo-l-w.png'
 import {Phone, Mail} from 'lucide-react';
 
 const Footer = () => {
+
+    // handle year display in copyright text
+    function getCopyrightYear() {
+        const startYear = 2025;
+        const currentYear = new Date().getFullYear();
+        return currentYear === startYear ? `${startYear}` : `${startYear} - ${currentYear}`;
+    }
+
+
     return(
         <>
             <footer className="bg-[var(--color-primary-h)] px-8 md:px-16 py-12 md:py-20 flex flex-col md:flex-row justify-between items-start gap-12">
@@ -67,8 +76,8 @@ const Footer = () => {
                     </div>
                 </div>
             </footer>
-            <div className="bg-black px-16 py-4 text-white flex flex-col md:flex-row gap-4 justify-between items-center text-sm text-center md:text-left">
-                <p>Copyright © 2025 All Rights Reserved.</p>
+            <div className="bg-black px-4  md:px-16 py-4 text-white flex flex-col md:flex-row gap-2 justify-between items-start md:items-center text-sm text-left">
+                <p>Copyright © {getCopyrightYear()}. All Rights Reserved.</p>
                 <p>🪄 Magic by: <strong className="hover:underline"><a href="https://chipyoka.vercel.app/" target="_blank" >Moontipo</a></strong></p>
             </div>
         </>

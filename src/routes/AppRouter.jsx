@@ -4,7 +4,7 @@ import Home from '../pages/Home.jsx';
 // import Products from '../pages/Products.jsx';
 // import ProductDetail from '../pages/ProductDetail.jsx';
 import Login from '../pages/Login.jsx';
-// import Register from '../pages/Register.jsx';
+import Register from '../pages/Register.jsx';
 // import Cart from '../pages/Cart.jsx';
 
 export default function AppRouter() {
@@ -13,11 +13,12 @@ export default function AppRouter() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        
+        <Route path="/register" element={<Register />} />
+
         {/* <Route path="/products" element={<Products />} />
         <Route path="/products/:id" element={<ProductDetail />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/register" element={<Register />} /> */}
+         */}
       </Routes>
     </BrowserRouter>
   );

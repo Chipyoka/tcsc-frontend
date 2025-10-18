@@ -5,10 +5,11 @@ const Newsletter = () => {
             <p className="text-lg md:text-center max-w-full md:max-w-[50%] ">Get actionable insights, cost-saving strategies, and product updates tailored for professional environments.</p>
             <div className="mt-6 flex items-center gap-2 bg-white border-2 border-gray-300 rounded-lg px-3 py-4 md:py-2 w-full max-w-full md:max-w-lg focus-within:shadow-sm focus-within:border-[var(--color-primary)] focus-within:border-[var(--color-primary)]">
                  <input
-                    type="text"
+                    type="email"
                     name="email"
                     placeholder="Enter you email address"
                     className="flex-1 outline-none text-sm text-gray-700 placeholder-gray-400"
+                    required
                 />
 
                 <button className="hidden md:block btn-primary-sm">Subscribe</button>

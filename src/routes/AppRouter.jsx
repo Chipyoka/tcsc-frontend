@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import '../styles/App.css';
 import Home from '../pages/Home.jsx';
 import Products from '../pages/Products.jsx';
-// import ProductDetail from '../pages/ProductDetail.jsx';
+import ProductDetail from '../pages/ProductDetails.jsx';
 import Login from '../pages/Login.jsx';
 import Register from '../pages/Register.jsx';
 // import Cart from '../pages/Cart.jsx';
@@ -15,9 +15,8 @@ export default function AppRouter() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/products/:category" element={<Products />} />
-
+        <Route path="/product/:slug" element={<ProductDetail />} />
         {/* 
-        <Route path="/products/:id" element={<ProductDetail />} />
         <Route path="/cart" element={<Cart />} />
          */}
       </Routes>

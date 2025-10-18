@@ -29,6 +29,8 @@ const Products = () => {
     setVisibleCount((prev) => Math.min(prev + 8, totalProducts));
   };
 
+  window.document.title = `${productCategory} | The Cleaning Supplies Co.`;
+
   return (
     <>
       <Topbar />

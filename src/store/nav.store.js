@@ -7,11 +7,12 @@ export const useNavStore = create(
   persist(
     (set) => ({
       productCategory: 'all',
+      selectedProductId: null,
       setProductCategory: (cat) => set({ productCategory: cat }),
+      setProductId: (id) => set({ selectedProductId: id }),
     }),
     {
       name: 'nav-storage', // localStorage key
-      partialize: (state) => ({ productCategory: state.productCategory }), // only store productCategory
     }
   )
 );

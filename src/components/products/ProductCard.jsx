@@ -1,10 +1,28 @@
 import { ShoppingCart, Heart } from 'lucide-react';
+import { getProductSlug } from "../../utils/getProductSlug";
+import {useNavigate} from 'react-router-dom';
+
+import {useNavStore} from '../../store/nav.store.js';
 
 const ProductCard = ({ product }) => {
+
+    const navigate = useNavigate();
+    const {setProductId} = useNavStore();
+
+    const handleRedirect = (name,id) =>{
+        if(!name || !id) return;
+
+  
+        navigate(`/product/${getProductSlug(name)}`)
+        setProductId(id);
+    }
     return (
         <div className="h-[400px] w-[280px] flex flex-col group">
             {/* Image container */}
-            <div className="relative border border-gray-200 rounded-lg h-[50%] overflow-hidden flex items-center justify-center mb-4 bg-[var(--color-white)]">
+            <div 
+                onClick={()=>{handleRedirect(product.name, product.id)}}
+                className="relative border border-gray-200 rounded-lg h-[50%] overflow-hidden flex items-center justify-center mb-4 bg-[var(--color-white)]"
+            >
                 <img
                     src={product.image || '../src/assets/images/default_product.png'}
                     alt={product.name}

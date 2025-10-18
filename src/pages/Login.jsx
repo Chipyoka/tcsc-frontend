@@ -10,7 +10,7 @@ const Login = () => {
 
     const navigate = useNavigate();
     // set title
-    window.title = "Login | The Cleaning Supplies Co.";
+    window.document.title = "Login | The Cleaning Supplies Co.";
 
     return(
         <>

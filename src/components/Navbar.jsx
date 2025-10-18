@@ -86,7 +86,7 @@ const Navbar = () => {
       <nav className="sticky top-0 z-50 w-full md:hidden flex justify-between items-center bg-[var(--color-white)] px-6 py-4 shadow-sm">
         {/* Logo */}
         <div className="flex items-center">
-          <img src={Logo} alt="TCSC Logo" className="w-36" />
+          <img src={Logo} alt="TCSC Logo" className="w-36" onClick={()=> {navigate(`/`)}}/>
         </div>
 
         {/* Right: Cart + Hamburger */}
@@ -110,7 +110,7 @@ const Navbar = () => {
       >
         <div className="flex justify-between p-4 mb-6">
                  <div className="flex items-center">
-          <img src={Logo} alt="TCSC Logo" className="w-36" />
+          <img src={Logo} alt="TCSC Logo" className="w-36" onClick={()=> {navigate(`/`)}} />
             </div>
           <button onClick={() => setMenuOpen(false)}>
             <ChevronRight className="w-9 h-9 text-[var(--color-primary)]" />

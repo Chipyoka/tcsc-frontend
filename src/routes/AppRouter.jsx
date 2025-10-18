@@ -5,11 +5,14 @@ import Products from '../pages/Products.jsx';
 import ProductDetail from '../pages/ProductDetails.jsx';
 import Login from '../pages/Login.jsx';
 import Register from '../pages/Register.jsx';
+
+import HandleScroll from '../components/HandleScroll';
 // import Cart from '../pages/Cart.jsx';
 
 export default function AppRouter() {
   return (
     <BrowserRouter>
+      <HandleScroll/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />

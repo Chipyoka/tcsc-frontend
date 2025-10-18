@@ -6,27 +6,29 @@ import {Phone, Mail} from 'lucide-react';
 const Footer = () => {
     return(
         <>
-            <footer className="bg-[var(--color-primary-h)] px-16 py-20 flex flex-col md:flex-row justify-between items-start gap-12">
+            <footer className="bg-[var(--color-primary-h)] px-8 md:px-16 py-12 md:py-20 flex flex-col md:flex-row justify-between items-start gap-12">
                 <div className="flex flex-col gap-4 justify-start items-start max-w-full md:max-w-1/4">
                     <div>
                         <img src={Logo} alt="" width="200px" />
                     </div>
                     <div className="text-white my-4 max-w-full ">
                         <p>
-                            The premier supplier of cleaning supplies in Hertfordshire,
+                            Premier supplier of cleaning supplies in Hertfordshire,
                             helping small businesses maintain clean, compliant, and efficient environments. 
                         </p>
             
-                        <p className="mt-4">
-                            <address>
+                        <p className="my-4">
+                          
                                 123 Street, Town, <br />
                                 United Kingdom
-                            </address>
+                           
                         </p>
+
+                        <h6>The Cleaning Supplies Co. is a Trademark of <strong>BRIMU VENTURES</strong>.</h6>
                     </div>
 
                 </div>
-                <div className="text-white flex flex-col md:flex-row justify-between items-start gap-24 max-w-full md:max-w-3/4">
+                <div className="text-white flex flex-col md:flex-row justify-between items-start gap-16 md:gap-24 max-w-full md:max-w-3/4">
                     <div>
                         <h4 className="text-2xl font-medium mb-6">Company</h4>
                         <ul className="flex flex-col gap-y-4 w-full">
@@ -65,7 +67,7 @@ const Footer = () => {
                     </div>
                 </div>
             </footer>
-            <div className="bg-black px-16 py-4 text-white flex flex-col md:flex-row gap-4 justify-between items-center text-sm">
+            <div className="bg-black px-16 py-4 text-white flex flex-col md:flex-row gap-4 justify-between items-center text-sm text-center md:text-left">
                 <p>Copyright © 2025 All Rights Reserved.</p>
                 <p>🪄 Magic by: <strong className="hover:underline"><a href="https://chipyoka.vercel.app/" target="_blank" >Moontipo</a></strong></p>
             </div>

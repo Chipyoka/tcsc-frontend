@@ -17,9 +17,9 @@ const BestSelling = () => {
     // smooth scroll handler
     const scroll = (direction) => {
         const container = scrollRef.current;
-        const scrollAmount = 300 * 2; // scroll 2 card widths
+        const scrollAmount = 280 * 1; // scroll 2 card widths
         container.scrollBy({
-            left: direction === "left" ? -scrollAmount : scrollAmount,
+            left: direction === "left" ? - scrollAmount : scrollAmount,
             behavior: "smooth",
         });
     };
@@ -33,10 +33,10 @@ const BestSelling = () => {
             {/* Product list */}
             <div
                 ref={scrollRef}
-                className="flex overflow-x-auto scroll-smooth no-scrollbar gap-x-6 justify-center w-full max-w-[1280px] px-4 mt-4"
+                className="flex overflow-x-auto scroll-smooth no-scrollbar gap-x-6 w-full max-w-[300px] md:max-w-[1280px] px-4 mt-4"
             >
                 {sampleProducts.map((product) => (
-                    <div key={product.id} className="flex-shrink-0 w-[300px]">
+                    <div key={product.id} className="flex-shrink-0 w-[280px]">
                         <ProductCard product={product} />
                     </div>
                 ))}

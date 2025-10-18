@@ -16,16 +16,21 @@ const Hero = () => {
   }, []);
 
   return (
-    <header className="h-[68dvh] overflow-hidden bg-[url('../assets/images/bg-hero-2.jpg')] bg-cover bg-bottom bg-no-repeat flex items-center justify-between relative">
+    <header 
+    className="
+      h-fit
+      md:h-[68dvh] overflow-hidden bg-[url('../assets/images/bg-hero-2.jpg')] bg-cover bg-bottom 
+      bg-no-repeat flex flex-col md:flex-row items-center justify-between relative
+    ">
       
-      <div className="max-w-[50%] space-y-4 px-10 z-10 relative">
-        <h1 className="text-7xl font-bold text-[var(--color-white)]">
+      <div className="max-w-full md:max-w-[50%] space-y-4 px-6 py-12 md:px-10 z-10 relative">
+        <h1 className="text-5xl md:text-7xl font-bold text-[var(--color-white)]">
           Everything you <span className="badge">need</span> to maintain cleanliness.
         </h1>
-        <button className="btn-primary-lg">Explore Our Catalogue</button>
+        <button className="btn-primary-lg w-full md:w-fit">Explore Our Catalogue</button>
       </div>
 
-      <div className="w-[70%] h-[750px] relative">
+      <div className="w-full md:w-[70%] h-[350px] md:h-[750px] relative">
         {images.map((img, index) => (
           <img
             key={index}

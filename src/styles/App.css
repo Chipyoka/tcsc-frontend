@@ -126,6 +126,18 @@ a, a:visited, a:focus, a:active{
   transform: rotate(6deg);
 }
 
+@media screen and (max-width: 768px) {
+    .rotate-y{
+    display: inline-block; 
+    transform: rotate(0deg) !important;
+  }
+
+  .btn-primary-sm, .btn-primary-lg, .btn-primary-lg-2{
+    padding: .75em 1.5em !important;
+    font-size: 1.05rem;
+  }
+}
+
 /* Hides scrollbar but allows scrolling */
 .no-scrollbar {
   -ms-overflow-style: none !important;  /* IE and Edge */

@@ -60,7 +60,7 @@ const Navbar = () => {
           <div className="cursor-pointer">
             <UserCircle className="w-9 h-9 text-[var(--color-primary)]" />
           </div>
-          <div className="cursor-pointer">
+          <div className="cursor-pointer" onClick={() => {navigate('/cart')}}>
             <ShoppingCart className="w-9 h-9 text-[var(--color-primary)]" />
           </div>
           <div>
@@ -91,7 +91,7 @@ const Navbar = () => {
 
         {/* Right: Cart + Hamburger */}
         <div className="flex items-center gap-4">
-          <ShoppingCart className="w-9 h-9 text-[var(--color-primary)] cursor-pointer" />
+          <ShoppingCart className="w-9 h-9 text-[var(--color-primary)] cursor-pointer"  onClick={() => {navigate('/cart')}}/>
 
           {/* Hamburger button */}
           <button

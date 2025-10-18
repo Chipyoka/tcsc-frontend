@@ -5,9 +5,9 @@ import Products from '../pages/Products.jsx';
 import ProductDetail from '../pages/ProductDetails.jsx';
 import Login from '../pages/Login.jsx';
 import Register from '../pages/Register.jsx';
+import Cart from '../pages/Cart.jsx';
 
 import HandleScroll from '../components/HandleScroll';
-// import Cart from '../pages/Cart.jsx';
 
 export default function AppRouter() {
   return (
@@ -19,9 +19,7 @@ export default function AppRouter() {
         <Route path="/register" element={<Register />} />
         <Route path="/products/:category" element={<Products />} />
         <Route path="/product/:slug" element={<ProductDetail />} />
-        {/* 
         <Route path="/cart" element={<Cart />} />
-         */}
       </Routes>
     </BrowserRouter>
   );

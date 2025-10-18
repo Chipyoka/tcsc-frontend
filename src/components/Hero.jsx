@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import {useNavigate} from 'react-router-dom'
 import Cleaning from '../assets/images/cleaning.png';
 import Tools from '../assets/images/tools.png';
 
@@ -6,7 +7,7 @@ const images = [Cleaning, Tools];
 
 const Hero = () => {
   const [current, setCurrent] = useState(0);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrent(prev => (prev + 1) % images.length);
@@ -27,7 +28,7 @@ const Hero = () => {
         <h1 className="text-5xl md:text-7xl font-bold text-[var(--color-white)]">
           Everything you <span className="badge">need</span> to maintain cleanliness.
         </h1>
-        <button className="btn-primary-lg w-full md:w-fit">Explore Our Catalogue</button>
+        <button className="btn-primary-lg w-full md:w-fit" onClick={()=> {navigate(`/products/all`)}}>Explore Our Catalogue</button>
       </div>
 
       <div className="w-full md:w-[70%] h-[350px] md:h-[750px] relative">

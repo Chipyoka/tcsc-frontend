@@ -3,19 +3,31 @@ import {useNavigate} from 'react-router-dom';
 import Logo from '../assets/images/logo-l.png';
 import { Search, UserCircle, ShoppingCart, Menu, X, ChevronRight } from "lucide-react";
 
+import {useNavStore} from '../store/nav.store.js';
+
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const {productCategory, setProductCategory} = useNavStore();
 
   const navigate = useNavigate();
 
   const navLinks = [
-    "Disinfectants",
-    "Floor Cleaners",
-    "Washroom Cleaners",
-    "Sanitizers",
-    "Handwash Cleaners",
-    "Cleaning Cloths"
+    {tag: "Disinfectants", slug:"disinfectants"},
+    {tag: "Floor Cleaners", slug:"floor-cleaners"},
+    {tag: "Washroom Cleaners", slug:"washroom-cleaners"},
+    {tag: "Sanitizers", slug:"sanitizers"},
+    {tag: "Handwash Cleaners", slug:"handwash-cleaners"},
+    {tag: "Cleaning Cloths", slug:"cleaning-cloths"},
   ];
+
+  const handleToProducts = (link) =>{
+    if(!link) return;
+
+    navigate(`/products/${link.slug}`)
+    setProductCategory(link.tag);
+    // alert(link.tag)
+
+  }
 
   return (
     <>
@@ -24,7 +36,7 @@ const Navbar = () => {
         {/* logo + categories */}
         <div className="flex justify-start gap-x-12 items-center w-[30%]">
           <div>
-            <img src={Logo} alt="TCSC Logo" width="200px" />
+            <img src={Logo} alt="TCSC Logo" width="200px"  onClick={()=> {navigate(`/`)}} />
           </div>
         </div>
 
@@ -59,7 +71,11 @@ const Navbar = () => {
       <div className="hidden md:flex md:px-12 md:py-4 md:bg-[var(--color-primary)]">
         <ul className="flex justify-center gap-x-30 items-center text-xl text-[var(--color-white)]">
           {navLinks.map((link, i) => (
-            <li key={i} className="cursor-pointer">{link}</li>
+            <li 
+              key={i} 
+              className="cursor-pointer"
+              onClick={()=> {handleToProducts(link)}}
+            >{link.tag}</li>
           ))}
         </ul>
       </div>
@@ -109,13 +125,12 @@ const Navbar = () => {
         <ul className="flex flex-col gap-6 p-6 text-lg text-[var(--color-primary)]">
           {/* Nav Links */}
           {navLinks.map((link, i) => (
-            <li key={i} className="cursor-pointer hover:text-[var(--color-primary-dark)]">{link}</li>
+            <li 
+              key={i} 
+              className="cursor-pointer hover:text-[var(--color-primary-dark)]"
+              onClick={()=> {handleToProducts(link)}}
+            >{link.tag}</li>
           ))}
-
-          {/* Search Input */}
-          <li>
-       
-          </li>
 
           {/* Profile */}
           <li className="flex items-center gap-2 mt-2">

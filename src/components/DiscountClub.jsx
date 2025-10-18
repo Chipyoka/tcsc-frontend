@@ -3,7 +3,7 @@ import Delivery from '../assets/images/delivery.png';
 
 const DiscountClub = () => {
     return(
-        <section className="bg-[var(--color-accent-1)] my-6 p-6 md:p-16  gap-12 flex flex-col md:flex-row justify-between items-center border-b-24 border-[var(--color-primary)]">
+        <section className="bg-[var(--color-accent-1)] mt-6 p-6 md:p-16  gap-12 flex flex-col md:flex-row justify-between items-center border-b-24 border-[var(--color-primary)]">
               <aside className="max-w-full md:max-w-1/2 rounded-2xl">
                 <img src={Delivery} alt="We will deliver to your door step" className="w-full h-full rounded-lg md:rounded-2xl" />
             </aside>

@@ -7,10 +7,11 @@ import {useNavStore} from '../store/nav.store.js';
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const {productCategory, setProductCategory} = useNavStore();
+  const {setProductCategory} = useNavStore();
 
   const navigate = useNavigate();
 
+  // categories turned into navigation links as filters
   const navLinks = [
     {tag: "Disinfectants", slug:"disinfectants"},
     {tag: "Floor Cleaners", slug:"floor-cleaners"},
@@ -25,6 +26,7 @@ const Navbar = () => {
 
     navigate(`/products/${link.slug}`)
     setProductCategory(link.tag);
+    setMenuOpen(false);
     // alert(link.tag)
 
   }

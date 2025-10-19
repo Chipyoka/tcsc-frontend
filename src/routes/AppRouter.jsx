@@ -6,6 +6,7 @@ import ProductDetail from '../pages/ProductDetails.jsx';
 import Login from '../pages/Login.jsx';
 import Register from '../pages/Register.jsx';
 import Cart from '../pages/Cart.jsx';
+import Checkout from '../pages/Checkout.jsx';
 
 import HandleScroll from '../components/HandleScroll';
 
@@ -20,6 +21,7 @@ export default function AppRouter() {
         <Route path="/products/:category" element={<Products />} />
         <Route path="/product/:slug" element={<ProductDetail />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<Checkout />} />
       </Routes>
     </BrowserRouter>
   );

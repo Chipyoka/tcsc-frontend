@@ -11,6 +11,9 @@ import Footer from '../components/Footer';
 import ScrollToTop from '../components/ScrollToTop';
 
 const Home = () => {
+
+    // set window title
+    window.document.title = "The Cleaning Supplies Co. | Smart solutions for everyday cleaning."
     return (
         <>
             <Topbar/>

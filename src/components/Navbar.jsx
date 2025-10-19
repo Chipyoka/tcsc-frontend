@@ -4,10 +4,14 @@ import Logo from '../assets/images/logo-l.png';
 import { Search, UserCircle, ShoppingCart, Menu, X, ChevronRight } from "lucide-react";
 
 import {useNavStore} from '../store/nav.store.js';
+import useCartStore from '../store/cart.store.js';
+
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const {setProductCategory} = useNavStore();
+  const totalItems = useCartStore((state) => state.getTotalItems());
+
 
   const navigate = useNavigate();
 
@@ -60,9 +64,15 @@ const Navbar = () => {
           <div className="cursor-pointer">
             <UserCircle className="w-9 h-9 text-[var(--color-primary)]" />
           </div>
-          <div className="cursor-pointer" onClick={() => {navigate('/cart')}}>
-            <ShoppingCart className="w-9 h-9 text-[var(--color-primary)]" />
-          </div>
+        <div className="relative cursor-pointer" onClick={() => navigate('/cart')}>
+          <ShoppingCart className="w-9 h-9 text-[var(--color-primary)]" />
+          {totalItems > 0 && (
+            <span className="absolute -top-2 -right-2 bg-[var(--color-secondary)] text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+              {totalItems}
+            </span>
+          )}
+        </div>
+
           <div>
             <button className="btn-primary-outlined-sm" onClick={() => {navigate('/login')}}>Signup</button>
           </div>
@@ -91,7 +101,14 @@ const Navbar = () => {
 
         {/* Right: Cart + Hamburger */}
         <div className="flex items-center gap-4">
-          <ShoppingCart className="w-9 h-9 text-[var(--color-primary)] cursor-pointer"  onClick={() => {navigate('/cart')}}/>
+          <div className="relative cursor-pointer" onClick={() => navigate('/cart')}>
+            <ShoppingCart className="w-9 h-9 text-[var(--color-primary)]" />
+            {totalItems > 0 && (
+              <span className="absolute -top-2 -right-2 bg-[var(--color-secondary)] text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                {totalItems}
+              </span>
+            )}
+          </div>
 
           {/* Hamburger button */}
           <button

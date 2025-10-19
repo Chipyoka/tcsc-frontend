@@ -122,7 +122,9 @@ const Cart = () => {
               </div>
 
               <div className="mt-6 flex flex-col gap-2">
-                <button className="w-full btn-primary-sm" onClick={() => navigate('/checkout')}>Checkout</button>
+                {items.length > 0 && (
+                     <button className="w-full btn-primary-sm" onClick={() => navigate('/checkout')}>Checkout</button>
+                )}
                 <button className="w-full btn-primary-outlined-sm" onClick={handleContinueShopping}>Continue Shopping</button>
               </div>
             </div>

@@ -22,8 +22,11 @@ const Checkout = () => {
   const { getSubtotal, getTotalItems, items, subscriptions, clearCart } = useCartStore();
   const { setProductCategory } = useNavStore();
 
+
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [pageLoading, setPageLoading] = useState(true);
+  const [noItems, setNoItems] = useState(true);
   const [status, setStatus] = useState("processing");
 
   const subtotal = getSubtotal();
@@ -34,6 +37,18 @@ const Checkout = () => {
   // shipping fee state
   const [shippingFee, setShippingFee] = useState(0);
 
+
+    // Route protection: redirect to /cart if no items
+  useEffect(() => {
+    setTimeout(() => {
+        setPageLoading(false);
+    }, 1000);
+    if (items.length > 0) {
+      setNoItems(false);
+    }
+  }, [items, navigate]);
+
+  
   // --- Shipping Data ---
   const [formData, setFormData] = useState({
     email: "",
@@ -198,6 +213,18 @@ const Checkout = () => {
     </div>
   );
 
+  if (pageLoading) return (
+        <div className="px-6 md:px-36 py-12 flex items-center justify-center min-h-[100dvh]">
+            <p className="text-center text-gray-400">Please wait...</p>
+        </div>
+    )
+  if (noItems) return (
+        <div className="px-6 md:px-36 py-12 flex flex-col items-center justify-center min-h-[100dvh]">
+            <p className="text-center text-gray-500 text-lg my-6 ">You can't checkout with no items</p>
+            <button className="btn-primary-outlined-sm" onClick={()=>{navigate('/cart')}}>Go to cart</button>
+        </div>
+    )
+  
   return (
     <div className="px-6 md:px-36 py-12 bg-gray-100 min-h-[100dvh]">
       <img src={Logo} alt="Logo" className="w-48 cursor-pointer" onClick={() => navigate("/")} />

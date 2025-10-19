@@ -229,6 +229,7 @@ const Checkout = () => {
     <div className="px-6 md:px-36 py-12 bg-gray-100 min-h-[100dvh]">
       <img src={Logo} alt="Logo" className="w-48 cursor-pointer" onClick={() => navigate("/")} />
       <h2 className="text-2xl md:text-3xl font-bold text-[var(--color-primary)] mt-6">Checkout</h2>
+      <p className="text-gray-400 my-4 cursor-pointer"><a href="/">Home</a> / <a href="/cart">Cart</a> / Payment & Shipping</p>
       {renderSteps()}
 
       <div className="flex flex-col-reverse md:flex-row gap-12">

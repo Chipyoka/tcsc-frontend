@@ -1,7 +1,7 @@
 import { ShoppingCart, Heart } from 'lucide-react';
 import { getProductSlug } from "../../utils/getProductSlug";
 import {useNavigate} from 'react-router-dom';
-
+import L from '../../assets/images/default_product.png'
 import {useNavStore} from '../../store/nav.store.js';
 
 const ProductCard = ({ product }) => {
@@ -26,7 +26,7 @@ const ProductCard = ({ product }) => {
                 className="relative border border-gray-200 rounded-lg h-[50%] overflow-hidden flex items-center justify-center mb-4 bg-[var(--color-white)]"
             >
                 <img
-                    src={product.image || '../src/assets/images/default_product.png'}
+                    src={product.image || L}
                     alt={product.name}
                     className="w-full h-full object-cover transition-all duration-500 group-hover:brightness-96 group-hover:scale-105"
                 />

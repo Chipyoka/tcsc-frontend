@@ -4,6 +4,7 @@ import Topbar from '../components/Topbar';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Visa from '../assets/icons/visa.webp';
+import L from '../assets/images/default_product.png'
 import Mastercard from '../assets/icons/mastercard.jpg';
 import useCartStore from '../store/cart.store';
 import { useState } from 'react';
@@ -46,7 +47,7 @@ const Cart = () => {
                   <div key={product.id} className="flex items-center justify-start gap-6 py-4 border-t border-gray-200">
                     <div className="flex justify-center items-center border border-gray-200 rounded-lg max-w-[100px] md:max-w-[150px] overflow-hidden mb-4 bg-[var(--color-white)]">
                       <img
-                        src={product.image || '../src/assets/images/default_product.png'}
+                        src={product.image || L}
                         alt={product.name}
                         className="w-full h-full object-cover transition-all duration-500 group-hover:brightness-90 group-hover:scale-105"
                       />

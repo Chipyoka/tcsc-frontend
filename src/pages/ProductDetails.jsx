@@ -11,6 +11,7 @@ import Footer from "../components/Footer";
 import FAQSection from "../components/FAQSection";
 
 import Visa from '../assets/icons/visa.webp';
+import L from '../assets/images/default_product.png'
 import Mastercard from '../assets/icons/mastercard.jpg'
 
 const ProductDetails = () => {
@@ -31,7 +32,7 @@ const ProductDetails = () => {
     id: 1,
     name: "Multi-Surface Cleaner",
     price: 12.99,
-    image: "../src/assets/images/default_product.png",
+    image: "",
     sku: "MSC-500ML",
     shortDesc:
       "High-performance surface cleaner ideal for home or commercial use.",
@@ -84,7 +85,7 @@ const handleAddToCart = () => {
           {/* Product image */}
           <div className="relative border border-gray-200 rounded-lg h-[50%] overflow-hidden flex items-center justify-center mb-4 bg-[var(--color-white)]">
             <img
-              src={product.image}
+              src={product.image || L}
               alt={product.name}
               className="w-full h-full object-cover transition-all duration-500 group-hover:brightness-90 group-hover:scale-105"
             />

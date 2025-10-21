@@ -56,11 +56,11 @@ const Login = () => {
                         
                     </div>
                     <div className="mt-8 mb-4">
-                        <button className="btn-primary-sm w-full ">Login</button>
+                        <button type="button" className="btn-primary-sm w-full ">Login</button>
                     </div>
                 
                     <div className="my-4">
-                        <p className="text-lg text-gray-600 text-center font-medium">Don't have an account? <a href="/register" className="font-medium text-[var(--color-primary)]">Signup</a></p>               
+                        <p className="text-lg text-gray-600 text-center font-medium">Don't have an account? <span onClick={()=>{navigate('/register')}} className="cursor-pointer font-medium text-[var(--color-primary)]">Signup</span></p>               
                     </div>
                     <div>
                         <p className="text-sm text-gray-600 text-center mt-6">By continuing you agree to our <strong>Terms and Conditions</strong></p>

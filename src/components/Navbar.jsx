@@ -81,7 +81,7 @@ const Navbar = () => {
 
       {/* Desktop Bottom Menu */}
       <div className="hidden md:flex md:px-12 md:py-4 md:bg-[var(--color-primary)]">
-        <ul className="flex justify-center gap-x-30 items-center text-xl text-[var(--color-white)]">
+        <ul className="flex justify-center gap-x-30 items-center text-sm text-[var(--color-white)]">
           {navLinks.map((link, i) => (
             <li 
               key={i} 

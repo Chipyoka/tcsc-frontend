@@ -12,16 +12,16 @@ const WhyUs = () => {
                 </div>
                 <div>
                     <h3 className="text-white text-xl font-bold">Reliable Delivery</h3>
-                    <p className="text-white text-sm md:text-md">Get your products delivered to your doorstep in no time.</p>
+                    <p className="text-white text-sm md:text-md">Your orders get delivered within one working day of dispatch.</p>
                 </div>
             </div>
             <div className="w-full md:w-[30%] max-w-full md:max-w-[30%] h-30 flex justify-center items-center gap-x-6 md:border-r-2 border-[var(--color-white)] px-4 md:px-8 md:mr-4">
                 <div>
-                    <img src={Offer} alt="" className="w-[120px]" />
+                    <img src={Offer} alt="" className="w-[100px]" />
                 </div>
                 <div>
                     <h3 className="text-white text-xl font-bold">Discount Club Offers</h3>
-                    <p className="text-white text-sm md:text-md">Join our club and enjoy exclusive discounts on your favorite products.</p>
+                    <p className="text-white text-sm md:text-md">We have exclusive discounts on your wholesale orders.</p>
                 </div>
             </div>
             <div className="w-full md:w-[30%] max-w-full md:max-w-[30%] h-30 flex justify-center items-center gap-x-6 px-4 md:px-8">
@@ -30,7 +30,7 @@ const WhyUs = () => {
                 </div>
                 <div>
                     <h3 className="text-white text-xl font-bold">Assorted Products</h3>
-                    <p className="text-white text-sm md:text-md">Explore a wide range of products tailored to your needs.</p>
+                    <p className="text-white text-sm md:text-md">We offer a wide range of products tailored for every industry.</p>
                 </div>
             </div>
  

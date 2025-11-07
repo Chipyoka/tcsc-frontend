@@ -8,6 +8,10 @@ const DiscountClub = () => {
                 <img src={Delivery} alt="We will deliver to your door step" className="w-full h-full rounded-lg md:rounded-2xl" />
             </aside>
             <aside className="max-w-full md:max-w-1/2 rounded-2xl">
+                <h4 
+                className="text-[var(--color-accent-2)] md:text-2xl font-semibold my-2 md:my-4 uppercase">
+                    There is more we're offering
+                </h4>
                 <h2 className="text-4xl md:text-5xl font-medium text-white">Join the Discount Club</h2>
                 <p className="text-lg mt-6 md:max-w-[96%] max-w-full text-white">
                     Simplify your shopping with our exclusive subscription service, designed to save you money and make

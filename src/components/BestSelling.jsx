@@ -27,7 +27,7 @@ const BestSelling = () => {
     return (
         <section className="my-12 mx-auto px-4 flex flex-col justify-center items-center">
             <h2 className="text-4xl md:text-5xl text-[var(--color-primary)] font-bold my-6">
-                Best Sellers
+                Top-Ordered in Bulk
             </h2>
 
             {/* Product list */}

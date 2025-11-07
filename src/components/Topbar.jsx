@@ -1,6 +1,6 @@
 const Topbar = () => {
     return(
-        <div className="bg-[var(--color-primary)] text-[var(--color-white)] px-6 md:px-12 py-4 md:py-6 flex justify-center md:justify-between items-center">
+        <div className="bg-[var(--color-primary)] text-[var(--color-white)] px-6 md:px-12 py-4 md:py-4 flex justify-center md:justify-between items-center">
            <div>
              <p className="text-sm text-center md:text-left md:text-lg text-[var(--color-white)] font-medium cursor-default">Smart Solutions for Everyday Cleaning</p>
            </div>

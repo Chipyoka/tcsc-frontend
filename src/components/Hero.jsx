@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import {useNavigate} from 'react-router-dom'
-import Cleaning from '../assets/images/cleaning.png';
-import Tools from '../assets/images/tools.png';
+import Cleaning from '../assets/images/image_2.png';
+import Tools from '../assets/images/image_3.png';
 
 const images = [Cleaning, Tools];
 
@@ -20,15 +20,16 @@ const Hero = () => {
     <header 
     className="
       h-fit
-      md:h-[68dvh] overflow-hidden bg-[url('../assets/images/bg-hero-2.jpg')] bg-cover bg-bottom 
+      md:h-[76dvh] overflow-hidden bg-[url('../assets/images/bg-hero-2.jpg')] bg-cover bg-bottom 
       bg-no-repeat flex flex-col md:flex-row items-center justify-between relative
     ">
       
-      <div className="max-w-full md:max-w-[50%] space-y-4 px-6 py-12 md:px-10 z-10 relative">
+      <div className="max-w-full md:max-w-[50%] space-y-4 md:space-y-8 px-6 py-12 md:px-10 z-10 relative">
         <h1 className="text-5xl md:text-7xl font-bold text-[var(--color-white)]">
-          Everything you <span className="badge">need</span> to maintain cleanliness.
+          Bulk Cleaning <span className="badge">Solutions</span> for Every Business.
         </h1>
-        <button className="btn-primary-lg w-full md:w-fit" onClick={()=> {navigate(`/products/all`)}}>Explore Our Catalogue</button>
+        <button className="btn-primary-lg w-full md:w-fit" onClick={()=> {navigate(`/products/all`)}}>Get a Business Quote</button>
+        {/* <button className="btn-primary-outlined-lg w-full md:w-fit" onClick={()=> {navigate(`/products/all`)}}>Get a Business Quote</button> */}
       </div>
 
       <div className="w-full md:w-[70%] h-[350px] md:h-[750px] relative">

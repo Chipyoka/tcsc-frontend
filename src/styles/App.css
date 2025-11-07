@@ -11,7 +11,7 @@ button{
   background: var(--color-primary);
   color: var(--color-white);
   font-family: var(--secondary-font);
-  padding: .75em 3em;
+  padding: .75em 2em;
   border-radius: .35rem;
   border: 3px solid var(--color-primary);
   font-weight: 600;
@@ -28,7 +28,7 @@ button{
   background: var(--color-white);
   color: var(--color-primary);
   font-family: var(--secondary-font);
-  padding: .75em 3em;
+  padding: .75em 2em;
   border-radius: .35rem;
   border: 3px solid var(--color-primary);
   font-weight: 600;

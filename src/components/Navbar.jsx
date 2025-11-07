@@ -1,7 +1,7 @@
 import { useState } from "react";
 import {useNavigate} from 'react-router-dom';
 import Logo from '../assets/images/logo-l.png';
-import { Search, UserCircle, ShoppingCart, Menu, X, ChevronRight } from "lucide-react";
+import { Search, UserCircle, ShoppingCart, Menu, X, ChevronRight, ChevronDown } from "lucide-react";
 
 import {useNavStore} from '../store/nav.store.js';
 import useCartStore from '../store/cart.store.js';
@@ -39,7 +39,7 @@ const Navbar = () => {
   return (
     <>
       {/* Desktop Navbar */}
-      <nav className="hidden md:flex justify-center items-center bg-[var(--color-white)] px-12 py-6">
+      <nav className="hidden md:flex justify-center items-center bg-[var(--color-white)] px-12 py-4">
         {/* logo + categories */}
         <div className="flex justify-start gap-x-12 items-center w-[30%]">
           <div>
@@ -81,79 +81,72 @@ const Navbar = () => {
       </nav>
 
           {/* Desktop Bottom Menu */}
-{/* Desktop Bottom Menu */}
-{/* Desktop Bottom Menu */}
-<div className="hidden md:flex md:px-12 md:py-4 md:bg-[var(--color-primary)]">
-  <ul className="flex justify-center gap-x-8 items-center text-sm md:text-lg text-[var(--color-white)] relative">
-    {navLinks.map((link, i) => (
-      <li
-        key={i}
-        className="relative group cursor-pointer"
-      >
-        <span
-          onClick={() => handleToProducts(link)}
-          className="block px-3 py-2 hover:text-[var(--color-accent)]"
-        >
-          {link.tag}
-        </span>
+      <div className="hidden md:flex md:px-12 md:py-4 md:bg-[var(--color-primary)]">
+        <ul className="flex justify-center gap-x-8 items-center text-sm md:text-[1.0rem] text-[var(--color-white)] relative">
+          {navLinks.map((link, i) => (
+            <li
+              key={i}
+              className="relative group cursor-pointer"
+            >
+              <span
+                onClick={() => handleToProducts(link)}
+                className="flex items-center px-3 py-2 hover:text-[var(--color-accent)]"
+              >
+                {link.tag}   
+                <span><ChevronDown className="w-4 h-4 ml-2" /></span>
+              </span>
 
-        {/* MEGA MENU */}
-        {link.children && (
-          <div
-            className={`
-              absolute top-full hidden group-hover:flex
-              bg-white text-black shadow-xl px-8 pb-20 pt-10 rounded-sm
-               z-50 transition-all duration-300 ease-in-out
-              ${i > navLinks.length / 2 ? 'right-0' : 'left-0'}
-            `}
-          >
-            <div className="flex items-start gap-12 mb-12">
-              {link.children.map((sub, j) => (
-                <div key={j} className="flex flex-col w-62 border-r border-gray-200 last:border-white">
-                  <h4 className="font-semibold text-[var(--color-primary)] mb-2  pb-1">
-                    {sub.tag}
-                  </h4>
-                  {sub.children && (
-                    <ul className="space-y-2">
-                      {sub.children.map((subsub, k) => (
-                        <li
-                          key={k}
-                          onClick={() => handleToProducts(subsub)}
-                          className="text-lg text-gray-500 hover:text-gray-700 cursor-pointer"
-                        >
-                          {subsub.tag}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
+              {/* MEGA MENU */}
+              {link.children && (
+                <div
+                  className={`
+                    absolute top-full hidden group-hover:flex
+                    bg-white text-black shadow-xl px-8 pb-20 pt-12 rounded-sm
+                    z-50 transition-all duration-300 ease-in-out
+                    ${i > navLinks.length / 2 ? 'right-0' : 'left-0'}
+                  `}
+                >
+                  <div className="flex items-start gap-12 mb-12">
+                    {link.children.map((sub, j) => (
+                      <div key={j} className="flex flex-col w-62 border-r border-gray-200 last:border-white">
+                        <h4 className="font-semibold text-[var(--color-primary)] mb-4  pb-1">
+                          {sub.tag}
+                        </h4>
+                        {sub.children && (
+                          <ul className="space-y-3">
+                            {sub.children.map((subsub, k) => (
+                              <li
+                                key={k}
+                                onClick={() => handleToProducts(subsub)}
+                                className="text-lg text-gray-500 hover:text-gray-900 cursor-pointer"
+                              >
+                                {subsub.tag}
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+              
+                    ))}
+                  </div>
+                
+                  {/* Invisible hover bridge to prevent flicker */}
+                  <div className="absolute -top-4 left-0 w-full h-4"></div>
+
+
+                    <div className="absolute bottom-6 left-8 w-full h-12">
+                      <p className="text-sm font-medium p-4 w-fit bg-gray-100">
+                        <span className="text-[var(--color-secondary)]">Enjoy 20%</span> off as a Discount Club Member 
+                        <span className=" ml-6 py-2 px-4 w-fit bg-[var(--color-accent-1)] rounded-sm text-[var(--color-white)] font-bold transition-all duration-300">Learn More</span></p>
+                    </div>
+                  
                 </div>
-         
-              ))}
-            </div>
-          
-            {/* Invisible hover bridge to prevent flicker */}
-            <div className="absolute -top-4 left-0 w-full h-4"></div>
-
-
-            {link.slug == "cleaning-disinfecting-chemicals" ? (
-              <div className="absolute bottom-6 left-8 w-full h-12">
-                <p className="text-sm font-medium p-4 w-fit bg-gray-100"><span className="text-[var(--color-secondary)]">Enjoy 20%</span> off as a Discount Club Member <span className=" ml-6 py-2 px-4 w-fit bg-[var(--color-accent-1)] rounded-sm text-[var(--color-white)] font-bold transition-all duration-300">Join Now !</span></p>
-              </div>
-
-            ) : (
-              <div className="absolute bottom-6 left-8 w-full h-12">
-                <p className="text-sm font-medium p-4 w-fit bg-gray-100"><span className="text-[var(--color-secondary)]">Huge Savings</span> when you buy in bulk <span className=" ml-6 py-2 px-4 w-fit bg-[var(--color-accent-1)] rounded-sm text-[var(--color-white)] font-bold transition-all duration-300">Shop Now</span></p>
-              </div>
-
-            ) }
-            
-          </div>
-        )}
-      </li>
-    ))}
-    <li className="cursor-pointer">Wholesale</li>
-  </ul>
-</div>
+              )}
+            </li>
+          ))}
+          <li className="cursor-pointer">Bulk Orders</li>
+        </ul>
+      </div>
 
 
 
@@ -215,19 +208,22 @@ const Navbar = () => {
           {navLinks.map((link, i) => (
             <li 
               key={i} 
-              className="cursor-pointer hover:text-[var(--color-primary-dark)]"
+              className="cursor-pointer hover:text-[var(--color-primary-dark)] flex items-center justify-between"
               onClick={()=> {handleToProducts(link)}}
-            >{link.tag}</li>
+            >{link.tag} <span><ChevronRight className="w-4 h-4 " /></span></li>
           ))}
+          <li  className="cursor-pointer hover:text-[var(--color-primary-dark)]">
+            Bulk Orders
+          </li>
 
           {/* Profile */}
-          <li className="flex items-center gap-2 mt-2">
+          {/* <li className="flex items-center gap-2 mt-2">
              <button className="btn-primary-outlined-sm w-full mt-4 flex items-center justify-center gap-4">
                 <UserCircle className="w-8 h-8 text-[var(--color-primary)]" />
                 Profile
             </button>
             
-          </li>
+          </li> */}
 
           {/* Signup button */}
           <li>

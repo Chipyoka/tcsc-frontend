@@ -5,6 +5,7 @@ import { Search, UserCircle, ShoppingCart, Menu, X, ChevronRight } from "lucide-
 
 import {useNavStore} from '../store/nav.store.js';
 import useCartStore from '../store/cart.store.js';
+import { navLinks } from "../data/categories";
 
 
 const Navbar = () => {
@@ -16,14 +17,14 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   // categories turned into navigation links as filters
-  const navLinks = [
-    {tag: "Disinfectants", slug:"disinfectants"},
-    {tag: "Floor Cleaners", slug:"floor-cleaners"},
-    {tag: "Washroom Cleaners", slug:"washroom-cleaners"},
-    {tag: "Sanitizers", slug:"sanitizers"},
-    {tag: "Handwash Cleaners", slug:"handwash-cleaners"},
-    {tag: "Cleaning Cloths", slug:"cleaning-cloths"},
-  ];
+  // const navLinks = [
+  //   {tag: "Cleaning & Disinfecting Chemicals", slug:"disinfectants"},
+  //   {tag: "Cleaning Tools & Accessories", slug:"floor-cleaners"},
+  //   {tag: "Hand Wash & Soaps", slug:"washroom-cleaners"},
+  //   {tag: "Waste Management", slug:"sanitizers"},
+  //   {tag: "Equipment & Safety", slug:"handwash-cleaners"},
+  //   {tag: "Wholesale Deals", slug:"handwash-cleaners"}
+  // ];
 
   const handleToProducts = (link) =>{
     if(!link) return;
@@ -79,18 +80,86 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Desktop Bottom Menu */}
-      <div className="hidden md:flex md:px-12 md:py-4 md:bg-[var(--color-primary)]">
-        <ul className="flex justify-center gap-x-30 items-center text-sm text-[var(--color-white)]">
-          {navLinks.map((link, i) => (
-            <li 
-              key={i} 
-              className="cursor-pointer"
-              onClick={()=> {handleToProducts(link)}}
-            >{link.tag}</li>
-          ))}
-        </ul>
-      </div>
+          {/* Desktop Bottom Menu */}
+{/* Desktop Bottom Menu */}
+{/* Desktop Bottom Menu */}
+<div className="hidden md:flex md:px-12 md:py-4 md:bg-[var(--color-primary)]">
+  <ul className="flex justify-center gap-x-8 items-center text-sm md:text-lg text-[var(--color-white)] relative">
+    {navLinks.map((link, i) => (
+      <li
+        key={i}
+        className="relative group cursor-pointer"
+      >
+        <span
+          onClick={() => handleToProducts(link)}
+          className="block px-3 py-2 hover:text-[var(--color-accent)]"
+        >
+          {link.tag}
+        </span>
+
+        {/* MEGA MENU */}
+        {link.children && (
+          <div
+            className={`
+              absolute top-full hidden group-hover:flex
+              bg-white text-black shadow-xl px-8 pb-20 pt-10 rounded-sm
+               z-50 transition-all duration-300 ease-in-out
+              ${i > navLinks.length / 2 ? 'right-0' : 'left-0'}
+            `}
+          >
+            <div className="flex items-start gap-12 mb-12">
+              {link.children.map((sub, j) => (
+                <div key={j} className="flex flex-col w-62 border-r border-gray-200 last:border-white">
+                  <h4 className="font-semibold text-[var(--color-primary)] mb-2  pb-1">
+                    {sub.tag}
+                  </h4>
+                  {sub.children && (
+                    <ul className="space-y-2">
+                      {sub.children.map((subsub, k) => (
+                        <li
+                          key={k}
+                          onClick={() => handleToProducts(subsub)}
+                          className="text-lg text-gray-500 hover:text-gray-700 cursor-pointer"
+                        >
+                          {subsub.tag}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+         
+              ))}
+            </div>
+          
+            {/* Invisible hover bridge to prevent flicker */}
+            <div className="absolute -top-4 left-0 w-full h-4"></div>
+
+
+            {link.slug == "cleaning-disinfecting-chemicals" ? (
+              <div className="absolute bottom-6 left-8 w-full h-12">
+                <p className="text-sm font-medium p-4 w-fit bg-gray-100"><span className="text-[var(--color-secondary)]">Enjoy 20%</span> off as a Discount Club Member <span className=" ml-6 py-2 px-4 w-fit bg-[var(--color-accent-1)] rounded-sm text-[var(--color-white)] font-bold transition-all duration-300">Join Now !</span></p>
+              </div>
+
+            ) : (
+              <div className="absolute bottom-6 left-8 w-full h-12">
+                <p className="text-sm font-medium p-4 w-fit bg-gray-100"><span className="text-[var(--color-secondary)]">Huge Savings</span> when you buy in bulk <span className=" ml-6 py-2 px-4 w-fit bg-[var(--color-accent-1)] rounded-sm text-[var(--color-white)] font-bold transition-all duration-300">Shop Now</span></p>
+              </div>
+
+            ) }
+            
+          </div>
+        )}
+      </li>
+    ))}
+    <li className="cursor-pointer">Wholesale</li>
+  </ul>
+</div>
+
+
+
+
+
+
 
       {/* ---------------- Mobile Navbar ---------------- */}
       <nav className="sticky top-0 z-50 w-full md:hidden flex justify-between items-center bg-[var(--color-white)] px-6 py-4 shadow-sm">

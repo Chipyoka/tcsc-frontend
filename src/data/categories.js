@@ -44,7 +44,7 @@ export const navLinks = [
     ]
   },
   {
-    tag: "Cleaning Tools & Accessories",
+    tag: "Tools & Accessories",
     slug: "cleaning-tools-accessories",
     children: [
       {

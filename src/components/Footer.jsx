@@ -22,18 +22,18 @@ const Footer = () => {
                     </div>
                     <div className="text-white my-4 max-w-full ">
                         <p>
-                            Premier supplier of cleaning supplies in Hertfordshire,
+                            Premier wholesaler of cleaning supplies,
                             helping small businesses maintain clean, compliant, and efficient environments. 
                         </p>
             
                         <p className="my-4">
-                          
-                                123 Street, Town, <br />
-                                United Kingdom
+                                15 De Havilland House, <br />
+                                Endymion Mews, <br />
+                                Hatfield.
                            
                         </p>
 
-                        <h6>The Cleaning Supplies Co. is a Trademark of <strong>BRIMU VENTURES</strong>.</h6>
+                        {/* <h6>The Cleaning Supplies Co. is a Trademark of <strong>BRIMU VENTURES</strong>.</h6> */}
                     </div>
 
                 </div>
@@ -64,7 +64,7 @@ const Footer = () => {
                                 <div className="bg-white rounded-full p-2 text-[var(--color-primary)]">
                                     <Phone/>
                                 </div>
-                                +44 7877 673877
+                                +44 7877 673877 | +44 7734 337836
                             </li>
                             <li className="flex justify-start items-center gap-4">
                                 <div className="bg-white rounded-full p-2 text-[var(--color-primary)]">

@@ -12,7 +12,7 @@ const DiscountClub = () => {
                 className="text-[var(--color-accent-2)] md:text-2xl font-semibold my-2 md:my-4 uppercase">
                     There is more we're offering
                 </h4>
-                <h2 className="text-4xl md:text-5xl font-medium text-white">Join the Discount Club</h2>
+                <h2 className="text-4xl md:text-5xl font-semibold text-white">Join the Discount Club.</h2>
                 <p className="text-lg mt-6 md:max-w-[96%] max-w-full text-white">
                     Simplify your shopping with our exclusive subscription service, designed to save you money and make
                     your life easier. As a Discount Club member, you'll enjoy exclusive savings, Buy now pay later access

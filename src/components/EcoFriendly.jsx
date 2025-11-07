@@ -4,8 +4,8 @@ const EcoFriendly = () => {
     return(
         <section className ="mb-16 mt-12 md:mt-36 mx-auto flex flex-col md:flex-row justify-between items-center px-4 md:px-12">
             <aside className="max-w-full md:max-w-1/2 p-2 md:p-4">
-                <h4 className="md:text-2xl my-2 md:my-4 font-semibold uppercase text-gray-400">our Commitments</h4>
-                <h2 className=" text-4xl md:text-5xl font-medium text-[var(--color-primary)]">A Cleaner Future: For You and the Planet.</h2>
+                <h4 className="md:text-2xl my-2 md:my-4 font-semibold uppercase text-gray-400">our Commitment to Nature</h4>
+                <h2 className=" text-4xl md:text-5xl font-semibold text-[var(--color-primary)]">A Cleaner Future: For You and the Planet.</h2>
                 <p className="text-lg mt-6 md:max-w-[90%] max-w-full">
                     At The Cleaning Supplies Co., sustainability isn’t a trend, it’s a responsibility. 
                     We continuously source and promote eco-friendly products that reduce environmental 

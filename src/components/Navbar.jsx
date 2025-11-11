@@ -82,7 +82,7 @@ const Navbar = () => {
 
           {/* Desktop Bottom Menu */}
       <div className="hidden md:flex md:px-12 md:py-4 md:bg-[var(--color-primary)]">
-        <ul className="flex justify-center gap-x-6 items-center text-sm md:text-[1.025rem] text-[var(--color-white)] relative">
+        <ul className="flex justify-center gap-x-6 items-center text-sm md:text-[1.0rem] text-[var(--color-white)] relative">
           {navLinks.map((link, i) => (
             <li
               key={i}
@@ -93,7 +93,7 @@ const Navbar = () => {
                 className="flex items-center px-3 py-2 hover:text-[var(--color-accent)]"
               >
                 {link.tag}   
-                <span><ChevronDown className="w-4 h-4 ml-2" /></span>
+                <span><ChevronDown className="w-4 h-4 ml-1" /></span>
               </span>
 
               {/* MEGA MENU */}

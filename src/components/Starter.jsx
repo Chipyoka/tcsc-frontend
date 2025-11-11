@@ -19,7 +19,7 @@ const Starta = () => {
             </aside>
           
 
-              <aside className="max-w-full md:max-w-1/2 p-2 md:p-4 ">
+              <aside className="max-w-full md:max-w-1/2 p-2 md:p-4">
                 <img src={Eco} alt="Eco friendly" className="w-full h-full object-cover rounded-lg md:rounded-2xl"/>
             </aside>
             <div className="my-4"></div>

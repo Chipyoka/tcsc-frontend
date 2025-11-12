@@ -20,7 +20,7 @@ const Footer = () => {
                     <div>
                         <img src={Logo} alt="" width="200px" />
                     </div>
-                    <div className="text-white my-4 max-w-full ">
+                    <div className="text-white text-sm my-4 max-w-full ">
                         <p>
                             Premier wholesaler of cleaning supplies,
                             helping small businesses maintain clean, compliant, and efficient environments. 
@@ -37,10 +37,10 @@ const Footer = () => {
                     </div>
 
                 </div>
-                <div className="text-white flex flex-col md:flex-row justify-between items-start gap-16 md:gap-24 max-w-full md:max-w-3/4">
+                <div className="text-white flex flex-col md:flex-row justify-between items-start gap-12 md:gap-32 max-w-full md:max-w-3/4">
                     <div>
-                        <h4 className="text-2xl font-medium mb-6">Company</h4>
-                        <ul className="flex flex-col gap-y-4 w-full">
+                        <h4 className="text-lg font-medium mb-6">Company</h4>
+                        <ul className="flex flex-col gap-y-4 w-full text-sm">
                             <li className="hover:underline"><a href="">Shop</a></li>
                             <li className="hover:underline"><a href="">The Discount Club</a></li>
                             <li className="hover:underline"><a href="">Blog</a></li>
@@ -48,8 +48,8 @@ const Footer = () => {
                         </ul>
                     </div>
                     <div>
-                        <h4 className="text-2xl font-medium mb-6">Legal</h4>
-                        <ul className="flex flex-col gap-y-4 w-full">
+                        <h4 className="text-lg font-medium mb-6">Legal</h4>
+                        <ul className="flex flex-col gap-y-4 w-full text-sm">
                             <li className="hover:underline"><a href="">Terms and Conditions</a></li>
                             <li className="hover:underline"><a href="">Privacy Policy</a></li>
                             <li className="hover:underline"><a href="">Cookie Policy</a></li>
@@ -58,8 +58,8 @@ const Footer = () => {
                         </ul>
                     </div>
                     <div>
-                        <h4 className="text-2xl font-medium mb-6">Get in Touch</h4>
-                        <ul className="flex flex-col gap-y-4 w-full">
+                        <h4 className="text-lg font-medium mb-6">Get in Touch</h4>
+                        <ul className="flex flex-col gap-y-4 w-full text-sm">
                             <li className="flex justify-start items-center gap-4">
                                 <div className="bg-white rounded-full p-2 text-[var(--color-primary)]">
                                     <Phone/>

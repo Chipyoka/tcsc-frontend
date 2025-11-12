@@ -7,6 +7,7 @@ import BestSelling from '../components/BestSelling';
 import Starta from '../components/Starter';
 import EcoFriendly from '../components/EcoFriendly';
 import DiscountClub from '../components/DiscountClub';
+import OurStory from '../components/OurStory';
 import Newsletter from '../components/Newsletter';
 import Footer from '../components/Footer';
 import ScrollToTop from '../components/ScrollToTop';
@@ -26,6 +27,7 @@ const Home = () => {
             <Starta/>
             <DiscountClub/>
             <EcoFriendly/>
+            <OurStory/>
             <Newsletter/>
             <Footer/>
             <ScrollToTop/>

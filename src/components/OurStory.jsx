@@ -1,3 +1,5 @@
+import { ArrowRight } from 'lucide-react';
+
 const OurStory = () => {
     return(
         <section className="relative h-fit md:h-[70vh] flex items-center justify-center text-white">
@@ -22,6 +24,7 @@ const OurStory = () => {
                     <div className="mt-6">
                         <button className="btn-primary-outlined-lg bg-none w-full md:w-fit flex items-center justify-center hover:shadow-lg transition-all duration-300">
                             Book a call with us
+                            <span> <ArrowRight  className="w-5 h-5 ml-2"/></span>
                         </button>
                     </div>
                </div>

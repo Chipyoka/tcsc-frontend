@@ -15,6 +15,7 @@
   /* Fonts */
   --primary-font: 'Nunito', Arial, sans-serif;
   --secondary-font: 'Poppins', Arial, sans-serif;
+  font-size: 16px;
 
   /* Colors */
   --color-primary: #004C9F;
@@ -39,6 +40,8 @@
   --color-gray-7: #999999;
   --color-gray-8: #888888;
   --color-gray-9: #777777;
+
+
 }
 
 

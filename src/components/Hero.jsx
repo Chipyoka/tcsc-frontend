@@ -32,7 +32,7 @@ const Hero = () => {
         {/* <button className="btn-primary-outlined-lg w-full md:w-fit" onClick={()=> {navigate(`/products/all`)}}>Get a Business Quote</button> */}
       </div>
 
-      <div className="w-full md:w-[70%] h-[350px] md:h-[750px] relative">
+      <div className="w-full md:w-[70%] h-[350px] md:h-[640px] relative">
         {images.map((img, index) => (
           <img
             key={index}

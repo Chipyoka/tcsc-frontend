@@ -26,11 +26,15 @@ const Navbar = () => {
   //   {tag: "Wholesale Deals", slug:"handwash-cleaners"}
   // ];
 
-  const handleToProducts = (link) =>{
-    if(!link) return;
+  const handleToProducts = (cat,subcat,subsub) =>{
+    if(!cat) return;
 
-    navigate(`/products/${link.slug}`)
-    setProductCategory(link.tag);
+    navigate(`/products/${cat.slug}/${subcat.slug}/${subsub.slug}`);
+    setProductCategory({
+      cat: cat.tag,
+      subcat: subcat ? subcat.tag : null,
+      slug: subsub ? subsub.tag : null,
+    });
     setMenuOpen(false);
     // alert(link.tag)
 
@@ -75,7 +79,12 @@ const Navbar = () => {
         </div>
 
           <div>
-            <button className="btn-primary-outlined-sm" onClick={() => {navigate('/login')}}>Signup</button>
+            <button 
+              className="btn-primary-outlined-sm" 
+              onClick={() => {navigate('/login')}}
+            >
+              Signup
+            </button>
           </div>
         </div>
       </nav>
@@ -89,7 +98,7 @@ const Navbar = () => {
               className="relative group cursor-pointer"
             >
               <span
-                onClick={() => handleToProducts(link)}
+                // onClick={() => handleToProducts(link)}
                 className="flex items-center px-3 py-2 hover:text-[var(--color-accent)]"
               >
                 {link.tag}   
@@ -109,7 +118,7 @@ const Navbar = () => {
                   <div className="flex items-start gap-12 mb-12">
                     {link.children.map((sub, j) => (
                       <div key={j} className="flex flex-col w-62 border-r border-gray-200 last:border-white">
-                        <h4 className="font-semibold text-[var(--color-primary)] mb-4  pb-1">
+                        <h4 className="font-semibold text-[var(--color-primary)] mb-4 cursor-default pb-1">
                           {sub.tag}
                         </h4>
                         {sub.children && (
@@ -117,7 +126,7 @@ const Navbar = () => {
                             {sub.children.map((subsub, k) => (
                               <li
                                 key={k}
-                                onClick={() => handleToProducts(subsub)}
+                                onClick={() => handleToProducts(link,sub,subsub)}
                                 className="text-lg text-gray-500 hover:text-gray-900 cursor-pointer"
                               >
                                 {subsub.tag}

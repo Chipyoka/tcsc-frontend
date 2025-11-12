@@ -6,7 +6,11 @@ import { persist } from 'zustand/middleware';
 export const useNavStore = create(
   persist(
     (set) => ({
-      productCategory: 'all',
+      productCategory: {
+        cat: 'all',
+        subcat: null,
+        slug: null,
+      },
       selectedProductId: null,
       setProductCategory: (cat) => set({ productCategory: cat }),
       setProductId: (id) => set({ selectedProductId: id }),

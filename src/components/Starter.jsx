@@ -1,8 +1,12 @@
 import Eco from '../assets/images/starta_2.png'
 
+
+import {ArrowRight} from 'lucide-react';
+
+
 const Starta = () => {
     return(
-        <section className ="mb-16 mt-12 md:mt-8 mx-auto flex flex-col md:flex-row justify-between items-center px-4 md:px-12">
+        <section className ="border-t border-gray-200 mb-16 mt-12 md:mt-8 mx-auto flex flex-col md:flex-row justify-between items-center pt-6 md:pt-1 px-4 md:px-12">
          
             <aside className="max-w-full md:max-w-1/2 p-2 md:p-4">
                 <h4 className="md:text-2xl my-2 md:my-4 font-semibold uppercase text-gray-400">Not sure what to order?</h4>
@@ -15,7 +19,10 @@ const Starta = () => {
             
                 </p>
                 <div className="md:my-12"></div>
-                <button className="btn-primary-lg w-full hidden md:inline-block md:w-fit">Get Yours Now</button>
+                <button className="btn-primary-lg w-full hidden md:inline-flex items-center md:w-fit">
+                    Get Yours Now
+                   <span> <ArrowRight  className="w-5 h-5 ml-2"/></span>
+                </button>
             </aside>
           
 
@@ -23,7 +30,9 @@ const Starta = () => {
                 <img src={Eco} alt="Eco friendly" className="w-full h-full object-cover rounded-lg md:rounded-2xl"/>
             </aside>
             <div className="my-4"></div>
-            <button className="btn-primary-lg w-full md:w-fit md:hidden">Get Yours Now</button>
+            <button className="btn-primary-lg w-full md:w-fit flex items-center justify-center md:hidden">
+                Get Yours Now   <span> <ArrowRight  className="w-5 h-5 ml-2"/></span>
+            </button>
             
         </section>
     )

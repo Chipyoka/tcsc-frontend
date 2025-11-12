@@ -1,7 +1,7 @@
 import { useState } from "react";
 import {useNavigate} from 'react-router-dom';
 import Logo from '../assets/images/logo-l.png';
-import { Search, UserCircle, ShoppingCart, Menu, X, ChevronRight, ChevronDown } from "lucide-react";
+import { Search, UserCircle, ShoppingCart, Menu, X, ChevronRight, ChevronDown, ArrowRight } from "lucide-react";
 
 import {useNavStore} from '../store/nav.store.js';
 import useCartStore from '../store/cart.store.js';
@@ -42,7 +42,7 @@ const Navbar = () => {
       <nav className="hidden md:flex justify-center items-center bg-[var(--color-white)] px-12 py-4">
         {/* logo + categories */}
         <div className="flex justify-start gap-x-12 items-center w-[30%]">
-          <div>
+          <div className="cursor-pointer">
             <img src={Logo} alt="TCSC Logo" width="200px"  onClick={()=> {navigate(`/`)}} />
           </div>
         </div>
@@ -81,7 +81,7 @@ const Navbar = () => {
       </nav>
 
           {/* Desktop Bottom Menu */}
-      <div className="hidden md:flex md:px-12 md:py-4 md:bg-[var(--color-primary)]">
+      <div className="hidden md:flex md:px-10 md:py-2 md:bg-[var(--color-primary)]">
         <ul className="flex justify-center gap-x-6 items-center text-sm md:text-[1.0rem] text-[var(--color-white)] relative">
           {navLinks.map((link, i) => (
             <li
@@ -226,8 +226,14 @@ const Navbar = () => {
           </li> */}
 
           {/* Signup button */}
-          <li>
-            <button className="btn-primary-sm w-full mt-4" onClick={() => {navigate('/login')}}>Signup</button>
+          <li className="border-t border-gray-300 pt-8 mt-4">
+            <button 
+              onClick={() => {navigate('/login')}}
+              className="btn-primary-sm w-full mt-4 flex items-center justify-center " 
+            >
+              Create an Account
+              <span> <ArrowRight  className="w-5 h-5 ml-2"/></span>
+            </button>
           </li>
         </ul>
       </div>

@@ -1,4 +1,4 @@
-import {Check} from 'lucide-react';
+import {Check, ArrowRight} from 'lucide-react';
 import Delivery from '../assets/images/delivery.png';
 
 const DiscountClub = () => {
@@ -53,7 +53,9 @@ const DiscountClub = () => {
                 </p>
 
                 <div className="mt-6">
-                    <button className="btn-primary-outlined-lg-2 w-full md:w-fit hover:shadow-lg transition-all duration-300">Join Now !</button>
+                    <button className="btn-primary-outlined-lg-2 w-full md:w-fit flex items-center justify-center hover:shadow-lg transition-all duration-300">
+                        Join Now ! <span><ArrowRight  className="w-5 h-5 ml-2"/></span>
+                    </button>
                 </div>
             </aside>
           

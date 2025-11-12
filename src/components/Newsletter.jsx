@@ -1,3 +1,5 @@
+import {ArrowRight} from 'lucide-react';
+
 const Newsletter = () => {
     return(
         <section className="mt-0 mb-20 px-6 md:px-12 flex flex-col justify-center items-center gap-6 pt-24 border-t-24 border-[var(--color-primary)]">
@@ -14,7 +16,10 @@ const Newsletter = () => {
 
                 <button className="hidden md:block btn-primary-sm">Subscribe</button>
             </div>
-                <button className=" w-full md:hidden btn-primary-sm">Subscribe</button>
+                <button className=" w-full flex items-center justify-center md:hidden btn-primary-sm">
+                    Subscribe
+                    {/* <span> <ArrowRight  className="w-5 h-5 ml-2"/></span> */}
+                </button>
         </section>
     )
 }

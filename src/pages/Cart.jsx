@@ -107,6 +107,7 @@ const Cart = () => {
                   <p className="flex items-center gap-x-2">
                     VAT (20%)
                     <a 
+                        title="Read More"
                         target="_blank"
                         href="https://www.gov.uk/vat-rates"
                     ><Info className="w-4 h-4 text-gray-400 hover:text-gray-600" title="Read More"/></a>

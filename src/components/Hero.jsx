@@ -3,6 +3,8 @@ import {useNavigate} from 'react-router-dom'
 import Cleaning from '../assets/images/image_2.png';
 import Tools from '../assets/images/image_3.png';
 
+import {ArrowRight} from 'lucide-react';
+
 const images = [Cleaning, Tools];
 
 const Hero = () => {
@@ -28,7 +30,10 @@ const Hero = () => {
         <h1 className="text-5xl md:text-7xl font-bold text-[var(--color-white)]">
           Bulk Cleaning <span className="badge">Solutions</span> for Every Business.
         </h1>
-        <button className="btn-primary-lg w-full md:w-fit" onClick={()=> {navigate(`/products/all`)}}>Get a Business Quote</button>
+        <button className="btn-primary-lg w-full flex items-center justify-center md:w-fit" onClick={()=> {navigate(`/products/all`)}}>
+          Get a Business Quote 
+          <span> <ArrowRight  className="w-5 h-5 ml-2"/></span>
+        </button>
         {/* <button className="btn-primary-outlined-lg w-full md:w-fit" onClick={()=> {navigate(`/products/all`)}}>Get a Business Quote</button> */}
       </div>
 

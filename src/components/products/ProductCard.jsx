@@ -19,7 +19,7 @@ const ProductCard = ({ product }) => {
     return (
         <div 
         onClick={()=>{handleRedirect(product.name, product.id)}}
-        className="h-[400px] w-[280px] flex flex-col group cursor-pointer">
+        className="h-[400px] w-[270px] flex flex-col group cursor-pointer">
             {/* Image container */}
             <div 
                 

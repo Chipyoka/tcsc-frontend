@@ -2,15 +2,50 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Logo from "../assets/images/logo-l-w.png";
 import FooterSmall from "../components/FooterSmall.jsx";
+import { useNavStore } from "../store/nav.store.js";
 
 import { Info, CheckCircle2, Loader2, Check } from "lucide-react";
 
 const PaymentSuccess = () => {
+    const [orderItems, setOrderItems] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const { productCategory } = useNavStore();
+    const navigate = useNavigate();
 
+    useEffect(() => {
+        const sampleItems = [
+            { id: 1, name: "My Awesome product name", price: 120.00 },
+            { id: 2, name: "My Other Awesome product name", price: 36.78 },
+            
+        ];
+        
+        setOrderItems(sampleItems);
+
+        // delay setting loading to false
+        setTimeout(() => {
+            setLoading(false);
+
+        }, 2000);
+    }, [])
+
+
+    /**
+     * Handle redirect to products with last viewed category in effect.
+     */
+    const handleToShopping = () =>{
+        if(!productCategory.subcat){
+            navigate('/');
+        }
+
+        navigate(
+            `/products/${productCategory.cat}/${productCategory.subcat}/${productCategory.slug}`
+        )
+    }
     // Set page title
     window.document.title = `Payment Success | The Cleaning Supplies Co.`;
+
+
     
-    const navigate = useNavigate();
     return(
         <>
             {/* header */}
@@ -29,36 +64,52 @@ const PaymentSuccess = () => {
                     <div className="bg-[var(--color-success)] p-2 rounded-full w-10 h-10 justify-center items-center flex">
                             <Check className="text-white mx-auto w-6 h-6 font-bold" />
                     </div>
-                    <p className="font-semibold text-2xl text-gray-400 sp">Thank You !</p>
+                    <p className="font-semibold text-2xl text-gray-500 sp">Thank You !</p>
                     </div>
              
                 </div>
-                <div className="bg-white w-full max-w-2xl text-gray-400 rounded-b-lg mb-2 p-5 md:p-8 border-dashed border-2 border-gray-200">
+                <div className="bg-white w-full max-w-2xl text-gray-500 rounded-b-lg mb-2 p-5 md:p-8 border-dashed border-2 border-gray-200">
                     <div className="my-2 flex justify-center items-center">
                         {/* <p className="text-xs">ORDER ID</p> */}
                         <p className="text-lg w-fit px-2.5 py-2 bg-gray-100 rounded-sm">
-                            ORDER # :  <span className="text-gray-500">OD-XXX-XXX</span></p>
+                            ORDER # :  <span className="text-gray-700">OD-XXX-XXX</span></p>
                     </div>
-                    <p className="text-gray-400 text-center">Your order payment was successful.</p>
+                    <p className="text-gray-500 text-center">Your order payment was successful.</p>
 
                     {/* order summary */}
                     <div>
                         <p className="uppercase text-xs mt-12 mb-4">Order Summary</p>
                     </div>
+
+                    {/* map order items */}
                     <div>
                         <div className="bg-gray-50">
-                           <div className="px-1 md:px-4 flex justify-between items-center border-b border-gray-100 hover:border-gray-200  py-4">
-                            <p className="w-[60%] md:w-[70%] truncate">My Awesome product name</p>
-                            <p className="w-[30%] md:w-[20%] truncate ml-4 md:ml-8">£120,000.00</p>
-                           </div>
-                       
+                            {loading ? (
+                                <div className="flex justify-center items-center py-12">
+                                    
+                                    <div className="loader"></div>
+                                </div>
+                            ) : (
+                                orderItems.map((item) => (
+                                    <div key={item.id} className="px-1 md:px-4 flex justify-between items-center border-b border-gray-100 hover:border-gray-200  py-4">
+                                        <p className="w-[60%] md:w-[70%] truncate">{item.name}</p>
+                                        <p className="w-[30%] md:w-[20%] truncate ml-4 md:ml-8 text-right">£{item.price.toFixed(2)}</p>
+                                   </div>
+                                    )
+                                )
+                            )
+                            }
+                      
                         </div>
                     </div>
 
                 </div>
 
                 <div className="mt-12 mb-6">
-                    <button className="btn-primary-outlined-lg w-full md:w-fit">Continue Shopping</button>
+                    <button 
+                        className="btn-primary-outlined-lg w-full md:w-fit"
+                        onClick={()=>{handleToShopping()}}
+                    >Continue Shopping</button>
                 </div>
             </div>
 

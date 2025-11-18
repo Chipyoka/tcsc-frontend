@@ -7,6 +7,7 @@ import { Info, CheckCircle2, Loader2 } from "lucide-react";
 import useCartStore from "../store/cart.store";
 import useCheckoutStore from "../store/checkout.store";
 import { useNavStore } from "../store/nav.store";
+
 import {
   validateUKPhone,
   validateUKPostcode,

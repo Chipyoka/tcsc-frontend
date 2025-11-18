@@ -36,6 +36,9 @@ button{
   cursor: pointer;
   transition: background .3s ease-in-out;
 }
+.sp{
+  font-family: var(--secondary-font) !important;
+}
 .btn-primary-outlined-lg-2{
   background: var(--color-white);
   color: var(--color-accent-1);

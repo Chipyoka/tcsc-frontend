@@ -42,7 +42,7 @@ const PaymentSuccess = () => {
         )
     }
     // Set page title
-    window.document.title = `Payment Success | The Cleaning Supplies Co.`;
+    window.document.title = `Success | The Cleaning Supplies Co.`;
 
 
     

@@ -8,6 +8,10 @@ import Register from '../pages/Register.jsx';
 import Cart from '../pages/Cart.jsx';
 import Checkout from '../pages/Checkout.jsx';
 
+// payments & checkout
+import PaymentSuccess from '../pages/PaymentSuccess.jsx';
+import PaymentFailed from '../pages/PaymentFailed.jsx';
+
 import HandleScroll from '../components/HandleScroll';
 
 export default function AppRouter() {
@@ -22,6 +26,8 @@ export default function AppRouter() {
         <Route path="/product/:slug" element={<ProductDetail />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/checkout/payment/success" element={<PaymentSuccess />} />
+        <Route path="/checkout/payment/failed" element={<PaymentFailed />} />
       </Routes>
     </BrowserRouter>
   );

@@ -19,6 +19,7 @@ const PaymentFailed = () => {
         ];
         
         setOrderData(sampleItems);
+       
 
         // delay setting loading to false
         setTimeout(() => {

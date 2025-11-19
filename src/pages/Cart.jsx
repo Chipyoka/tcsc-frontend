@@ -10,10 +10,14 @@ import useCartStore from '../store/cart.store';
 import { useState } from 'react';
 import { useNavStore } from '../store/nav.store.js';
 
+
+
+import { toast } from 'react-toastify';
+
 const Cart = () => {
   window.document.title = "My Cart | The Cleaning Supplies Co.";
   const navigate = useNavigate();
-  const { setProductCategory } = useNavStore();
+  const { setProductCategory, productCategory } = useNavStore();
 
   // --- Zustand store ---
   const items = useCartStore((state) => state.items);
@@ -27,10 +31,26 @@ const Cart = () => {
   const vat = subtotal * vatRate;
   const total = subtotal + vat;
 
-  const handleContinueShopping = () => {
-    setProductCategory('All');
-    navigate('/products/all');
-  };
+    const handleContinueShopping = () => {
+      if(!productCategory.subcat){
+          navigate('/');
+        }
+
+      navigate(
+        `/products/${productCategory.cat}/${productCategory.subcat}/${productCategory.slug}`
+      )
+    };
+
+    const handleRemoveItem = (id) =>{
+
+      try {
+        removeItem(id)
+        toast.success('Product removed from cart.');
+      } catch (error) {
+        toast.warning('Failed to remove product.');
+        console.error("Error removing product from cart:", error)
+      }
+    }
 
   return (
     <>
@@ -79,7 +99,7 @@ const Cart = () => {
 
                       <div
                         className="text-gray-400 flex justify-center items-center w-10 h-10 rounded-sm p-2 hover:bg-gray-100 transition-all duration-300 cursor-pointer"
-                        onClick={() => removeItem(product.id)}
+                        onClick={() => handleRemoveItem(product.id)}
                       >
                         <X />
                       </div>

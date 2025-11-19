@@ -1,7 +1,12 @@
 import { useState } from 'react';
 import { ShoppingCart, Heart, Check } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import useCartStore from '../store/cart.store'; // your Zustand store
+import useCartStore from '../store/cart.store'; 
+import { useNavStore } from "../store/nav.store.js";
+
+
+
+import { toast } from 'react-toastify';
 
 import Topbar from "../components/Topbar";
 import Navbar from "../components/Navbar";
@@ -18,6 +23,8 @@ const ProductDetails = () => {
   const navigate = useNavigate();
   const addItem = useCartStore((state) => state.addItem);
   const addSubscription = useCartStore((state) => state.addSubscription);
+
+  const { productCategory } = useNavStore();
 
   const [pageTitle, setPageTitle] = useState("Loading...");
   const [quantity, setQuantity] = useState(1);
@@ -68,8 +75,21 @@ const handleAddToCart = () => {
     }
 
     // TODO: show UI feedback (toast/banner) for add-to-cart
+    toast.success('Product added to cart!');
     };
 
+    /**
+    * Handle redirect to products with last viewed category in effect.
+    */
+    const handleToShopping = () =>{
+        if(!productCategory.subcat){
+            navigate('/');
+        }
+
+        navigate(
+            `/products/${productCategory.cat}/${productCategory.subcat}/${productCategory.slug}`
+        )
+    }
 
   return (
     <>

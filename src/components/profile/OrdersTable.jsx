@@ -201,7 +201,7 @@ const OrdersTable = ({ tenantId, userId }) => {
 
   if (loading) {
     return (
-       <div className="px-6 md:px-36 py-12 flex items-center justify-center min-h-[100dvh] w-full bg-white rounded-lg border border-gray-200 mt-4">
+       <div className="px-6 md:px-36 py-12 flex items-center justify-center min-h-[60dvh] w-full bg-white rounded-lg border border-gray-200 mt-4">
                 <p className="text-center text-gray-400">Loading your orders...</p>
         </div>
     );

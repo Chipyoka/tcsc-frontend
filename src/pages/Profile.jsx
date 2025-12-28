@@ -4,6 +4,8 @@ import Topbar from "../components/profile/Topbar.jsx";
 import MostTopbar from "../components/Topbar.jsx";
 import Home from "../components/profile/Home.jsx";
 import OrdersTable from "../components/profile/OrdersTable.jsx";
+import PaymentsTable from "../components/profile/PaymentsTable.jsx";
+import SubscriptionSection from "../components/profile/SubscriptionsSection.jsx";
 import FooterSmall from "../components/FooterSmall.jsx";
 import { useProfileStore } from "../store/profile.store.js";
 import { useNavStore } from '../store/nav.store.js';
@@ -54,6 +56,8 @@ const Profile = () => {
 
                     {nav === "Home" && <Home/>}
                     {nav === "Orders" && <OrdersTable/>}
+                    {nav === "Payments" && <PaymentsTable/>}
+                    {nav === "Subscriptions" && <SubscriptionSection/>}
 
                     {/* Continue shopping section */}
                     <div className="bg-white border border-gray-200 rounded-md w-[90%] max-w-full md:w-full p-6 md:py-4 mx-4 my-4 md:mx-auto flex flex-col justify-start items-start gap-6">

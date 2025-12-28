@@ -20,6 +20,7 @@ const Topbar = () => {
         { name: 'Home', link: '#' },
         { name: 'Orders', link: '#' },
         { name: 'Payments', link: '#' },
+        { name: 'Subscriptions', link: '#' },
         { name: 'Settings', link: '#' },
     ];
 

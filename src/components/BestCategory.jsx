@@ -1,10 +1,8 @@
-import Mop from '../assets/images/mop.jpg';
-import Cloths from '../assets/images/cloths.png';
-import Carex from '../assets/images/carex-2.png';
-import Office from '../assets/images/office.jpg';
-import School from '../assets/images/school.jpg';
-import Res from '../assets/images/restaurant.jpg';
-import Hos from '../assets/images/hospital.jpg';
+
+import Office from '../assets/images/office.avif';
+import School from '../assets/images/school.avif';
+import Res from '../assets/images/restaurant.avif';
+import Hos from '../assets/images/hospital.avif';
 
 
 
@@ -15,13 +13,13 @@ const BestCategory = () => {
 
                 <div className="max-w-lg h-[80dvh] flex flex-col justify-center gap-4">
                      <div className="relative h-[80%] overflow-hidden md:rounded-lg">
-                        <img src={Office} alt="Mop" className="object-cover w-[2200px] h-full" />
+                        <img src="https://res.cloudinary.com/dsqvrrzov/image/upload/q_auto,dpr_auto/v1766929039/office_wicrau.avif" alt="Mop" className="object-cover w-[2200px] h-full" />
                         <div className="z-10 absolute bottom-2 left-4 bg-white w-fit border-b-4 px-4 py-2 border-[var(--color-accent-1)] rounded-t-md text-[var(--color-primary)] cursor-default transition-all duration-300 ease-in-out">
                             Office & Commercial Buildings
                         </div>
                     </div>
                      <div className="relative h-[80%] overflow-hidden md:rounded-lg">
-                        <img src={School} alt="Mop" className="object-cover w-[2200px] h-full" />
+                        <img src="https://res.cloudinary.com/dsqvrrzov/image/upload/q_auto,dpr_auto/v1766929031/restaurant_wprglr.avif" alt="Mop" className="object-cover w-[2200px] h-full" />
                         <div className="z-10 absolute bottom-2 left-4 bg-white w-fit border-b-4 px-4 py-2 border-[var(--color-accent-1)] rounded-t-md text-[var(--color-primary)] cursor-default transition-all duration-300 ease-in-out">
                             Educational Facilities
                         </div>
@@ -31,7 +29,7 @@ const BestCategory = () => {
                
                 <div className="max-w-lg h-[50dvh] md:h-[80dvh] flex flex-col justify-center gap-4 my-3 md:my-0">
                      <div className="relative h-[100%] overflow-hidden md:rounded-lg">
-                        <img src={Hos} alt="Mop" className="object-cover w-[2200px] h-full" />
+                        <img src="https://res.cloudinary.com/dsqvrrzov/image/upload/q_auto,dpr_auto/v1766929030/hospital_z1ryoi.avif" alt="Mop" className="object-cover w-[2200px] h-full" />
                         <div className="z-10 absolute bottom-2 left-4 bg-white w-fit border-b-4 px-4 py-2 border-[var(--color-accent-1)] rounded-t-md text-[var(--color-primary)] cursor-default transition-all duration-300 ease-in-out">
                             Healthcare & Laboratory 
                         </div>
@@ -42,11 +40,11 @@ const BestCategory = () => {
 
                 <div className="max-w-lg h-[80dvh] flex flex-col justify-between gap-4">
                 <div className="p-4 md:p-2">
-                    <h3 className="text-4xl md:text-5xl font-bold text-[var(--color-black)] text-[var(--color-primary)] mb-4">For Every Workplace.</h3>
+                    <h3 className="text-4xl md:text-5xl font-bold text-[var(--color-primary)] mb-4">For Every Workplace.</h3>
                      <p className="text-[var(--color-black)] text-xl">We supply smart cleaning solutions on wholesale for every industry.</p>
                  </div>
                      <div className="relative h-[60%] overflow-hidden md:rounded-lg">
-                        <img src={Res} alt="Mop" className="object-cover  h-full" />
+                        <img src="https://res.cloudinary.com/dsqvrrzov/image/upload/q_auto,dpr_auto/v1766929031/restaurant_wprglr.avif" alt="Mop" className="object-cover  h-full" />
                         <div className="z-10 absolute bottom-2 left-4 bg-white w-fit border-b-4 px-4 py-2 border-[var(--color-accent-1)] rounded-t-md text-[var(--color-primary)] cursor-default transition-all duration-300 ease-in-out">Restaurants & Hospitality</div>
                     </div>
                 </div>

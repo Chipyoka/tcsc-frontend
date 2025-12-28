@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import {useNavigate} from 'react-router-dom'
-import Cleaning from '../assets/images/image_2.png';
-import Tools from '../assets/images/image_3.png';
+import Cleaning from '../assets/images/hero-03.avif';
+import Tools from '../assets/images/image_3.avif';
 
 import {ArrowRight} from 'lucide-react';
 
@@ -37,7 +37,7 @@ const Hero = () => {
         {/* <button className="btn-primary-outlined-lg w-full md:w-fit" onClick={()=> {navigate(`/products/all`)}}>Get a Business Quote</button> */}
       </div>
 
-      <div className="w-full md:w-[70%] h-[350px] md:h-[640px] relative">
+      <div className="w-full md:w-[70%] h-[350px] md:h-[680px] relative">
         {images.map((img, index) => (
           <img
             key={index}

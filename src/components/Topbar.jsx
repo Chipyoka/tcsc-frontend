@@ -6,7 +6,7 @@ const Topbar = () => {
            </div>
            <div className="hidden md:flex justify-end items-center gap-x-4">
                 <p className="text-lg text-[var(--color-white)] font-medium cursor-pointer border-b-2 border-[var(--color-primary)] hover:border-[var(--color-white)]">
-                    Get a Custom Quote
+                    Create Custom Product List
                 </p>
 
                 | 

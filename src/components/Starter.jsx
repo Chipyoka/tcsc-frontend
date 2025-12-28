@@ -1,4 +1,4 @@
-import Eco from '../assets/images/starta_2.png'
+import Eco from '../assets/images/starta_3.png'
 
 
 import {ArrowRight} from 'lucide-react';

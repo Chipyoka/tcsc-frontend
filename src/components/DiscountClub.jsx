@@ -1,5 +1,5 @@
 import {Check, ArrowRight} from 'lucide-react';
-import Delivery from '../assets/images/delivery.png';
+import Delivery from '../assets/images/discount-club.avif';
 
 const DiscountClub = () => {
     return(
@@ -26,6 +26,12 @@ const DiscountClub = () => {
                         <div>
                             <Check/>
                         </div>
+                        Weekly
+                    </li>
+                    <li className="flex gap-2 px-4 py-2 border-3 border-white rounded-lg cursor-default hover:shadow-lg transition-all duration-300 text-white">
+                        <div>
+                            <Check/>
+                        </div>
                         Monthly
                     </li>
                     <li className="flex gap-2 px-4 py-2 border-3 border-white rounded-lg cursor-default hover:shadow-lg transition-all duration-300 text-white">
@@ -40,12 +46,7 @@ const DiscountClub = () => {
                         </div>
                         Every 3 Months
                     </li>
-                    <li className="flex gap-2 px-4 py-2 border-3 border-white rounded-lg cursor-default hover:shadow-lg transition-all duration-300 text-white">
-                        <div>
-                            <Check/>
-                        </div>
-                        Every 6 Months
-                    </li>
+              
                 
                 </ul>
                 <p className="italic font-medium text-lg text-white mt-4">
@@ -54,7 +55,7 @@ const DiscountClub = () => {
 
                 <div className="mt-6">
                     <button className="btn-primary-outlined-lg-2 w-full md:w-fit flex items-center justify-center hover:shadow-lg transition-all duration-300">
-                        Join Now ! <span><ArrowRight  className="w-5 h-5 ml-2"/></span>
+                        Join Now <span><ArrowRight  className="w-5 h-5 ml-2"/></span>
                     </button>
                 </div>
             </aside>

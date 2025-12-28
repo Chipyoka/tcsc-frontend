@@ -3,7 +3,7 @@ import { ArrowRight } from 'lucide-react';
 const OurStory = () => {
     return(
         <section className="relative h-fit md:h-[70vh] flex items-center justify-center text-white">
-            <div className="absolute inset-0 bg-[url('../assets/images/image_3.png')] bg-cover bg-center opacity-70 mix-blend-multiply"></div>
+            <div className="absolute inset-0 bg-[url('../assets/images/image_3.avif')] bg-cover bg-center opacity-70 mix-blend-multiply"></div>
             <div className="absolute inset-0 bg-[var(--color-primary-d)]/80"></div>
 
            

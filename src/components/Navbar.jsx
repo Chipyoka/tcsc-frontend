@@ -29,6 +29,10 @@ const Navbar = () => {
   const handleToProducts = (cat,subcat,subsub) =>{
     if(!cat) return;
 
+    console.log('Navigating to cat:', cat);
+    console.log('Navigating to subcat:', subcat);
+    console.log('Navigating to subsub:', subsub);
+
     navigate(`/products/${cat.slug}/${subcat.slug}/${subsub.slug}`);
     setProductCategory({
       cat: cat.tag,
@@ -90,8 +94,8 @@ const Navbar = () => {
       </nav>
 
           {/* Desktop Bottom Menu */}
-      <div className="hidden md:flex md:px-10 md:py-2 md:bg-[var(--color-primary)]">
-        <ul className="flex justify-center gap-x-6 items-center text-sm md:text-[1.0rem] text-[var(--color-white)] relative">
+      <div className="hidden md:flex md:justify-center md:px-10 md:py-2 md:bg-[var(--color-primary)]">
+        <ul className="flex justify-center gap-x-12 items-center text-sm md:text-[1.0rem] text-[var(--color-white)] relative">
           {navLinks.map((link, i) => (
             <li
               key={i}
@@ -153,7 +157,7 @@ const Navbar = () => {
               )}
             </li>
           ))}
-          <li className="cursor-pointer">Bulk Orders</li>
+          {/* <li className="cursor-pointer">Bulk Orders</li> */}
         </ul>
       </div>
 
@@ -212,18 +216,18 @@ const Navbar = () => {
                 className="flex-1 outline-none text-gray-700 placeholder-gray-400 text-sm"
               />
             </div>
-        <ul className="flex flex-col gap-6 p-6 text-lg text-[var(--color-primary)]">
+        <ul className="flex flex-col md:justify-center gap-6 p-6 text-lg text-[var(--color-primary)]">
           {/* Nav Links */}
           {navLinks.map((link, i) => (
             <li 
               key={i} 
               className="cursor-pointer hover:text-[var(--color-primary-dark)] flex items-center justify-between"
-              onClick={()=> {handleToProducts(link)}}
+              onClick={()=> {handleToProducts(link, link.children, link.children.children)}}
             >{link.tag} <span><ChevronRight className="w-4 h-4 " /></span></li>
           ))}
-          <li  className="cursor-pointer hover:text-[var(--color-primary-dark)]">
+          {/* <li  className="cursor-pointer hover:text-[var(--color-primary-dark)]">
             Bulk Orders
-          </li>
+          </li> */}
 
           {/* Profile */}
           {/* <li className="flex items-center gap-2 mt-2">

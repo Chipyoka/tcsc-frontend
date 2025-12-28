@@ -22,7 +22,7 @@ const Hero = () => {
     <header 
     className="
       h-fit
-      md:h-[76dvh] overflow-hidden bg-[url('../assets/images/bg-hero-2.jpg')] bg-cover bg-bottom 
+      md:h-[80dvh] overflow-hidden bg-[url('../assets/images/bg-hero-2.jpg')] bg-cover bg-bottom 
       bg-no-repeat flex flex-col md:flex-row items-center justify-between relative
     ">
       

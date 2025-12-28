@@ -10,7 +10,7 @@ import FooterSmall from "../components/FooterSmall.jsx";
 import { useProfileStore } from "../store/profile.store.js";
 import { useNavStore } from '../store/nav.store.js';
 
-import { Info, CheckCircle2, Loader2, X } from "lucide-react";
+import { Info, CheckCircle2, Loader2, X, ChevronRight } from "lucide-react";
 
 const Profile = () => {
     const [pageLoading, setPageLoading] = useState(true);
@@ -49,10 +49,10 @@ const Profile = () => {
         <>
         <div className="min-h-[98dvh]  flex flex-col justify-between bg-gray-50">
             <MostTopbar/>
-            <div className="min-h-[98dvh] max-w-[1024px] w-full mx-auto">
+            <div className="min-h-[98dvh] max-w-[1284px] w-full mx-auto flex flex-col md:flex-row items-start justify-start md:justify-between gap-6 px-2 md:px-0 py-4">
 
                 <Topbar/>
-                <div className="no-scrollbar h-[calc(100dvh-100px)] flex flex-col justify-start items-center overflow-y-auto scrollbar-hide">
+                <div className="w-full no-scrollbar h-[calc(100dvh-100px)] flex flex-col justify-start items-center overflow-y-auto scrollbar-hide">
 
                     {nav === "Home" && <Home/>}
                     {nav === "Orders" && <OrdersTable/>}
@@ -70,6 +70,10 @@ const Profile = () => {
                         <div>
                             <button type="button" className="w-full md:w-fit btn-primary-sm" onClick={handleContinueShopping}>Continue Shopping</button>
                             <button type="button" className="w-full md:w-fit btn-primary-outlined-sm" onClick={() => navigate("/cart")}>Go to Cart</button>
+                        </div>
+
+                        <div>
+                            <p onClick={() => navigate("/")} className="text-sm font-medium text-(--color-primary) border-b-2 border-transparent hover:text-(--color-primary-h) transition duration-300 ease-in-out cursor-pointer">Go to Home <ChevronRight className="h-4 w-4 inline border-none hover:border-none" /></p>
                         </div>
                     </div>
                     <FooterSmall/>

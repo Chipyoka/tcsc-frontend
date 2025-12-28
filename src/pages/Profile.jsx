@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Topbar from "../components/profile/Topbar.jsx";
 import MostTopbar from "../components/Topbar.jsx";
 import Home from "../components/profile/Home.jsx";
+import OrdersTable from "../components/profile/OrdersTable.jsx";
 import FooterSmall from "../components/FooterSmall.jsx";
 import { useProfileStore } from "../store/profile.store.js";
 import { useNavStore } from '../store/nav.store.js';
@@ -52,7 +53,9 @@ const Profile = () => {
                 <div className="no-scrollbar h-[calc(100dvh-100px)] flex flex-col justify-start items-center overflow-y-auto scrollbar-hide">
 
                     {nav === "Home" && <Home/>}
+                    {nav === "Orders" && <OrdersTable/>}
 
+                    {/* Continue shopping section */}
                     <div className="bg-white border border-gray-200 rounded-md w-[90%] max-w-full md:w-full p-6 md:py-4 mx-4 my-4 md:mx-auto flex flex-col justify-start items-start gap-6">
                         <div>
                             <h2 className="text-2xl font-bold text-gray-700 ">Finished for now?</h2>

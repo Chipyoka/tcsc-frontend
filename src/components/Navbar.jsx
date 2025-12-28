@@ -70,17 +70,20 @@ const Navbar = () => {
 
         {/* cta */}
         <div className="flex justify-end items-center gap-x-12 w-[30%]">
-          <div className="cursor-pointer">
+          {/* User Profile */}
+          <div className="cursor-pointer"  onClick={() => navigate('/profile')}>
             <UserCircle className="w-9 h-9 text-[var(--color-primary)]" />
           </div>
-        <div className="relative cursor-pointer" onClick={() => navigate('/cart')}>
-          <ShoppingCart className="w-9 h-9 text-[var(--color-primary)]" />
-          {totalItems > 0 && (
-            <span className="absolute -top-2 -right-2 bg-[var(--color-secondary)] text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-              {totalItems}
-            </span>
-          )}
-        </div>
+
+          {/* Cart */}
+          <div className="relative cursor-pointer" onClick={() => navigate('/cart')}>
+            <ShoppingCart className="w-9 h-9 text-[var(--color-primary)]" />
+            {totalItems > 0 && (
+              <span className="absolute -top-2 -right-2 bg-[var(--color-secondary)] text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                {totalItems}
+              </span>
+            )}
+          </div>
 
           <div>
             <button 

@@ -1,16 +1,58 @@
+import {useEffect, useState} from 'react';
+
+
 import Topbar from '../components/Topbar';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Logo from '../assets/images/logo-l.png';
 
 import {useNavigate} from 'react-router-dom';
+import useAuthStore from '../store/auth.store.js';
+
+import { toast } from 'react-toastify';
 
 
 const Login = () => {
+    const { login } = useAuthStore();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
 
     const navigate = useNavigate();
     // set title
     window.document.title = "Login | The Cleaning Supplies Co.";
+
+    const handleLogin = (e) => {
+        e.preventDefault();
+
+        // validate inputs
+        if(!email || !password){
+            toast.error('Please fill in all fields.');
+            return;
+        }
+
+        const user ={
+            email: email,
+            name: "John Doe"
+        }
+
+        const token =  "my-token"; // get token from backend
+        try {
+            toast.success('Login successful!');
+
+            // api call here to login user
+
+            // introduce small delay
+            setTimeout(() => {
+                login(user, token);
+                navigate('/profile');
+            }, 1500);
+
+        } catch (error) {
+            console.error("Login error:", error);
+            toast.error('Login failed. Please try again.');
+        }
+    }
 
     return(
         <>
@@ -23,7 +65,7 @@ const Login = () => {
                <h2 className="text-3xl md:text-4xl text-[var(--color-primary)] font-bold">Login</h2>
                {/* <p className="text-gray-600 my-2">Enjoy the full shopping experience</p> */}
 
-               <form action="" className="w-full">
+               <form onSubmit={handleLogin} className="w-full">
                     <div className="my-4">
 
                         <label htmlFor="email" className="text-gray-600">Email:</label>
@@ -32,6 +74,8 @@ const Login = () => {
                                 type="email"
                                 name="email"
                                 placeholder=""
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                                 className="flex-1 outline-none text-sm text-gray-700 placeholder-gray-400 w-full"
                                 required
                             />
@@ -45,6 +89,8 @@ const Login = () => {
                                 type="password"
                                 name="password"
                                 placeholder=""
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                                 className="flex-1 outline-none text-sm text-gray-700 placeholder-gray-400 w-full"
                                 required
                             />
@@ -56,7 +102,7 @@ const Login = () => {
                         
                     </div>
                     <div className="mt-8 mb-4">
-                        <button type="button" className="btn-primary-sm w-full ">Login</button>
+                        <button type="submit" className="btn-primary-sm w-full ">Login</button>
                     </div>
                 
                     <div className="my-4">

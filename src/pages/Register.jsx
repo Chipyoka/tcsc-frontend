@@ -97,7 +97,7 @@ const Register = () => {
                     </div>
                 
                     <div className="my-4">
-                        <p className="text-lg text-gray-600 text-center font-medium">Already have an account? <span onClick={()=>{navigate('/login')}} className="cursor-pointer font-medium text-[var(--color-primary)]">Signup</span></p>               
+                        <p className="text-lg text-gray-600 text-center font-medium">Already have an account? <span onClick={()=>{navigate('/login')}} className="cursor-pointer font-medium text-[var(--color-primary)]">Login</span></p>               
                     </div>
                     <div>
                         <p className="text-sm text-gray-600 text-center mt-6">By continuing you agree to our <strong>Terms and Conditions</strong></p>

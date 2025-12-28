@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import ProtectedRoute from '../components/auth/ProtectedRoute';
 import '../styles/App.css';
 
 import { ToastContainer } from 'react-toastify';
@@ -11,6 +12,7 @@ import Login from '../pages/Login.jsx';
 import Register from '../pages/Register.jsx';
 import Cart from '../pages/Cart.jsx';
 import Checkout from '../pages/Checkout.jsx';
+import Profile from '../pages/Profile.jsx';
 
 // payments & checkout
 import PaymentSuccess from '../pages/PaymentSuccess.jsx';
@@ -33,6 +35,11 @@ export default function AppRouter() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/checkout/payment/success" element={<PaymentSuccess />} />
           <Route path="/checkout/payment/failed" element={<PaymentFailed />} />
+
+          {/* Protected Routes */}
+          <Route element={<ProtectedRoute />}>
+            <Route path="/profile" element={<><Profile /></>} />
+          </Route>
         </Routes>
       </BrowserRouter>
 

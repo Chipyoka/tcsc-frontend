@@ -6,9 +6,10 @@ const useAuthStore = create(
     (set) => ({
       user: null,
       isAuthenticated: false,
-      token: null,
-      login: (userData, token) => set({ user: userData, token, isAuthenticated: true }),
-      logout: () => set({ user: null, token: null, isAuthenticated: false }),
+      accessToken: null,
+      setAccessToken: (token) => set({ accessToken: token }),
+      login: (userData, token) => set({ user: userData, accessToken: token, isAuthenticated: true }),
+      logout: () => set({ user: null, accessToken: null, isAuthenticated: false }),
     }),
     {
       name: 'tcsc-auth-storage', // name of the item in storage

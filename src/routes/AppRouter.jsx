@@ -22,6 +22,7 @@ import HandleScroll from '../components/HandleScroll';
 
 // utility pages
 import CheckEmail from '../pages/CheckEmail.jsx';
+import CookieBanner from '../components/CookieBanner.jsx';
 
 export default function AppRouter() {
   return (
@@ -48,6 +49,10 @@ export default function AppRouter() {
         </Routes>
       </BrowserRouter>
 
+      {/* Cookie Banner */}
+      <CookieBanner />
+
+      {/* Toast Container */}
       <ToastContainer
         position="top-center"
         autoClose={3000}

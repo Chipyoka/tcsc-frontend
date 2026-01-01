@@ -16,7 +16,7 @@ export const useNavStore = create(
       setProductId: (id) => set({ selectedProductId: id }),
     }),
     {
-      name: 'nav-storage', // localStorage key
+      name: 'tcsc-nav-storage', // localStorage key
     }
   )
 );

@@ -75,7 +75,7 @@ const useCartStore = create(
     }),
 
     {
-      name: 'cart-store',
+      name: 'tcsc-cart-store',
       getStorage: () => localStorage,
     }
   )

@@ -17,7 +17,7 @@ const Settings = () => {
         <>
              {/* Profile Information Section */}
             <div
-                className="bg-white border border-gray-200 rounded-md w-[90%] max-w-full md:w-full p-6 md:py-4 mx-4 my-4 md:mx-auto flex flex-col justify-start items-start gap-6"
+                className="bg-white border border-gray-200 rounded-md w-[90%] max-w-full md:w-full p-6 md:py-4 mx-4 my-2 md:my-4 md:mx-auto flex flex-col justify-start items-start gap-6"
             >
                 <div>
                     <h2 className="text-xl font-semibold text-gray-600">Profile Information</h2>
@@ -28,7 +28,7 @@ const Settings = () => {
 
                 {/* form */}
                 <form action="" className="w-full">
-                     <div className="my-4 md:w-lg">
+                     <div className="my-2 md:my-4 md:w-lg">
 
                         <label htmlFor="name" className="text-gray-600">Fullname:</label>
                         <div className="flex items-center gap-2 bg-white border border-gray-300 rounded-md px-3 py-3 md:py-4 w-full max-w-full md:max-w-lg focus-within:shadow-sm focus-within:border-[var(--color-primary)]">
@@ -43,7 +43,7 @@ const Settings = () => {
                             />
                         </div>
                     </div>
-                     <div className="my-4 md:w-lg">
+                     <div className="my-2 md:my-4 md:w-lg">
 
                         <label htmlFor="email" className="text-gray-600">Email:</label>
                         <div className="flex items-center gap-2 bg-white border border-gray-300 rounded-md px-3 py-3 md:py-4 w-full max-w-full md:max-w-lg focus-within:shadow-sm focus-within:border-[var(--color-primary)]">
@@ -67,7 +67,7 @@ const Settings = () => {
 
              {/* Shipping Information Section */}
             <div
-                className="bg-white border border-gray-200 rounded-md w-[90%] max-w-full md:w-full p-6 md:py-4 mx-4 my-4 md:mx-auto flex flex-col justify-start items-start gap-6"
+                className="bg-white border border-gray-200 rounded-md w-[90%] max-w-full md:w-full p-6 md:py-4 mx-4 my-2 md:my-4 md:mx-auto flex flex-col justify-start items-start gap-6"
             >
                 <div>
                     <h2 className="text-xl font-semibold text-gray-600">Shipping Information</h2>
@@ -79,7 +79,7 @@ const Settings = () => {
                 {/* form */}
                 <form action="" className="w-full">
                     {/* street address */}
-                     <div className="my-4 md:w-lg">
+                     <div className="my-2 md:my-4 md:w-lg">
                         <label htmlFor="streetAddress" className="text-gray-600">Street Address:</label>
                         <div className="flex items-center gap-2 bg-white border border-gray-300 rounded-md px-3 py-3 md:py-4 w-full max-w-full md:max-w-lg focus-within:shadow-sm focus-within:border-[var(--color-primary)]">
                             <input
@@ -96,7 +96,7 @@ const Settings = () => {
 
                     {/* Postcode and Town/City side by side */}
                     <div className="flex flex-col md:flex-row max-w-full md:max-w-lg gap-4 ">
-                        <div className="my-4 w-full md:w-md mr-4">
+                        <div className="my-2 md:my-4 w-full md:w-md mr-4">
 
                             <label htmlFor="postcode" className="text-gray-600">Postcode:</label>
                             <div className="flex items-center gap-2 bg-white border border-gray-300 rounded-md px-3 py-3 md:py-4 w-full max-w-full md:max-w-lg focus-within:shadow-sm focus-within:border-[var(--color-primary)]">
@@ -112,7 +112,7 @@ const Settings = () => {
                             </div>
                         </div>
 
-                        <div className="my-4 w-full md:w-md ">
+                        <div className="my-2 md:my-4 w-full md:w-md ">
 
                             <label htmlFor="cityTown" className="text-gray-600">City/Town:</label>
                             <div className="flex items-center gap-2 bg-white border border-gray-300 rounded-md px-3 py-3 md:py-4 w-full max-w-full md:max-w-lg focus-within:shadow-sm focus-within:border-[var(--color-primary)]">
@@ -129,7 +129,7 @@ const Settings = () => {
                         </div>
                     </div>
 
-                    <div className="my-4 md:w-lg">
+                    <div className="my-2 md:my-4 md:w-lg">
 
                         <label htmlFor="phone" className="text-gray-600">Phone:</label>
                         <div className="flex items-center gap-2 bg-white border border-gray-300 rounded-md px-3 py-3 md:py-4 w-full max-w-full md:max-w-lg focus-within:shadow-sm focus-within:border-[var(--color-primary)]">
@@ -153,7 +153,7 @@ const Settings = () => {
 
             {/* Change Password Section */}
             <div
-                className="bg-white border border-gray-200 rounded-md w-[90%] max-w-full md:w-full p-6 md:py-4 mx-4 my-4 md:mx-auto flex flex-col justify-start items-start gap-6"
+                className="bg-white border border-gray-200 rounded-md w-[90%] max-w-full md:w-full p-6 md:py-4 mx-4 my-2 md:my-4 md:mx-auto flex flex-col justify-start items-start gap-6"
             >
                 <div>
                     <h2 className="text-xl font-semibold text-gray-600">Change Password</h2>
@@ -164,7 +164,7 @@ const Settings = () => {
 
                 {/* form */}
                 <form action="" className="w-full">
-                     <div className="my-4 md:w-lg">
+                     <div className="my-2 md:my-4 md:w-lg">
 
                         <label htmlFor="currentPassword" className="text-gray-600">Current Password:</label>
                         <div className="flex items-center gap-2 bg-white border border-gray-300 rounded-md px-3 py-3 md:py-4 w-full max-w-full md:max-w-lg focus-within:shadow-sm focus-within:border-[var(--color-primary)]">
@@ -179,7 +179,7 @@ const Settings = () => {
                             />
                         </div>
                     </div>
-                     <div className="my-4 md:w-lg">
+                     <div className="my-2 md:my-4 md:w-lg">
 
                         <label htmlFor="newPassword" className="text-gray-600">New Password:</label>
                         <div className="flex items-center gap-2 bg-white border border-gray-300 rounded-md px-3 py-3 md:py-4 w-full max-w-full md:max-w-lg focus-within:shadow-sm focus-within:border-[var(--color-primary)]">
@@ -194,7 +194,7 @@ const Settings = () => {
                             />
                         </div>
                     </div>
-                     <div className="my-4 md:w-lg">
+                     <div className="my-2 md:my-4 md:w-lg">
 
                         <label htmlFor="confirmNewPassword" className="text-gray-600">Confirm New Password:</label>
                         <div className="flex items-center gap-2 bg-white border border-gray-300 rounded-md px-3 py-3 md:py-4 w-full max-w-full md:max-w-lg focus-within:shadow-sm focus-within:border-[var(--color-primary)]">

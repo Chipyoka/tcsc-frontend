@@ -78,9 +78,14 @@ const Topbar = () => {
     return (
         <div className="border border-gray-200 rounded-md relative w-full md:w-1/4 h-18 md:h-[80dvh] bg-white flex flex-col items-start px-4 md:px-6 mt-4 justify-between">
             {/* Logo and Title */}
-            <div className="flex items-center gap-3 mt-4">
+            <div className="flex items-center gap-3 mt-4 w-full">
                 <img src={Favicon} alt="Favicon" className="h-10 w-10 md:h-12 md:w-12" />
-                <h4 className="text-lg font-semibold text-gray-600">My Account</h4>
+                <h4 className="text-lg font-semibold text-gray-600 truncate overflow-ellipsis">
+                    My Account
+                    <br />
+                    <p className="text-sm text-gray-400 font-normal max-w-[80%] truncate">John's Business</p>
+                </h4>
+                
             </div>
 
             {/* Desktop Navigation */}

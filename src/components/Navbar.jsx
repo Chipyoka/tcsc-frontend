@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {useNavigate} from 'react-router-dom';
 import Logo from '../assets/images/logo-l.png';
 import { Search, UserCircle, ShoppingCart, Menu, X, ChevronRight, ChevronDown, ArrowRight } from "lucide-react";
@@ -6,6 +6,8 @@ import { Search, UserCircle, ShoppingCart, Menu, X, ChevronRight, ChevronDown, A
 import {useNavStore} from '../store/nav.store.js';
 import useCartStore from '../store/cart.store.js';
 import { navLinks } from "../data/categories";
+
+import axiosInstance from '../api/axiosInstance';
 
 
 const Navbar = () => {
@@ -43,6 +45,24 @@ const Navbar = () => {
     // alert(link.tag)
 
   }
+
+  /**
+   * Fetch categories from backend
+   */
+  // useEffect(() => {
+  //   const fetchCategories = async () => {
+  //     try { 
+  //       const response = await axiosInstance.get('/categories');
+  //       const categories = response.data;
+  //       console.log('Fetched categories:', categories);
+  //       // You can set categories to state here if needed
+  //     } catch (error) {
+  //       console.error('Error fetching categories:', error);
+  //     }
+  //   };
+
+  //   fetchCategories();
+  // }, []);
 
   return (
     <>

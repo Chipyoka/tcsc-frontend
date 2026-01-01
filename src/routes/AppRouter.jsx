@@ -13,7 +13,7 @@ import Register from '../pages/Register.jsx';
 import Cart from '../pages/Cart.jsx';
 import Checkout from '../pages/Checkout.jsx';
 import Profile from '../pages/Profile.jsx';
-import DiscountClub from '../pages/DiscountClub.jsx';
+// import DiscountClub from '../pages/DiscountClub.jsx';
 
 // payments & checkout
 import PaymentSuccess from '../pages/PaymentSuccess.jsx';
@@ -43,7 +43,7 @@ export default function AppRouter() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/checkout/payment/success" element={<PaymentSuccess />} />
           <Route path="/checkout/payment/failed" element={<PaymentFailed />} />
-          <Route path="/discount-club" element={<DiscountClub />} />
+          {/* <Route path="/discount-club" element={<DiscountClub />} /> */}
 
           <Route path="/check-email" element={<CheckEmail />} />
 

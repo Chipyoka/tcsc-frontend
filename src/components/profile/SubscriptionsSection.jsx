@@ -26,7 +26,7 @@ const mockSubscriptions = [
     status: 'active',
     next_billing_date: new Date(Date.now() + 30 * 86400000).toISOString(),
     amount: 4999, // $49.99 in cents
-    currency: 'USD',
+    currency: 'GBP',
     interval: 'monthly',
     payment_method: 'credit_card',
     card_last4: '4242',
@@ -44,7 +44,7 @@ const mockSubscriptions = [
     status: 'active',
     next_billing_date: new Date(Date.now() + 14 * 86400000).toISOString(),
     amount: 12500, // $125.00 in cents
-    currency: 'USD',
+    currency: 'GBP',
     interval: 'bi_monthly',
     payment_method: 'bank_transfer',
     items: [
@@ -64,7 +64,7 @@ const mockSubscriptions = [
     status: 'paused',
     next_billing_date: new Date(Date.now() + 60 * 86400000).toISOString(),
     amount: 8500, // $85.00 in cents
-    currency: 'USD',
+    currency: 'GBP',
     interval: 'monthly',
     payment_method: 'paypal',
     items: [
@@ -99,7 +99,7 @@ const SubscriptionsSection = () => {
     }
   };
 
-  const formatCurrency = (amount, currency = 'USD') => {
+  const formatCurrency = (amount, currency = 'GBP') => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: currency,
@@ -184,7 +184,7 @@ const SubscriptionsSection = () => {
       <div className="p-6 border-b border-gray-200">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           <div>
-            <h2 className="text-xl font-semibold text-gray-800">Active Subscriptions</h2>
+            <h2 className="text-xl font-semibold text-gray-600">Active Subscriptions</h2>
             <p className="text-sm text-gray-600 mt-1">
               Manage your recurring services, deliveries, and billing
             </p>
@@ -197,13 +197,6 @@ const SubscriptionsSection = () => {
             >
               <RefreshCw size={16} />
               Refresh
-            </button>
-            <button
-              onClick={() => console.log('Add new subscription')}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-sm text-sm font-medium hover:bg-blue-700"
-            >
-              <TrendingUp size={16} />
-              Add Subscription
             </button>
           </div>
         </div>
@@ -231,7 +224,7 @@ const SubscriptionsSection = () => {
                   <div className="flex items-start justify-between">
                     <div>
                       <div className="flex items-center gap-3">
-                        <h3 className="text-lg font-semibold text-gray-800">
+                        <h3 className="text-lg font-semibold text-gray-600">
                           {subscription.name}
                         </h3>
                         {getStatusBadge(subscription.status)}

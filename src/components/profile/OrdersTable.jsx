@@ -24,7 +24,7 @@ const mockOrders = Array.from({ length: 25 }, (_, i) => ({
   placed_at: new Date(Date.now() - i * 86400000).toISOString(),
   total_amount: (Math.random() * 1000 + 50) * 100, // In cents
   payment_status: ['paid', 'pending', 'failed'][i % 3],
-  currency: 'USD',
+  currency: 'GBP',
   item_count: Math.floor(Math.random() * 5) + 1
 }));
 
@@ -136,7 +136,7 @@ const OrdersTable = ({ tenantId, userId }) => {
   };
 
   // Format currency
-  const formatCurrency = (amount, currency = 'USD') => {
+  const formatCurrency = (amount, currency = 'GBP') => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: currency,
@@ -213,7 +213,7 @@ const OrdersTable = ({ tenantId, userId }) => {
       <div className="p-6 border-b border-gray-200">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h2 className="text-xl font-semibold text-gray-800">Order History</h2>
+            <h2 className="text-xl font-semibold text-gray-600">Order History</h2>
             <p className="text-sm text-gray-600 mt-1">
               {filteredAndSortedOrders.length} orders found
             </p>
@@ -480,7 +480,7 @@ const OrdersTable = ({ tenantId, userId }) => {
           </div>
           <button
             onClick={fetchOrders}
-            className="inline-flex items-center gap-1.5 text-gray-600 hover:text-gray-800"
+            className="inline-flex items-center gap-1.5 text-gray-600 hover:text-gray-600"
           >
             <RefreshCw size={12} />
             Refresh

@@ -6,6 +6,7 @@ import Home from "../components/profile/Home.jsx";
 import OrdersTable from "../components/profile/OrdersTable.jsx";
 import PaymentsTable from "../components/profile/PaymentsTable.jsx";
 import SubscriptionSection from "../components/profile/SubscriptionsSection.jsx";
+import Settings from "../components/profile/Settings.jsx";
 import FooterSmall from "../components/FooterSmall.jsx";
 import { useProfileStore } from "../store/profile.store.js";
 import { useNavStore } from '../store/nav.store.js';
@@ -47,7 +48,7 @@ const Profile = () => {
     }
     return(
         <>
-        <div className="min-h-[98dvh]  flex flex-col justify-between bg-gray-50">
+        <div className="min-h-[98dvh]  flex flex-col justify-between bg-gray-50 text-gray-500">
             <MostTopbar/>
             <div className="min-h-[98dvh] max-w-[1284px] w-full mx-auto flex flex-col md:flex-row items-start justify-start md:justify-between gap-6 px-2 md:px-0 py-4">
 
@@ -58,6 +59,7 @@ const Profile = () => {
                     {nav === "Orders" && <OrdersTable/>}
                     {nav === "Payments" && <PaymentsTable/>}
                     {nav === "Subscriptions" && <SubscriptionSection/>}
+                    {nav === "Settings" && <Settings/>}
 
                     {/* Continue shopping section */}
                     <div className="bg-white border border-gray-200 rounded-md w-[90%] max-w-full md:w-full p-6 md:py-4 mx-4 my-4 md:mx-auto flex flex-col justify-start items-start gap-6">

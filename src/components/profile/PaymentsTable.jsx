@@ -28,7 +28,7 @@ const mockPayments = Array.from({ length: 30 }, (_, i) => ({
   reference: `INV-${String(i + 3000).padStart(4, '0')}`,
   date: new Date(Date.now() - i * 172800000).toISOString(), // Every 2 days
   amount: (Math.random() * 2000 + 100) * 100, // In cents
-  currency: ['USD', 'EUR', 'GBP'][i % 3],
+  currency: ['GBP'][i % 3],
   status: ['completed', 'pending', 'failed', 'refunded'][i % 4],
   method: ['credit_card', 'bank_transfer', 'paypal', 'account_credit'][i % 4],
   linked_orders: Math.floor(Math.random() * 3) + 1,
@@ -154,7 +154,7 @@ const PaymentsTable = ({ tenantId, userId }) => {
   };
 
   // Format currency
-  const formatCurrency = (amount, currency = 'USD') => {
+  const formatCurrency = (amount, currency = 'GBP') => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: currency,
@@ -208,7 +208,7 @@ const PaymentsTable = ({ tenantId, userId }) => {
       <div className="p-6 border-b border-gray-200">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           <div>
-            <h2 className="text-xl font-semibold text-gray-800">Payment Ledger</h2>
+            <h2 className="text-xl font-semibold text-gray-600">Payment Ledger</h2>
             <p className="text-sm text-gray-600 mt-1">
               {filteredAndSortedPayments.length} transactions • Financial transparency and reconciliation
             </p>

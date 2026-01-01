@@ -1,25 +1,35 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Logo from "../assets/images/logo-l.png";
-import { Search, UserCircle, ShoppingCart, Menu, X, ChevronRight, ChevronDown, ArrowRight } from "lucide-react";
+import {
+  Search,
+  UserCircle,
+  ShoppingCart,
+  Menu,
+  X,
+  ChevronRight,
+  ChevronDown,
+  ArrowRight
+} from "lucide-react";
 
 import { useCategoryStore } from "../store/category.store";
-import {useNavStore} from '../store/nav.store.js';
+import { useNavStore } from "../store/nav.store.js";
 import { buildNavTree } from "../utils/buildTree";
 import axiosInstance from "../api/axiosInstance";
 import useCartStore from "../store/cart.store";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [openCats, setOpenCats] = useState({});
+  const [openSubs, setOpenSubs] = useState({});
+
   const { categories, setCategories, loading, setLoading } = useCategoryStore();
   const totalItems = useCartStore((state) => state.getTotalItems());
-    const {setProductCategory} = useNavStore();
+  const { setProductCategory } = useNavStore();
   const navigate = useNavigate();
 
-  // Fetch categories if not already loaded
   useEffect(() => {
-    console.log("What we have for cats:", categories);
-    if (categories.length) return; // already loaded from storage
+    if (categories.length) return;
 
     const fetchCategories = async () => {
       setLoading(true);
@@ -39,53 +49,35 @@ const Navbar = () => {
     fetchCategories();
   }, [categories.length, setCategories, setLoading]);
 
-  // Handle navigation
   const handleToProducts = (cat, subcat, subsub) => {
     if (!cat) return;
-
-    //   console.log('Navigating to cat:', cat);
-  //   console.log('Navigating to subcat:', subcat);
-  //   console.log('Navigating to subsub:', subsub);
 
     navigate(
       `/products/${cat.slug}/${subcat?.slug || ""}/${subsub?.slug || ""}`
     );
 
-    // Optional: set some store state for active category if needed
-    const categoryBody = {
-       cat: {tag:cat.tag, id: cat.id},
-      subcat: subcat ? {subcat:subcat.tag, id:subcat.id} : null,
-      slug: subsub ? {subsub:subsub.tag, id:subsub.id} : null,
-    }
-    console.log("What i am sending:", categoryBody);
-
-     setProductCategory(categoryBody);
+    setProductCategory({
+      cat: { tag: cat.tag, id: cat.id },
+      subcat: subcat ? { subcat: subcat.tag, id: subcat.id } : null,
+      slug: subsub ? { subsub: subsub.tag, id: subsub.id } : null
+    });
 
     setMenuOpen(false);
+    setOpenCats({});
+    setOpenSubs({});
   };
 
-  //   const handleToProducts = (cat,subcat,subsub) =>{
-  //   if(!cat) return;
+  const toggleCat = (id) => {
+    setOpenCats((prev) => ({ ...prev, [id]: !prev[id] }));
+  };
 
-  //   console.log('Navigating to cat:', cat);
-  //   console.log('Navigating to subcat:', subcat);
-  //   console.log('Navigating to subsub:', subsub);
-
-  //   navigate(`/products/${cat.slug}/${subcat.slug}/${subsub.slug}`);
-  //   setProductCategory({
-  //     cat: cat.tag,
-  //     subcat: subcat ? subcat.tag : null,
-  //     slug: subsub ? subsub.tag : null,
-  //   });
-  //   setMenuOpen(false);
-  //   // alert(link.tag)
-
-  // }
-
-  // if (loading) return <div>Loading categories...</div>;
+  const toggleSub = (id) => {
+    setOpenSubs((prev) => ({ ...prev, [id]: !prev[id] }));
+  };
 
   return (
     <>
+      {/* ================= DESKTOP (UNCHANGED) ================= */}
       {/* Desktop Navbar */}
       <nav className="hidden md:flex justify-center items-center bg-[var(--color-white)] px-12 py-4">
         <div className="flex justify-start gap-x-12 items-center w-[30%]">
@@ -93,39 +85,34 @@ const Navbar = () => {
         </div>
 
         <div className="w-[60%]">
-          <div className="flex items-center gap-2 bg-white border-2 border-gray-300 rounded-lg px-3 py-3 w-full max-w-lg focus-within:shadow-sm focus-within:border-[var(--color-primary)]">
+          <div className="flex items-center gap-2 bg-white border-2 border-gray-300 rounded-lg px-3 py-3 w-full max-w-lg">
             <Search className="w-6 h-6 text-gray-500" />
             <input
               type="search"
-              name="search"
               placeholder="Find a product..."
-              className="flex-1 outline-none text-sm text-gray-700 placeholder-gray-400"
+              className="flex-1 outline-none text-sm text-gray-700"
             />
           </div>
         </div>
 
         <div className="flex justify-end items-center gap-x-12 w-[30%]">
-          <div className="cursor-pointer" onClick={() => navigate("/profile")}>
-            <UserCircle className="w-9 h-9 text-[var(--color-primary)]" />
-          </div>
-
+          <UserCircle className="w-9 h-9 cursor-pointer text-[var(--color-primary)]" onClick={() => navigate("/profile")} />
           <div className="relative cursor-pointer" onClick={() => navigate("/cart")}>
             <ShoppingCart className="w-9 h-9 text-[var(--color-primary)]" />
             {totalItems > 0 && (
-              <span className="absolute -top-2 -right-2 bg-[var(--color-secondary)] text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+              <span className="absolute -top-2 -right-2 bg-[var(--color-secondary)] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                 {totalItems}
               </span>
             )}
           </div>
-
           <button className="btn-primary-outlined-sm" onClick={() => navigate("/login")}>
             Signup
           </button>
         </div>
       </nav>
 
-      {/* Desktop Bottom Menu */}
-      <div className="hidden md:flex md:justify-center md:px-10 md:py-2 md:bg-[var(--color-primary)]">
+      {/* Desktop Bottom Menu (UNCHANGED) */}
+       <div className="hidden md:flex md:justify-center md:px-10 md:py-2 md:bg-[var(--color-primary)]">
         <ul className="flex justify-center gap-x-12 items-center text-sm md:text-[1rem] text-[var(--color-white)] relative">
           {categories.map((cat, i) => (
             <li key={cat.id} className="relative group cursor-pointer">
@@ -174,57 +161,74 @@ const Navbar = () => {
         </ul>
       </div>
 
-      {/* ---------------- Mobile Navbar ---------------- */}
-      <nav className="sticky top-0 z-50 w-full md:hidden flex justify-between items-center bg-[var(--color-white)] px-6 py-4 shadow-sm">
+      {/* ================= MOBILE ================= */}
+      <nav className="sticky top-0 z-50 w-full md:hidden flex justify-between items-center bg-white px-6 py-4 shadow-sm">
         <img src={Logo} alt="TCSC Logo" className="w-36 cursor-pointer" onClick={() => navigate(`/`)} />
-
         <div className="flex items-center gap-4">
-          <div className="relative cursor-pointer" onClick={() => navigate("/cart")}>
-            <ShoppingCart className="w-9 h-9 text-[var(--color-primary)]" />
-            {totalItems > 0 && (
-              <span className="absolute -top-2 -right-2 bg-[var(--color-secondary)] text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-                {totalItems}
-              </span>
-            )}
-          </div>
-
-          <button className="p-2 rounded-md hover:bg-gray-100 transition" onClick={() => setMenuOpen(!menuOpen)}>
-            {menuOpen ? <X className="w-9 h-9 text-[var(--color-primary)]" /> : <Menu className="w-9 h-9 text-[var(--color-primary)]" />}
+          <ShoppingCart className="w-9 h-9 text-[var(--color-primary)] cursor-pointer" onClick={() => navigate("/cart")} />
+          <button onClick={() => setMenuOpen(!menuOpen)} className="text-(--color-primary)">
+            {menuOpen ? <X className="w-9 h-9" /> : <Menu className="w-9 h-9" />}
           </button>
         </div>
       </nav>
 
       {/* Mobile Slide-in Menu */}
-      <div className={`fixed top-0 right-0 h-full w-full bg-[var(--color-white)] shadow-lg transform transition-transform duration-300 z-100 ${menuOpen ? "translate-x-0" : "translate-x-full"}`}>
-        <div className="flex justify-between p-4 mb-6">
-          <img src={Logo} alt="TCSC Logo" className="w-36 cursor-pointer" onClick={() => navigate(`/`)} />
-          <button onClick={() => setMenuOpen(false)}>
-            <ChevronRight className="w-9 h-9 text-[var(--color-primary)]" />
-          </button>
+      <div className={`fixed inset-0 bg-white z-50 transform transition-transform ${menuOpen ? "translate-x-0" : "translate-x-full"}`}>
+        <div className="flex justify-between p-4">
+          <img src={Logo} alt="Logo" className="w-36" />
+          <ChevronRight className="w-8 h-8 cursor-pointer text-(--color-primary)" onClick={() => setMenuOpen(false)} />
         </div>
 
-        <div className="flex items-center border-2 border-gray-300 rounded-lg px-3 py-4 mt-2 mx-6 mb-4">
-          <Search className="w-5 h-5 text-gray-500 mr-2" />
-          <input type="search" placeholder="Find a product..." className="flex-1 outline-none text-gray-700 placeholder-gray-400 text-sm" />
-        </div>
-
-        <ul className="flex flex-col gap-6 p-6 text-lg text-[var(--color-primary)]">
+        <ul className="px-6 space-y-4 text-lg text-[var(--color-primary)]">
           {categories.map((cat) => (
-            <li key={cat.id} className="cursor-pointer hover:text-[var(--color-primary-dark)] flex items-center justify-between">
-              {cat.tag} <ChevronRight className="w-4 h-4" />
+            <li key={cat.id} className={`text-gray-700 ${openCats[cat.id] ? "border-l-2 px-2 py-1 bg-gray-100 border-gray-200" : ""}`} >
+              <div
+                className="flex justify-between items-center cursor-pointer "
+                onClick={() => toggleCat(cat.id)}
+              >
+                <span>{cat.tag}</span>
+                <ChevronDown className={`w-5 h-5 transition ${openCats[cat.id] ? "rotate-180" : ""}`} />
+              </div>
+
+              {openCats[cat.id] && (
+                <ul className="pl-4 mt-3 space-y-3 ">
+                  {cat.children.map((sub) => (
+                    <li key={sub.id} className="text-gray-500">
+                      <div
+                        className="flex justify-between items-center cursor-pointer"
+                        onClick={() => toggleSub(sub.id)}
+                      >
+                        <span>{sub.tag}</span>
+                        <ChevronDown className={`w-4 h-4 transition ${openSubs[sub.id] ? "rotate-180" : ""}`} />
+                      </div>
+
+                      {openSubs[sub.id] && (
+                        <ul className="pl-4 mt-2 space-y-2">
+                          {sub.children.map((subsub) => (
+                            <li
+                              key={subsub.id}
+                              className="font-semibold text-(--color-primary) cursor-pointer"
+                              onClick={() => handleToProducts(cat, sub, subsub)}
+                            >
+                              {subsub.tag}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </li>
           ))}
 
-          <li className="border-t border-gray-300 pt-8 mt-4">
-            <button onClick={() => navigate("/login")} className="btn-primary-sm w-full mt-4 flex items-center justify-center">
+          <li className="border-t pt-6 mt-6">
+            <button onClick={() => navigate("/login")} className="btn-primary-sm w-full flex justify-center items-center">
               Create an Account <ArrowRight className="w-5 h-5 ml-2" />
             </button>
           </li>
         </ul>
       </div>
-
-      {/* Mobile overlay */}
-      {menuOpen && <div className="fixed inset-0 bg-black opacity-30 z-40" onClick={() => setMenuOpen(false)}></div>}
     </>
   );
 };

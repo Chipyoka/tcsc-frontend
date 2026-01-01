@@ -20,6 +20,9 @@ import PaymentFailed from '../pages/PaymentFailed.jsx';
 
 import HandleScroll from '../components/HandleScroll';
 
+// utility pages
+import CheckEmail from '../pages/CheckEmail.jsx';
+
 export default function AppRouter() {
   return (
     <> 
@@ -35,6 +38,8 @@ export default function AppRouter() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/checkout/payment/success" element={<PaymentSuccess />} />
           <Route path="/checkout/payment/failed" element={<PaymentFailed />} />
+
+          <Route path="/check-email" element={<CheckEmail />} />
 
           {/* Protected Routes */}
           <Route element={<ProtectedRoute />}>

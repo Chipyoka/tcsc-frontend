@@ -29,7 +29,7 @@ const Products = () => {
     setVisibleCount((prev) => Math.min(prev + 8, totalProducts));
   };
 
-  window.document.title = `${productCategory.cat} | The Cleaning Supplies Co.`;
+  window.document.title = `${productCategory.cat.tag} | The Cleaning Supplies Co.`;
 
   return (
     <>
@@ -40,10 +40,10 @@ const Products = () => {
         <div className="py-16 px-6 md:px-12 bg-[var(--color-accent-1)] text-white capitalize">
           {/* breadcrumb */}
           <p className="font-medium">
-            <a href="/">Home / </a> {productCategory.cat ?? "-"} / {productCategory.subcat ?? "-"} / {productCategory.slug ?? "-"}
+            <a href="/">Home / </a> {productCategory.cat.tag ?? "-"} / {productCategory.subcat.subcat ?? "-"} / {productCategory.slug.subsub ?? "-"}
           </p>
           <h1 className="text-4xl md:text-5xl font-semibold my-4">
-            {productCategory.slug ?? "-"}
+            {productCategory.slug.subsub ?? "-"}
           </h1>
         </div>
 

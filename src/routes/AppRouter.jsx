@@ -13,6 +13,7 @@ import Register from '../pages/Register.jsx';
 import Cart from '../pages/Cart.jsx';
 import Checkout from '../pages/Checkout.jsx';
 import Profile from '../pages/Profile.jsx';
+import DiscountClub from '../pages/DiscountClub.jsx';
 
 // payments & checkout
 import PaymentSuccess from '../pages/PaymentSuccess.jsx';
@@ -23,6 +24,7 @@ import HandleScroll from '../components/HandleScroll';
 // utility pages
 import CheckEmail from '../pages/CheckEmail.jsx';
 import CookieBanner from '../components/CookieBanner.jsx';
+import NotFound from '../pages/NotFound.jsx';
 
 export default function AppRouter() {
   return (
@@ -30,6 +32,8 @@ export default function AppRouter() {
       <BrowserRouter>
         <HandleScroll/>
         <Routes>
+          <Route path="/404" element={<NotFound />} />
+          <Route path="/*" element={<NotFound />} />
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
@@ -39,6 +43,7 @@ export default function AppRouter() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/checkout/payment/success" element={<PaymentSuccess />} />
           <Route path="/checkout/payment/failed" element={<PaymentFailed />} />
+          <Route path="/discount-club" element={<DiscountClub />} />
 
           <Route path="/check-email" element={<CheckEmail />} />
 

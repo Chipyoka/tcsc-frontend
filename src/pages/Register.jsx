@@ -153,7 +153,7 @@ const Register = () => {
                         <label htmlFor="password" className="text-gray-600">Password:</label>
                         <div className="flex items-center gap-2 bg-white border border-gray-300 rounded-md px-3 py-3 md:py-4 w-full max-w-full md:max-w-lg focus-within:shadow-sm focus-within:border-[var(--color-primary)]">
                             <input
-                                type="text"
+                                type="password"
                                 name="password"
                                 placeholder=""
                                 value={password}
@@ -168,7 +168,7 @@ const Register = () => {
                         <label htmlFor="confirmPassword" className="text-gray-600">Confirm Password:</label>
                         <div className="flex items-center gap-2 bg-white border border-gray-300 rounded-md px-3 py-3 md:py-4 w-full max-w-full md:max-w-lg focus-within:shadow-sm focus-within:border-[var(--color-primary)]">
                             <input
-                                type="text"
+                                type="password"
                                 name="confirmPassword"
                                 placeholder=""
                                 value={confirmPassword}

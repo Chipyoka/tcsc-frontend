@@ -44,7 +44,7 @@ const Footer = () => {
                             <li className="hover:underline"><a href="">Shop</a></li>
                             <li className="hover:underline"><a href="">The Discount Club</a></li>
                             <li className="hover:underline"><a href="">Blog</a></li>
-                            <li className="hover:underline"><a href="">About</a></li>
+                            {/* <li className="hover:underline"><a href="">About</a></li> */}
                         </ul>
                     </div>
                     <div>

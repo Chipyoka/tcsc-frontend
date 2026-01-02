@@ -60,10 +60,13 @@ const VerifyEmail = () => {
 
     const verifyEmailToken = async (token) => {
         try {
-            const response = await axiosInstance.post(
-                '/profile/verify-email',
+       const response = await axiosInstance.post(
+            '/profile/verify-email',
+            {
                 token,
-            );
+            }
+        );
+
 
             if (response.status === 200) {
                 setVerificationStatus('success');

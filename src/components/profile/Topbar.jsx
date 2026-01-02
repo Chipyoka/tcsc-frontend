@@ -17,7 +17,7 @@ import { toast } from 'react-toastify';
 
 const Topbar = () => {
     const { nav, setNav } = useProfileStore();
-    const { logout } = useAuthStore();
+    const { logout, user } = useAuthStore();
     const [loading, setLoading] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 1024); // Changed to 1024 for sidebar layout
@@ -83,7 +83,9 @@ const Topbar = () => {
                 <h4 className="text-lg font-semibold text-gray-600 truncate overflow-ellipsis">
                     My Account
                     <br />
-                    <p className="text-sm text-gray-400 font-normal max-w-[80%] truncate">John's Business</p>
+                    <p 
+                    className="text-sm text-gray-400 font-normal max-w-[80%] truncate"
+                    >{user?.fullName ?? ""}</p>
                 </h4>
                 
             </div>

@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
+import useAuthStore from '../../store/auth.store.js';
+import axiosInstance from '../../api/axiosInstance'; 
 
 const Settings = () => {
-    const [email, setEmail] = useState("");
-    const [name, setName] = useState("");
+    const {accessToken, user} = useAuthStore();
+    const [email, setEmail] = useState(user.email);
+    const [name, setName] = useState(user.fullName);
 
     const [streetAddress, setStreetAddress] = useState("");
     const [postcode, setPostcode] = useState("");
@@ -12,6 +16,25 @@ const Settings = () => {
     const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [confirmNewPassword, setConfirmNewPassword] = useState("");
+
+
+     // Fetch addresses
+    useEffect(() => {
+          if (!accessToken) {
+            return;
+            }
+        const fetchAddresses = async () => {
+            try {
+                  const response = await axiosInstance.get('/profile/addresses');
+                  console.log("Fetched Addresses:", response);
+            } catch (error) {
+                console.error("Error fetching addresses:",error);
+            }
+        }
+
+        fetchAddresses()
+    }, []);
+
 
     return (
         <>

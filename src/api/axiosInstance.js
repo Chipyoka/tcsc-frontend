@@ -44,7 +44,7 @@ axiosInstance.interceptors.response.use(
         return axiosInstance(originalRequest);
       } catch (err) {
         // Refresh failed → logout user
-        useAuthStore.getState().logout();
+        // useAuthStore.getState().logout();
         return Promise.reject(err);
       }
     }

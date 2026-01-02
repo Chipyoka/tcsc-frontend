@@ -16,7 +16,7 @@ import {useReadyStore} from "../store/ready.store.js";
 
 const Home = () => {
 
-    const {bestSellersReady} = useReadyStore();
+    const {bestSellersReady, startaParksReady} = useReadyStore();
 
     // set window title
     window.document.title = "The Cleaning Supplies Co. | Smart solutions for everyday cleaning."
@@ -28,7 +28,8 @@ const Home = () => {
             <BestCategory/>
             <WhyUs/>
             {bestSellersReady &&  <BestSelling/>}  
-            <Starta/>
+            {startaParksReady &&   <Starta/>}  
+           
             <DiscountClub/>
             <EcoFriendly/>
             <OurStory/>

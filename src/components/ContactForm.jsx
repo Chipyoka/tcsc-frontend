@@ -1,10 +1,12 @@
 import {useState, useEffect} from 'react';
 import {toast} from 'react-toastify';
+import axiosInstance from '../api/axiosInstance'; 
 
 
 const ContactForm = () => {
 
     const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
     const [name, setName] = useState('');
     const [message, setMessage] = useState('');
     const [loading, setLoading] = useState(false);
@@ -17,6 +19,10 @@ const ContactForm = () => {
                 toast.error("Name must be longer than 3 Characters");
                 return;
             }
+            if(phone.length < 10){
+                toast.error("Name must be longer than 9 Characters");
+                return;
+            }
             if(message.length < 10){
                 toast.error("Message must be longer than 15 Characters");
                 return;
@@ -27,15 +33,28 @@ const ContactForm = () => {
             setLoading(true)
 
             try {
+                const subject = "Website Inquiry";
+
+                const response = await axiosInstance.post('/contacts', {
+                    email,
+                    phone,
+                    message,
+                    name,
+                    subject,
+                });
+
+                console.log("Contact Submitted: ", response);
                 toast.success("Form submited !")
                 
             } catch (error) {
                 toast.error("Something went wrong. Try again later");
                 console.error("Error Submitting contact form: ", error);
             }finally{
-                setEmail(" ");
-                setName(" ");
-                setMessage(" ");
+                setLoading(false);
+                setEmail("");
+                setPhone("");
+                setName("");
+                setMessage("");
             }
 
       }
@@ -66,8 +85,24 @@ const ContactForm = () => {
                                 />
                             </div>
                         </div>
+
                         <div className="my-2 md:my-4 md:w-lg">
-                            <label htmlFor="email" className="text-gray-600">Your Email:</label>
+                            <label htmlFor="phone" className="text-gray-600">Phone:</label>
+                            <div className="flex items-center gap-2 bg-white border border-gray-300 rounded-md px-3 py-3 md:py-4 w-full max-w-full md:max-w-lg focus-within:shadow-sm focus-within:border-[var(--color-primary)]">
+                                <input
+                                    type="text"
+                                    name="phone"
+                                    placeholder=""
+                                    value={phone}
+                                    onChange={(e) => setPhone(e.target.value)}
+                                    className="flex-1 outline-none text-sm text-gray-700 placeholder-gray-400 w-full"
+                                    required
+                                />
+                            </div>
+                        </div>
+
+                        <div className="my-2 md:my-4 md:w-lg">
+                            <label htmlFor="email" className="text-gray-600">Email:</label>
                             <div className="flex items-center gap-2 bg-white border border-gray-300 rounded-md px-3 py-3 md:py-4 w-full max-w-full md:max-w-lg focus-within:shadow-sm focus-within:border-[var(--color-primary)]">
                                 <input
                                     type="email"
@@ -100,7 +135,9 @@ const ContactForm = () => {
                         </div>
                         </div>
 
-                        <button type="submit" className="w-full md:w-fit btn-primary-sm" >Submit</button>
+                        <button type="submit" className="w-full md:w-fit btn-primary-sm"   disabled={loading}>
+                            {loading ? "Submitting..." : "Submit"}
+                        </button>
 
                     </form>
                 </aside>

@@ -150,8 +150,8 @@ const Navbar = () => {
                   {/* Optional promotion block */}
                   <div className="absolute bottom-6 left-8 w-full h-12">
                     <p className="text-sm font-medium p-4 w-fit bg-gray-100">
-                      <span className="text-[var(--color-secondary)]">Enjoy 20%</span> off as a Discount Club Member
-                      <span className="ml-6 py-2 px-4 w-fit bg-[var(--color-accent-1)] rounded-sm text-[var(--color-white)] font-bold transition-all duration-300">Learn More</span>
+                      <span className="text-[var(--color-secondary)]">Enjoy upto 20%</span> off as a Discount Club Member
+                      {/* <span className="ml-6 py-2 px-4 w-fit bg-[var(--color-accent-1)] rounded-sm text-[var(--color-white)] font-bold transition-all duration-300">Learn More</span> */}
                     </p>
                   </div>
                 </div>

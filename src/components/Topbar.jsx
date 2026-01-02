@@ -5,13 +5,13 @@ const Topbar = () => {
              <p className="text-sm text-center md:text-left md:text-lg text-[var(--color-white)] font-medium cursor-default">Smart Solutions for Everyday Cleaning</p>
            </div>
            <div className="hidden md:flex justify-end items-center gap-x-4">
-                <p className="text-lg text-[var(--color-white)] font-medium cursor-pointer border-b-2 border-[var(--color-primary)] hover:border-[var(--color-white)]">
+                {/* <p className="text-lg text-[var(--color-white)] font-medium cursor-pointer border-b-2 border-[var(--color-primary)] hover:border-[var(--color-white)]">
                     Create Custom Product List
                 </p>
 
-                | 
+                |  */}
 
-                <p className="text-lg text-[var(--color-white)] font-medium cursor-pointer border-b-2 border-[var(--color-primary)] hover:border-[var(--color-white)]">Join the Discount Club</p>
+                <p className="text-lg text-[var(--color-white)] font-medium cursor-default border-b-2 border-[var(--color-primary)] ">Enjoy upto 20% off as a Discount Club Member</p>
            </div>
         </div>
     )

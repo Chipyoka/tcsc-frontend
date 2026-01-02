@@ -7,8 +7,10 @@ export const useReadyStore = create(
   persist(
     (set) => ({
       productsReady: false,
+      startaParksReady: false,
       bestSellersReady : false,
       setProductsReady: (s) => set({ productReady: s }),
+      setStartaParksReady: (s) => set({ startaParksReady: s }),
       setBestSellersReady: (s) => set({ bestSellersReady: s }),
     }),
     {

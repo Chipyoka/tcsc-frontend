@@ -23,6 +23,7 @@ import HandleScroll from '../components/HandleScroll';
 
 // utility pages
 import CheckEmail from '../pages/CheckEmail.jsx';
+import VerifyEmail from '../pages/VerifyEmail.jsx';
 import CookieBanner from '../components/CookieBanner.jsx';
 import NotFound from '../pages/NotFound.jsx';
 
@@ -46,6 +47,8 @@ export default function AppRouter() {
           {/* <Route path="/discount-club" element={<DiscountClub />} /> */}
 
           <Route path="/check-email" element={<CheckEmail />} />
+          <Route path="/verify-email" element={<VerifyEmail />} />
+
 
           {/* Protected Routes */}
           <Route element={<ProtectedRoute />}>

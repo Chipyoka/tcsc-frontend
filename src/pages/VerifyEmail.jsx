@@ -60,13 +60,12 @@ const VerifyEmail = () => {
 
     const verifyEmailToken = async (token) => {
         try {
-       const response = await axiosInstance.get(
-            '/auth/verify-email',
-            {
-                token,
-            }
-        );
-
+            const response = await axiosInstance.get(
+                '/auth/verify-email',
+                {
+                    params: { token },
+                }
+            );
 
             if (response.status === 200) {
                 setVerificationStatus('success');

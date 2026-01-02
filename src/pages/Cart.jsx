@@ -37,7 +37,7 @@ const Cart = () => {
         }
 
       navigate(
-        `/products/${productCategory.cat}/${productCategory.subcat}/${productCategory.slug}`
+        `/products/${productCategory?.cat.tag}/${productCategory.subcat.subcat}/${productCategory.slug.subsub}`
       )
     };
 
@@ -75,7 +75,7 @@ const Cart = () => {
 
                     <div className="flex items-start justify-between gap-x-8 w-[60%]">
                       <div>
-                        <h3 className="text-[var(--color-primary)] font-normal text-sm md:text-lg max-w-[160px] md:max-w-lg truncate">
+                        <h3 className="text-[var(--color-primary)] font-normal text-sm md:text-lg max-w-[160px] md:max-w-lg text-wrap">
                           {product.name || '-'}
                         </h3>
                         <h3 className="text-[var(--color-primary)] font-bold text-md md:text-lg mt-1">£{product.price.toFixed(2)}</h3>

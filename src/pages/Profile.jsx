@@ -33,9 +33,8 @@ const Profile = () => {
       if(!productCategory.subcat){
           navigate('/');
         }
-
-      navigate(
-        `/products/${productCategory.cat}/${productCategory.subcat}/${productCategory.slug}`
+       navigate(
+        `/products/${productCategory?.cat.tag}/${productCategory.subcat.subcat}/${productCategory.slug.subsub}`
       )
     };
 

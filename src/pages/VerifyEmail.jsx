@@ -9,7 +9,7 @@ const VerifyEmail = () => {
     const [searchParams] = useSearchParams();
     const [verificationStatus, setVerificationStatus] = useState('verifying'); // 'verifying', 'success', 'error'
     const [errorMessage, setErrorMessage] = useState('');
-    const [countdown, setCountdown] = useState(5);
+    const [countdown, setCountdown] = useState(15);
     const [canResend, setCanResend] = useState(true);
     const [resendCooldown, setResendCooldown] = useState(0);
 

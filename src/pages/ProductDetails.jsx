@@ -210,13 +210,13 @@ const ProductDetails = () => {
 
                 {/* Add to cart */}
                 <div className="text-sm flex justify-start gap-6 items-center">
-                  <button onClick={handleAddToCart} className="btn-primary-sm flex gap-x-2 items-center">
+                  <button onClick={handleAddToCart} className="btn-primary-sm w-full md:w-70 flex items-center gap-x-4 justify-center">
                     <ShoppingCart /> {purchaseType === 'one-time' ? "Add to Cart" : "Sign Up"}
                   </button>
 
-                  <button className="text-[var(--color-primary)] mt-2 flex gap-x-2 items-center border-3 border-[var(--color-primary)] px-4 py-2 rounded-lg">
+                  {/* <button className="text-[var(--color-primary)] mt-2 flex gap-x-2 items-center border-3 border-[var(--color-primary)] px-4 py-2 rounded-lg">
                     <Heart className="w-7 h-7" />
-                  </button>
+                  </button> */}
                 </div>
 
                 {/* Accepted payments */}

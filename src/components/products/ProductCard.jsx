@@ -51,13 +51,13 @@ const ProductCard = ({ product }) => {
         </div>
 
         <div className="text-sm flex justify-between items-center">
-          <button className="btn-primary-sm flex gap-x-2 items-center">
+          <button className="btn-primary-sm w-full ">
             View Product
           </button>
 
-          <button className="text-[var(--color-primary)] mt-2 flex gap-x-2 items-center border-3 border-[var(--color-primary)] px-4 py-2 rounded-lg">
+          {/* <button className="text-[var(--color-primary)] mt-2 flex gap-x-2 items-center border-3 border-[var(--color-primary)] px-4 py-2 rounded-lg">
             <Heart className="w-7 h-7" />
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

@@ -12,7 +12,11 @@ import Newsletter from '../components/Newsletter';
 import Footer from '../components/Footer';
 import ScrollToTop from '../components/ScrollToTop';
 
+import {useReadyStore} from "../store/ready.store.js";
+
 const Home = () => {
+
+    const {bestSellersReady} = useReadyStore();
 
     // set window title
     window.document.title = "The Cleaning Supplies Co. | Smart solutions for everyday cleaning."
@@ -23,7 +27,7 @@ const Home = () => {
             <Hero/>
             <BestCategory/>
             <WhyUs/>
-            <BestSelling/>
+            {bestSellersReady &&  <BestSelling/>}  
             <Starta/>
             <DiscountClub/>
             <EcoFriendly/>

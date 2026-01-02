@@ -1,10 +1,16 @@
 import { useRef, useEffect , useState} from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import ProductCard from "./products/ProductCard";
+
+import {useReadyStore} from "../store/ready.store.js";
+
 import axiosInstance from "../api/axiosInstance";
+import axios from 'axios';
 
 const BestSelling = () => {
     const scrollRef = useRef(null);
+
+    const {setBestSellersReady} = useReadyStore();
 
     const [bestSellers, setBestSellers] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -23,27 +29,64 @@ const BestSelling = () => {
      * Fetch best-selling products from the backend API, We get regular slice just six for viewing on this section
      */
     useEffect(() => {
+        const controller = new AbortController();
+
         const fetchBestSellers = async () => {
-            try {   
-                const response = await axiosInstance.get('/products');
-                console.log('Best-selling products response:', response.data);
+            try {
+                setLoading(true);
 
-                // data is an array of products, we slice and get top 6
-                const products = response.data.data; // <-- access the array inside 'data'
+                const response = await axiosInstance.get('/products', {
+                    timeout: 15000, // 15s hard timeout
+                    signal: controller.signal,
+                });
 
-                // Take top 6
+                const products = response?.data?.data ?? [];
+
                 setBestSellers(products.slice(0, 6));
-                console.log('Best-selling products set in state:', products.slice(0, 6));
-                
+                // console.log("Best sellers: ", response.data);
+                // console.log("Fetched products: ", products)
+                // console.log("Fetched BS products ONE: ", products[0])
+
+
+                if (products[0].undefined){
+                    console.log("BS Yes")
+                    setBestSellersReady(false);
+                    
+                }else{
+                    // Update global readiness state
+                    setBestSellersReady(true);
+                }
+
             } catch (error) {
-                console.error('Error fetching best-selling products:', error);
+                if (axios.isAxiosError(error)) {
+                    if (error.code === 'ECONNABORTED') {
+                        console.error('Request timed out while fetching best sellers');
+                    } else if (error.response) {
+                        console.error(
+                            'Server error while fetching best sellers:',
+                            error.response.status,
+                            error.response.data
+                        );
+                    } else {
+                        console.error('Network or client error:', error.message);
+                    }
+                } else if (error.name === 'CanceledError') {
+                    console.warn('Best sellers request was aborted');
+                } else {
+                    console.error('Unexpected error:', error);
+                }
             } finally {
                 setLoading(false);
             }
         };
 
         fetchBestSellers();
+
+        return () => {
+            controller.abort(); // Prevent memory leaks / state updates after unmount
+        };
     }, []);
+
 
     return (
         <section className="my-12 mx-auto px-4 flex flex-col justify-center items-center">
@@ -51,6 +94,7 @@ const BestSelling = () => {
                 Top Bulk Orders
             </h2>
 
+           
             {/* Product list */}
             <div
                 ref={scrollRef}

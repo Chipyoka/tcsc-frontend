@@ -62,8 +62,7 @@ const VerifyEmail = () => {
         try {
             const response = await axiosInstance.post(
                 '/profile/verify-email',
-                null,
-                { params: { token } }
+                token,
             );
 
             if (response.status === 200) {

@@ -3,6 +3,7 @@ import { ChevronRight, CheckCircle, XCircle, Loader2, Mail } from "lucide-react"
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Topbar from '../components/Topbar';
 import axiosInstance from '../api/axiosInstance'; // or your preferred HTTP client
+import axios from 'axios';
 
 const VerifyEmail = () => {
     const navigate = useNavigate();
@@ -60,12 +61,17 @@ const VerifyEmail = () => {
 
     const verifyEmailToken = async (token) => {
         try {
-       const response = await axiosInstance.post(
-            '/profile/verify-email',
-            {
-                token,
-            }
-        );
+                const response = await axios.post(
+                    'https://tcsc-backend.onrender.com/api/profile/verify-email',
+                    {
+                        token,
+                    },
+                    {
+                        headers: {
+                        'Content-Type': 'application/json',
+                        },
+                    }
+                );
 
 
             if (response.status === 200) {

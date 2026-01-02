@@ -13,6 +13,7 @@ import Register from '../pages/Register.jsx';
 import Cart from '../pages/Cart.jsx';
 import Checkout from '../pages/Checkout.jsx';
 import Profile from '../pages/Profile.jsx';
+import Contact from '../pages/Contact.jsx';
 // import DiscountClub from '../pages/DiscountClub.jsx';
 
 // payments & checkout
@@ -40,11 +41,13 @@ export default function AppRouter() {
           <Route path="/register" element={<Register />} />
           <Route path="/check-email" element={<CheckEmail />} />
           <Route path="/verify-email" element={<VerifyEmail />} />
+
+          <Route path="/contact-us" element={<Contact />} />
           
           <Route path="/products/:category/:subcategory/:slug" element={<Products />} />
           <Route path="/product/:slug" element={<ProductDetail />} />
           <Route path="/cart" element={<Cart />} />
-          
+
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/checkout/payment/success" element={<PaymentSuccess />} />
           <Route path="/checkout/payment/failed" element={<PaymentFailed />} />

@@ -61,7 +61,7 @@ const VerifyEmail = () => {
     const verifyEmailToken = async (token) => {
         try {
        const response = await axiosInstance.post(
-            '/profile/verify-email',
+            '/auth/verify-email',
             {
                 token,
             }

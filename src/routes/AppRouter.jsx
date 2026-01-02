@@ -38,16 +38,18 @@ export default function AppRouter() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/check-email" element={<CheckEmail />} />
+          <Route path="/verify-email" element={<VerifyEmail />} />
+          
           <Route path="/products/:category/:subcategory/:slug" element={<Products />} />
           <Route path="/product/:slug" element={<ProductDetail />} />
           <Route path="/cart" element={<Cart />} />
+          
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/checkout/payment/success" element={<PaymentSuccess />} />
           <Route path="/checkout/payment/failed" element={<PaymentFailed />} />
           {/* <Route path="/discount-club" element={<DiscountClub />} /> */}
 
-          <Route path="/check-email" element={<CheckEmail />} />
-          <Route path="/verify-email" element={<VerifyEmail />} />
 
 
           {/* Protected Routes */}

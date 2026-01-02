@@ -16,6 +16,7 @@ import FAQSection from "../components/FAQSection";
 import Visa from '../assets/icons/visa.webp';
 import L from '../assets/images/default_product.png';
 import Mastercard from '../assets/icons/mastercard.jpg';
+import useAuthStore from '../store/auth.store.js';
 
 const ProductDetails = () => {
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1);
   const [purchaseType, setPurchaseType] = useState("one-time");
   const [frequency, setFrequency] = useState("weekly");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const {isAuthenticated, user} = useAuthStore();
 
   // Fetch product from backend
   useEffect(() => {
@@ -102,13 +103,13 @@ const ProductDetails = () => {
     });
 
     if (purchaseType === "subscription") {
-      if (!isLoggedIn) {
+      if (!isAuthenticated) {
         navigate("/login");
         return;
       }
       addSubscription({
         productId: product.id,
-        userId: null, // replace with actual user id from auth
+        userId: user.id, 
         frequency,
       });
     }

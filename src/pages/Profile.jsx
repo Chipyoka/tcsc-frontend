@@ -55,10 +55,10 @@ const Profile = () => {
                 <div className="w-full no-scrollbar h-[calc(100dvh-100px)] flex flex-col justify-start items-center overflow-y-auto scrollbar-hide">
 
                     {nav === "Home" && <Home/>}
-                    {nav === "Orders" && <OrdersTable/>}
+                    {/* {nav === "Orders" && <OrdersTable/>}
                     {nav === "Payments" && <PaymentsTable/>}
                     {nav === "Subscriptions" && <SubscriptionSection/>}
-                    {nav === "Settings" && <Settings/>}
+                    {nav === "Settings" && <Settings/>} */}
 
                     {/* Continue shopping section */}
                     <div className="bg-white border border-gray-200 rounded-md w-[90%] max-w-full md:w-full p-6 md:py-4 mx-4 my-4 md:mx-auto flex flex-col justify-start items-start gap-6">

@@ -27,10 +27,10 @@ const Topbar = () => {
     // navitems with icons
     const navItems = [
         { name: 'Home', link: '#', icon: Home },
-        { name: 'Orders', link: '#', icon: ShoppingBag },
-        { name: 'Payments', link: '#', icon: CreditCard },
-        { name: 'Subscriptions', link: '#', icon: Repeat },
-        { name: 'Settings', link: '#', icon: Settings },
+        // { name: 'Orders', link: '#', icon: ShoppingBag },
+        // { name: 'Payments', link: '#', icon: CreditCard },
+        // { name: 'Subscriptions', link: '#', icon: Repeat },
+        // { name: 'Settings', link: '#', icon: Settings },
     ];
 
     // Handle responsive behavior

@@ -47,7 +47,8 @@ const SearchPage = () => {
 
             <section className="my-8 px-4">
                 {loading ? (
-                    <div className="text-lg text-center text-gray-500 flex justify-center items-center min-h-[40dvh]">
+                    <div className="text-lg text-center text-gray-500 flex gap-4 flex-col justify-center items-center min-h-[40dvh]">
+                       <div className="loader"></div>
                         <p>Searching Products...</p>
                     </div>
                 ) : (

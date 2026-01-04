@@ -154,7 +154,8 @@ const Products = () => {
 
         {/* product list */}
         { loading ? (
-            <div className="px-6 md:px-36 py-6 flex items-center justify-center min-h-[20dvh]">
+            <div className="px-6 md:px-36 py-6 flex flex-col gap-4 items-center justify-center min-h-[30dvh]">
+              <div className="loader"></div>
                 <p className="text-center text-gray-400">Loading products...</p>
             </div>
         ) : (
@@ -171,8 +172,8 @@ const Products = () => {
             )}
 
             {/* When we have no products and no error show product unavailable */}
-            {totalProducts < 1 && !error && (
-               <div className="px-2 my-4 mb-12 md:px-36  flex flex-col items-center justify-center">
+            {totalProducts < 1 && !error && !loading && (
+               <div className="px-2 my-4 py-6 md:py-24 mb-12 md:px-36  flex flex-col items-center justify-center">
                   <h4 className="text-xl my-2 font-medium text-gray-600">Products Not Yet Available</h4>
                   <p className=" w-[90%] text-center text-gray-400">We are still expanding our catalog, kindly check back in a few days.</p>
               </div>

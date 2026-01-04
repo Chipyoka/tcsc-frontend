@@ -74,7 +74,8 @@ const Profile = () => {
 
     if (pageLoading) {
         return (
-              <div className="px-6 md:px-36 py-12 flex items-center justify-center min-h-[100dvh]">
+              <div className="px-6 md:px-36 py-12 flex flex-col gap-4 items-center justify-center min-h-[100dvh]">
+                <div className="loader"></div>
                 <p className="text-center text-gray-400">Loading your profile...</p>
             </div>
         )

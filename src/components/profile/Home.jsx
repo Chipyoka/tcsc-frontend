@@ -16,7 +16,7 @@ const Home = () => {
             </div>
 
             {/* quick links */}
-            {/* <div className="w-full">
+            <div className="w-full">
                 <h3 className="text-gray-500 font-semibold text-sm mb-4">Quick Links</h3>
       
 
@@ -43,13 +43,13 @@ const Home = () => {
               
 
             
-            </div> */}
+            </div>
 
-            <div className="bg-amber-50 px-4 py-3 text-amber-600 w-full">
+            {/* <div className="bg-amber-50 px-4 py-3 text-amber-600 w-full">
                 Profile page under construction. Check back in a few hours. <br />
                 <p className="font-bold">Thank you for understanding.</p>
              
-            </div>
+            </div> */}
         </div>
     )
 };

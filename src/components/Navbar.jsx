@@ -49,6 +49,7 @@ const Navbar = () => {
     fetchCategories();
   }, [categories.length, setCategories, setLoading]);
 
+  // Handle redirection
   const handleToProducts = (cat, subcat, subsub) => {
     if (!cat) return;
 
@@ -75,6 +76,20 @@ const Navbar = () => {
     setOpenSubs((prev) => ({ ...prev, [id]: !prev[id] }));
   };
 
+  // handle search 
+    const handleSearchKeyDown = (e) => {
+      if (e.key !== 'Enter') return;
+
+      const query = e.target.value.trim();
+
+      if (!query) return;
+
+      // close slide menu before navigation on mobile
+      setMenuOpen(false);
+
+      navigate(`/search/${encodeURIComponent(query)}`);
+  };
+
   return (
     <>
       {/* ================= DESKTOP (UNCHANGED) ================= */}
@@ -89,6 +104,7 @@ const Navbar = () => {
             <Search className="w-6 h-6 text-gray-500" />
             <input
               type="search"
+              onKeyDown={handleSearchKeyDown}
               placeholder="Find a product..."
               className="flex-1 outline-none text-sm text-gray-700"
             />
@@ -178,6 +194,17 @@ const Navbar = () => {
           <img src={Logo} alt="Logo" className="w-36" />
           <ChevronRight className="w-8 h-8 cursor-pointer text-(--color-primary)" onClick={() => setMenuOpen(false)} />
         </div>
+        <div className="w-full px-4 my-4 pb-8 border-b border-gray-200">
+            <div className="flex items-center gap-2 bg-white border-2 border-gray-300 rounded-lg px-3 py-3 w-full max-w-lg">
+              <Search className="w-6 h-6 text-gray-500" />
+              <input
+                type="search"
+                onKeyDown={handleSearchKeyDown}
+                placeholder="Find a product..."
+                className="flex-1 outline-none text-sm text-gray-700"
+              />
+            </div>
+          </div>
 
         <ul className="px-6 space-y-4 text-lg text-[var(--color-primary)]">
           {categories.map((cat) => (

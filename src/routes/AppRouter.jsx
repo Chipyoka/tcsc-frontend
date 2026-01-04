@@ -15,6 +15,7 @@ import Checkout from '../pages/Checkout.jsx';
 import Profile from '../pages/Profile.jsx';
 import Contact from '../pages/Contact.jsx';
 import Legal from '../pages/Legal.jsx';
+import SearchPage from '../pages/SearchPage.jsx';
 // import DiscountClub from '../pages/DiscountClub.jsx';
 
 // payments & checkout
@@ -49,6 +50,7 @@ export default function AppRouter() {
           
           <Route path="/products/:category/:subcategory/:slug" element={<Products />} />
           <Route path="/product/:slug" element={<ProductDetail />} />
+          <Route path="/search/:q" element={<SearchPage />} />
           <Route path="/cart" element={<Cart />} />
 
           <Route path="/checkout" element={<Checkout />} />

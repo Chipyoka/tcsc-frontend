@@ -41,8 +41,8 @@ const Footer = () => {
                     <div>
                         <h4 className="text-lg font-medium mb-6">Company</h4>
                         <ul className="flex flex-col gap-y-4 w-full text-sm">
-                            <li className="hover:underline"><a href="">Shop</a></li>
-                            <li className="hover:underline"><a href="">The Discount Club</a></li>
+                            <li className="hover:underline"><a href="/products/cleaning-disinfecting-chemicals/disinfectants-sanitizers/multi-surface-disinfectants">Shop</a></li>
+                            {/* <li className="hover:underline"><a href="">The Discount Club</a></li> */}
                             <li className="hover:underline"><a href="">Blog</a></li>
                             <li className="hover:underline"><a href="/contact-us">Contact</a></li>
                             {/* <li className="hover:underline"><a href="">About</a></li> */}

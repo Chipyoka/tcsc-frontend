@@ -161,7 +161,7 @@ const Products = () => {
           <>
             {/* When we have products and no error, show products */}
             {totalProducts > 0 && !error && (
-              <div className={`px-8 pb-6 md:px-20 gap-y-20 my-12 mx-auto gap-x-16 flex ${totalProducts < 3 ? "justify-start" :"justify-center"} items-start flex-wrap `}>
+              <div className={`px-8 pb-6 md:px-12 gap-y-20 my-12 mx-auto gap-x-14 flex ${totalProducts < 3 ? "justify-start" :"justify-evenly"} items-start flex-wrap `}>
                 {products.slice(0, visibleCount).map((product) => (
                   <div key={product.id}>
                     <ProductCard product={product} />

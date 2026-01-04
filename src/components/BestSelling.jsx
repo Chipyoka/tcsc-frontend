@@ -29,35 +29,35 @@ const BestSelling = () => {
      * Fetch best-selling products from the backend API, We get regular slice just six for viewing on this section
      */
     useEffect(() => {
-        const controller = new AbortController();
+       
 
         const fetchBestSellers = async () => {
             try {
                 setLoading(true);
 
                 const response = await axiosInstance.get('/products', {
-                    timeout: 15000, // 15s hard timeout
-                    signal: controller.signal,
+                    timeout: 55000, // 55s hard timeout
                 });
 
                 const products = response?.data?.data ?? [];
 
                 setBestSellers(products.slice(0, 6));
-                // console.log("Best sellers: ", response.data);
+                console.log("Best sellers: ", response.data);
                 // console.log("Fetched products: ", products)
                 // console.log("Fetched BS products ONE: ", products[0])
 
 
-                if (products[0].undefined){
-                    console.log("BS Yes")
-                    setBestSellersReady(false);
+                // if (products[0].undefined){
+                //     console.log("BS Yes")
+                //     setBestSellersReady(false);
                     
-                }else{
-                    // Update global readiness state
-                    setBestSellersReady(true);
-                }
-
+                // }else{
+                //     // Update global readiness state
+                //     setBestSellersReady(true);
+                // }
+                
             } catch (error) {
+                setBestSellersReady(false);
                 if (axios.isAxiosError(error)) {
                     if (error.code === 'ECONNABORTED') {
                         console.error('Request timed out while fetching best sellers');
@@ -82,9 +82,6 @@ const BestSelling = () => {
 
         fetchBestSellers();
 
-        return () => {
-            controller.abort(); // Prevent memory leaks / state updates after unmount
-        };
     }, []);
 
 

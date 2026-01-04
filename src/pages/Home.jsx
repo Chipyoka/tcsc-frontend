@@ -27,8 +27,9 @@ const Home = () => {
             <Hero/>
             <BestCategory/>
             <WhyUs/>
-            {bestSellersReady &&  <BestSelling/>}  
-            {startaParksReady &&   <Starta/>}  
+            {/* {bestSellersReady &&  <BestSelling/>}   */}
+             <BestSelling/>
+            {/* {startaParksReady &&   <Starta/>}   */}
            
             <DiscountClub/>
             <EcoFriendly/>

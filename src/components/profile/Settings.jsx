@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 
 const Settings = () => {
     const { setAddress, address } = useProfileStore();
-    const { accessToken, user } = useAuthStore();
+    const { accessToken, user, updateUser } = useAuthStore();
 
     // Profile fields
     const [email, setEmail] = useState(user.email);
@@ -59,8 +59,13 @@ const Settings = () => {
                 // Add new address
                 response = await axiosInstance.post('/profile/addresses', payload);
             }
+              const saveAddress = {
+                    loading: false,
+                    status: "found",
+                    data: response.data,
+                  }
 
-            setAddress(response.data); // update store
+            setAddress(saveAddress); // update store
             toast.success("Address saved successfully!");
         } catch (err) {
             console.error("Address save failed:", err);
@@ -77,6 +82,8 @@ const Settings = () => {
             const payload = { full_name: name, metadata: { email } };
             const response = await axiosInstance.put('/profile', payload);
             toast.success("Profile updated successfully!");
+            console.log(response.data);
+            updateUser(response.data);
         } catch (err) {
             console.error("Profile update failed:", err);
             toast.error("Failed to update profile. Try again later.");
@@ -127,11 +134,11 @@ const Settings = () => {
     return (
         <>
             {/* Shipping Information */}
-            <div className="bg-white border border-gray-200 rounded-md w-[90%] max-w-full md:w-full p-6 md:py-4 mx-4 my-2 md:my-4 md:mx-auto flex flex-col gap-6">
+            <div className="bg-white border border-gray-200 rounded-md w-[90%] max-w-full md:w-full p-6 md:py-4 mx-4 my-2  md:mx-auto flex flex-col">
                 <h2 className="text-xl font-semibold text-gray-600">Shipping Information</h2>
                 <p className="text-sm text-gray-600 mt-1">Update your account's shipping information.</p>
                 <form onSubmit={handleSaveAddress} className="w-full">
-                    <div className="my-2 md:my-4 md:w-lg">
+                <div className="my-2  md:w-lg">
                         <label className="text-gray-600">Street Address:</label>
                         <input
                             type="text"
@@ -141,25 +148,32 @@ const Settings = () => {
                             required
                         />
                     </div>
-                    <div className="flex flex-col md:flex-row gap-4">
-                        <input
-                            type="text"
-                            value={postcode}
-                            onChange={(e) => setPostcode(e.target.value)}
-                            placeholder="Postcode"
-                            className="flex-1 outline-none text-sm text-gray-700 placeholder-gray-400 w-full border border-gray-300 rounded-md px-3 py-3 md:py-4"
-                            required
-                        />
-                        <input
-                            type="text"
-                            value={cityTown}
-                            onChange={(e) => setCityTown(e.target.value)}
-                            placeholder="City/Town"
-                            className="flex-1 outline-none text-sm text-gray-700 placeholder-gray-400 w-full border border-gray-300 rounded-md px-3 py-3 md:py-4"
-                            required
-                        />
+                    <div className="flex flex-col md:flex-row gap-4 md:w-lg">
+                        <div className="my-2  md:w-1/2">
+                            <label className="text-gray-600">Postal Code:</label>
+                            <input
+                                type="text"
+                                value={postcode}
+                                onChange={(e) => setPostcode(e.target.value)}
+                                placeholder="Postcode"
+                                className="flex-1 outline-none text-sm text-gray-700 placeholder-gray-400 w-full border border-gray-300 rounded-md px-3 py-3 md:py-4"
+                                required
+                            />
+                        </div>
+                        <div className="my-2  md:w-1/2">
+                              <label className="text-gray-600">City/Town:</label>
+                            <input
+                                type="text"
+                                value={cityTown}
+                                onChange={(e) => setCityTown(e.target.value)}
+                                placeholder="City/Town"
+                                className="flex-1 outline-none text-sm text-gray-700 placeholder-gray-400 w-full border border-gray-300 rounded-md px-3 py-3 md:py-4"
+                                required
+                            />
+                        </div>
                     </div>
-                    <div className="my-2 md:my-4 md:w-lg">
+                    <div className="my-2  md:w-lg">
+                        <label className="text-gray-600">Phone:</label>
                         <input
                             type="text"
                             value={phone}
@@ -176,10 +190,10 @@ const Settings = () => {
             </div>
 
             {/* Profile Information */}
-            <div className="bg-white border border-gray-200 rounded-md w-[90%] max-w-full md:w-full p-6 md:py-4 mx-4 my-2 md:my-4 md:mx-auto flex flex-col gap-6">
+            <div className="bg-white border border-gray-200 rounded-md w-[90%] max-w-full md:w-full p-6 md:py-4 mx-4 my-2  md:mx-auto flex flex-col">
                 <h2 className="text-xl font-semibold text-gray-600">Profile Information</h2>
                 <p className="text-sm text-gray-600 mt-1">Update your account's profile information and email address.</p>
-                <div className="my-2 md:my-4 md:w-lg">
+                <div className="my-2  md:w-lg">
                     <label className="text-gray-600">Fullname:</label>
                     <input
                         type="text"
@@ -189,7 +203,7 @@ const Settings = () => {
                         required
                     />
                 </div>
-                <div className="my-2 md:my-4 md:w-lg">
+                <div className="my-2  md:w-lg">
                     <label className="text-gray-600">Email:</label>
                     <input
                         type="email"
@@ -205,10 +219,10 @@ const Settings = () => {
             </div>
 
             {/* Change Password */}
-            <div className="bg-white border border-gray-200 rounded-md w-[90%] max-w-full md:w-full p-6 md:py-4 mx-4 my-2 md:my-4 md:mx-auto flex flex-col gap-6">
+            <div className="bg-white border border-gray-200 rounded-md w-[90%] max-w-full md:w-full p-6 md:py-4 mx-4 my-2  md:mx-auto flex flex-col">
                 <h2 className="text-xl font-semibold text-gray-600">Change Password</h2>
                 <p className="text-sm text-gray-600 mt-1">Update your account's password.</p>
-                <div className="my-2 md:my-4 md:w-lg">
+                <div className="my-2  md:w-lg">
                     <label className="text-gray-600">Current Password:</label>
                     <input
                         type="password"
@@ -218,7 +232,7 @@ const Settings = () => {
                         required
                     />
                 </div>
-                <div className="my-2 md:my-4 md:w-lg">
+                <div className="my-2  md:w-lg">
                     <label className="text-gray-600">New Password:</label>
                     <input
                         type="password"
@@ -228,7 +242,7 @@ const Settings = () => {
                         required
                     />
                 </div>
-                <div className="my-2 md:my-4 md:w-lg">
+                <div className="my-2  md:w-lg">
                     <label className="text-gray-600">Confirm New Password:</label>
                     <input
                         type="password"

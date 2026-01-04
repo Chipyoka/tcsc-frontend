@@ -114,7 +114,7 @@ const Products = () => {
       <Topbar />
       <Navbar />
 
-      <section>
+      <section className="i-am">
         <div className="py-16 px-6 md:px-12 bg-[var(--color-accent-1)] text-white capitalize">
           {/* breadcrumb */}
           <p className="font-medium">

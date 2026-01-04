@@ -19,76 +19,12 @@ const Settings = () => {
 
 
      // Fetch addresses
-    useEffect(() => {
-          if (!accessToken) {
-            return;
-            }
-        const fetchAddresses = async () => {
-            try {
-                  const response = await axiosInstance.get('/profile/addresses');
-                  console.log("Fetched Addresses:", response);
-            } catch (error) {
-                console.error("Error fetching addresses:",error);
-            }
-        }
-
-        fetchAddresses()
-    }, []);
-
+ 
 
     return (
         <>
-             {/* Profile Information Section */}
-            <div
-                className="bg-white border border-gray-200 rounded-md w-[90%] max-w-full md:w-full p-6 md:py-4 mx-4 my-2 md:my-4 md:mx-auto flex flex-col justify-start items-start gap-6"
-            >
-                <div>
-                    <h2 className="text-xl font-semibold text-gray-600">Profile Information</h2>
-                    <p className="text-sm text-gray-600 mt-1">
-                        Update your account's profile information and email address.
-                    </p>
-                </div>
 
-                {/* form */}
-                <form action="" className="w-full">
-                     <div className="my-2 md:my-4 md:w-lg">
-
-                        <label htmlFor="name" className="text-gray-600">Fullname:</label>
-                        <div className="flex items-center gap-2 bg-white border border-gray-300 rounded-md px-3 py-3 md:py-4 w-full max-w-full md:max-w-lg focus-within:shadow-sm focus-within:border-[var(--color-primary)]">
-                            <input
-                                type="text"
-                                name="name"
-                                placeholder=""
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                                className="flex-1 outline-none text-sm text-gray-700 placeholder-gray-400 w-full"
-                                required
-                            />
-                        </div>
-                    </div>
-                     <div className="my-2 md:my-4 md:w-lg">
-
-                        <label htmlFor="email" className="text-gray-600">Email:</label>
-                        <div className="flex items-center gap-2 bg-white border border-gray-300 rounded-md px-3 py-3 md:py-4 w-full max-w-full md:max-w-lg focus-within:shadow-sm focus-within:border-[var(--color-primary)]">
-                            <input
-                                type="email"
-                                name="email"
-                                placeholder=""
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                className="flex-1 outline-none text-sm text-gray-700 placeholder-gray-400 w-full"
-                                required
-                            />
-                        </div>
-                    </div>
-
-                    <button type="button" className="w-full md:w-fit btn-primary-sm" >Save Profile</button>
-
-                </form>
-
-            </div>
-
-             {/* Shipping Information Section */}
+               {/* Shipping Information Section */}
             <div
                 className="bg-white border border-gray-200 rounded-md w-[90%] max-w-full md:w-full p-6 md:py-4 mx-4 my-2 md:my-4 md:mx-auto flex flex-col justify-start items-start gap-6"
             >
@@ -169,6 +105,56 @@ const Settings = () => {
                     </div>
 
                     <button type="button" className="w-full md:w-fit btn-primary-sm" >Save Changes</button>
+
+                </form>
+
+            </div>
+
+             {/* Profile Information Section */}
+            <div
+                className="bg-white border border-gray-200 rounded-md w-[90%] max-w-full md:w-full p-6 md:py-4 mx-4 my-2 md:my-4 md:mx-auto flex flex-col justify-start items-start gap-6"
+            >
+                <div>
+                    <h2 className="text-xl font-semibold text-gray-600">Profile Information</h2>
+                    <p className="text-sm text-gray-600 mt-1">
+                        Update your account's profile information and email address.
+                    </p>
+                </div>
+
+                {/* form */}
+                <form action="" className="w-full">
+                     <div className="my-2 md:my-4 md:w-lg">
+
+                        <label htmlFor="name" className="text-gray-600">Fullname:</label>
+                        <div className="flex items-center gap-2 bg-white border border-gray-300 rounded-md px-3 py-3 md:py-4 w-full max-w-full md:max-w-lg focus-within:shadow-sm focus-within:border-[var(--color-primary)]">
+                            <input
+                                type="text"
+                                name="name"
+                                placeholder=""
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                className="flex-1 outline-none text-sm text-gray-700 placeholder-gray-400 w-full"
+                                required
+                            />
+                        </div>
+                    </div>
+                     <div className="my-2 md:my-4 md:w-lg">
+
+                        <label htmlFor="email" className="text-gray-600">Email:</label>
+                        <div className="flex items-center gap-2 bg-white border border-gray-300 rounded-md px-3 py-3 md:py-4 w-full max-w-full md:max-w-lg focus-within:shadow-sm focus-within:border-[var(--color-primary)]">
+                            <input
+                                type="email"
+                                name="email"
+                                placeholder=""
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className="flex-1 outline-none text-sm text-gray-700 placeholder-gray-400 w-full"
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    <button type="button" className="w-full md:w-fit btn-primary-sm" >Save Profile</button>
 
                 </form>
 

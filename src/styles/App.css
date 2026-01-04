@@ -107,7 +107,7 @@ a, a:visited, a:focus, a:active{
   flex-direction: column;
 }
 
-*{
+.i-am{
   transition: all 0.3s ease-in-out;
 }
 

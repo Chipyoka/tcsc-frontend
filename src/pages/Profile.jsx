@@ -10,24 +10,47 @@ import Settings from "../components/profile/Settings.jsx";
 import FooterSmall from "../components/FooterSmall.jsx";
 import { useProfileStore } from "../store/profile.store.js";
 import { useNavStore } from '../store/nav.store.js';
+import useAuthStore from '../store/auth.store.js';
+
+
+import axiosInstance from '../api/axiosInstance'; 
 
 import { Info, CheckCircle2, Loader2, X, ChevronRight } from "lucide-react";
 
 const Profile = () => {
     const [pageLoading, setPageLoading] = useState(true);
-    const { nav, setNav } = useProfileStore();
+     const {accessToken, user} = useAuthStore();
+    const { nav, setNav, setAddress, address } = useProfileStore();
     const navigate = useNavigate();
     const { setProductCategory, productCategory } = useNavStore();
 
     // set title
     window.document.title = "Profile | The Cleaning Supplies Co.";
 
+    // Handle page loading
     useEffect(() => {
         setTimeout(() => {
             setPageLoading(false);
         }
         , 1500);
     }, []);
+
+    // Fetch addresses
+    useEffect(() => {
+          if (!accessToken) {
+            return;
+            }
+        const fetchAddresses = async () => {
+            try {
+                  const response = await axiosInstance.get('/profile/addresses');
+                  console.log("Fetched Addresses:", response);
+            } catch (error) {
+                console.error("Error fetching addresses:",error);
+            }
+        }
+
+        fetchAddresses()
+    }, [address]);
 
     const handleContinueShopping = () => {
       if(!productCategory.subcat){
@@ -47,11 +70,30 @@ const Profile = () => {
     }
     return(
         <>
+     
         <div className="min-h-[98dvh]  flex flex-col justify-between bg-gray-50 text-gray-500">
             <MostTopbar/>
             <div className="min-h-[98dvh] max-w-[1284px] w-full mx-auto flex flex-col md:flex-row items-start justify-start md:justify-between gap-6 px-2 md:px-0 py-4">
 
                 <Topbar/>
+              <div className="w-full">
+
+                {/* Warning of missing shipping information */}
+
+                {address.status !== "found" && (
+                    <div className="w-full drop-shadow-sm rounded-sm mx-auto z-50 bg-amber-50 px-4 py-3 border border-amber-200">
+                        <div className="w-full flex flex-col md:flex-row justify-between items-start gap-y-4 md:items-center">
+                            <div>
+                                <h4 className="font-medium text-(--color-warning)">Complete your profile</h4>
+                                <p className="text-sm text-gray-500">Kindly provide missing shipping information for smooth order processing.</p>
+                            </div>
+                            <button
+                                onClick={()=>setNav("Settings")}
+                            className="cursor-pointer bg-(--color-warning) text-white rounded-sm px-4 py-2">Click here</button>
+                        </div>
+                    </div>
+                )}
+
                 <div className="w-full no-scrollbar h-[calc(100dvh-100px)] flex flex-col justify-start items-center overflow-y-auto scrollbar-hide">
 
                     {nav === "Home" && <Home/>}
@@ -79,6 +121,7 @@ const Profile = () => {
                     </div>
                     <FooterSmall/>
                 </div>
+              </div>
             </div>
         </div>
         </>

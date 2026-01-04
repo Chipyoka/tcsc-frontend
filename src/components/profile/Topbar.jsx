@@ -28,7 +28,7 @@ const Topbar = () => {
     const navItems = [
         { name: 'Home', link: '#', icon: Home },
         { name: 'Orders', link: '#', icon: ShoppingBag },
-        { name: 'Payments', link: '#', icon: CreditCard },
+        // { name: 'Payments', link: '#', icon: CreditCard },
         { name: 'Subscriptions', link: '#', icon: Repeat },
         { name: 'Settings', link: '#', icon: Settings },
     ];

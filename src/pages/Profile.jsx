@@ -109,7 +109,7 @@ const Profile = () => {
 
                     {nav === "Home" && <Home/>}
                     {nav === "Orders" && <OrdersTable/>}
-                    {nav === "Payments" && <PaymentsTable/>}
+                    {/* {nav === "Payments" && <PaymentsTable/>} */}
                     {nav === "Subscriptions" && <SubscriptionSection/>}
                     {nav === "Settings" && <Settings/>}
 

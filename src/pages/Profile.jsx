@@ -44,13 +44,24 @@ const Profile = () => {
             try {
                   const response = await axiosInstance.get('/profile/addresses');
                   console.log("Fetched Addresses:", response);
+                  console.log("Fetched Addresses:", response.data[0]);
+
+                  const saveAddress = {
+                    loading: false,
+                    status: "found",
+                    data: response.data[0],
+                  }
+
+                  setAddress(saveAddress);
+                  console.log("Saved Address:", saveAddress);
+
             } catch (error) {
                 console.error("Error fetching addresses:",error);
             }
         }
 
         fetchAddresses()
-    }, [address]);
+    }, []);
 
     const handleContinueShopping = () => {
       if(!productCategory.subcat){

@@ -1,241 +1,249 @@
-import React, { useState, useEffect } from "react";
-
+import React, { useState } from "react";
 import useAuthStore from '../../store/auth.store.js';
+import { useProfileStore } from "../../store/profile.store.js";
 import axiosInstance from '../../api/axiosInstance'; 
+import { toast } from 'react-toastify';
 
 const Settings = () => {
-    const {accessToken, user} = useAuthStore();
+    const { setAddress, address } = useProfileStore();
+    const { accessToken, user } = useAuthStore();
+
+    // Profile fields
     const [email, setEmail] = useState(user.email);
     const [name, setName] = useState(user.fullName);
 
-    const [streetAddress, setStreetAddress] = useState("");
-    const [postcode, setPostcode] = useState("");
-    const [cityTown, setCityTown] = useState("");
-    const [phone, setPhone] = useState("");
+    // Address fields
+    const [streetAddress, setStreetAddress] = useState(address?.data?.line1 || "");
+    const [postcode, setPostcode] = useState(address?.data?.postal_code || "");
+    const [cityTown, setCityTown] = useState(address?.data?.city || "");
+    const [phone, setPhone] = useState(address?.data?.phone || "");
+    const [loadingA, setLoadingA] = useState(false);
 
+    // Password fields
     const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [confirmNewPassword, setConfirmNewPassword] = useState("");
+    const [loadingP, setLoadingP] = useState(false);
+    const [loadingProfile, setLoadingProfile] = useState(false);
 
+    /** HANDLE SAVE ADDRESS (CREATE OR UPDATE) */
+    const handleSaveAddress = async (e) => {
+        e.preventDefault();
+        setLoadingA(true);
 
-     // Fetch addresses
- 
+        if (!streetAddress || !postcode || !cityTown || !phone) {
+            toast.error('All shipping information fields are required');
+            setLoadingA(false);
+            return;
+        }
+
+        const payload = {
+            line1: streetAddress,
+            line2: streetAddress,
+            postal_code: postcode,
+            city: cityTown,
+            state: cityTown,
+            phone,
+            country: "uk",
+            full_name: user?.fullName || "unknown",
+            company: user?.fullName || "unknown",
+            metadata: { message: "updated via settings page" }
+        };
+
+        try {
+            let response;
+            if (address?.data?.id) {
+                // Update existing address
+                response = await axiosInstance.put(`/profile/addresses/${address.data.id}`, payload);
+            } else {
+                // Add new address
+                response = await axiosInstance.post('/profile/addresses', payload);
+            }
+
+            setAddress(response.data); // update store
+            toast.success("Address saved successfully!");
+        } catch (err) {
+            console.error("Address save failed:", err);
+            toast.error("Failed to save address. Try again later.");
+        } finally {
+            setLoadingA(false);
+        }
+    };
+
+    /** HANDLE PROFILE UPDATE */
+    const handleSaveProfile = async () => {
+        setLoadingProfile(true);
+        try {
+            const payload = { full_name: name, metadata: { email } };
+            const response = await axiosInstance.put('/profile', payload);
+            toast.success("Profile updated successfully!");
+        } catch (err) {
+            console.error("Profile update failed:", err);
+            toast.error("Failed to update profile. Try again later.");
+        } finally {
+            setLoadingProfile(false);
+        }
+    };
+
+    /** HANDLE PASSWORD CHANGE */
+    const handleChangePassword = async () => {
+        if (!currentPassword || !newPassword || !confirmNewPassword) {
+            toast.error("All password fields are required");
+            return;
+        }
+
+        if (newPassword.length < 8) {
+            toast.error("New password must be at least 8 characters");
+            return;
+        }
+
+        if (newPassword !== confirmNewPassword) {
+            toast.error("New passwords do not match");
+            return;
+        }
+
+        setLoadingP(true);
+        try {
+            await axiosInstance.post('/profile/change-password', {
+                currentPassword,
+                newPassword
+            });
+            toast.success("Password updated successfully!");
+            setCurrentPassword("");
+            setNewPassword("");
+            setConfirmNewPassword("");
+        } catch (err) {
+            console.error("Password update failed:", err);
+            if (err.response?.status === 401) {
+                toast.error("Current password incorrect");
+            } else {
+                toast.error("Failed to update password. Try again later.");
+            }
+        } finally {
+            setLoadingP(false);
+        }
+    };
 
     return (
         <>
-
-               {/* Shipping Information Section */}
-            <div
-                className="bg-white border border-gray-200 rounded-md w-[90%] max-w-full md:w-full p-6 md:py-4 mx-4 my-2 md:my-4 md:mx-auto flex flex-col justify-start items-start gap-6"
-            >
-                <div>
-                    <h2 className="text-xl font-semibold text-gray-600">Shipping Information</h2>
-                    <p className="text-sm text-gray-600 mt-1">
-                        Update your account's shipping information.
-                    </p>
-                </div>
-
-                {/* form */}
-                <form action="" className="w-full">
-                    {/* street address */}
-                     <div className="my-2 md:my-4 md:w-lg">
-                        <label htmlFor="streetAddress" className="text-gray-600">Street Address:</label>
-                        <div className="flex items-center gap-2 bg-white border border-gray-300 rounded-md px-3 py-3 md:py-4 w-full max-w-full md:max-w-lg focus-within:shadow-sm focus-within:border-[var(--color-primary)]">
-                            <input
-                                type="text"
-                                name="streetAddress"
-                                placeholder=""
-                                value={streetAddress}
-                                onChange={(e) => setStreetAddress(e.target.value)}
-                                className="flex-1 outline-none text-sm text-gray-700 placeholder-gray-400 w-full"
-                                required
-                            />
-                        </div>
-                    </div>
-
-                    {/* Postcode and Town/City side by side */}
-                    <div className="flex flex-col md:flex-row max-w-full md:max-w-lg gap-4 ">
-                        <div className="my-2 md:my-4 w-full md:w-md mr-4">
-
-                            <label htmlFor="postcode" className="text-gray-600">Postcode:</label>
-                            <div className="flex items-center gap-2 bg-white border border-gray-300 rounded-md px-3 py-3 md:py-4 w-full max-w-full md:max-w-lg focus-within:shadow-sm focus-within:border-[var(--color-primary)]">
-                                <input
-                                    type="text"
-                                    name="postcode"
-                                    placeholder=""
-                                    value={postcode}
-                                    onChange={(e) => setPostcode(e.target.value)}
-                                    className="flex-1 outline-none text-sm text-gray-700 placeholder-gray-400 w-full"
-                                    required
-                                />
-                            </div>
-                        </div>
-
-                        <div className="my-2 md:my-4 w-full md:w-md ">
-
-                            <label htmlFor="cityTown" className="text-gray-600">City/Town:</label>
-                            <div className="flex items-center gap-2 bg-white border border-gray-300 rounded-md px-3 py-3 md:py-4 w-full max-w-full md:max-w-lg focus-within:shadow-sm focus-within:border-[var(--color-primary)]">
-                                <input
-                                    type="text"
-                                    name="cityTown"
-                                    placeholder=""
-                                    value={cityTown}
-                                    onChange={(e) => setCityTown(e.target.value)}
-                                    className="flex-1 outline-none text-sm text-gray-700 placeholder-gray-400 w-full"
-                                    required
-                                />
-                            </div>
-                        </div>
-                    </div>
-
+            {/* Shipping Information */}
+            <div className="bg-white border border-gray-200 rounded-md w-[90%] max-w-full md:w-full p-6 md:py-4 mx-4 my-2 md:my-4 md:mx-auto flex flex-col gap-6">
+                <h2 className="text-xl font-semibold text-gray-600">Shipping Information</h2>
+                <p className="text-sm text-gray-600 mt-1">Update your account's shipping information.</p>
+                <form onSubmit={handleSaveAddress} className="w-full">
                     <div className="my-2 md:my-4 md:w-lg">
-
-                        <label htmlFor="phone" className="text-gray-600">Phone:</label>
-                        <div className="flex items-center gap-2 bg-white border border-gray-300 rounded-md px-3 py-3 md:py-4 w-full max-w-full md:max-w-lg focus-within:shadow-sm focus-within:border-[var(--color-primary)]">
-                            <input
-                                type="text"
-                                name="phone"
-                                placeholder=""
-                                value={phone}
-                                onChange={(e) => setPhone(e.target.value)}
-                                className="flex-1 outline-none text-sm text-gray-700 placeholder-gray-400 w-full"
-                                required
-                            />
-                        </div>
+                        <label className="text-gray-600">Street Address:</label>
+                        <input
+                            type="text"
+                            value={streetAddress}
+                            onChange={(e) => setStreetAddress(e.target.value)}
+                            className="flex-1 outline-none text-sm text-gray-700 placeholder-gray-400 w-full border border-gray-300 rounded-md px-3 py-3 md:py-4"
+                            required
+                        />
                     </div>
-
-                    <button type="button" className="w-full md:w-fit btn-primary-sm" >Save Changes</button>
-
+                    <div className="flex flex-col md:flex-row gap-4">
+                        <input
+                            type="text"
+                            value={postcode}
+                            onChange={(e) => setPostcode(e.target.value)}
+                            placeholder="Postcode"
+                            className="flex-1 outline-none text-sm text-gray-700 placeholder-gray-400 w-full border border-gray-300 rounded-md px-3 py-3 md:py-4"
+                            required
+                        />
+                        <input
+                            type="text"
+                            value={cityTown}
+                            onChange={(e) => setCityTown(e.target.value)}
+                            placeholder="City/Town"
+                            className="flex-1 outline-none text-sm text-gray-700 placeholder-gray-400 w-full border border-gray-300 rounded-md px-3 py-3 md:py-4"
+                            required
+                        />
+                    </div>
+                    <div className="my-2 md:my-4 md:w-lg">
+                        <input
+                            type="text"
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
+                            placeholder="Phone"
+                            className="flex-1 outline-none text-sm text-gray-700 placeholder-gray-400 w-full border border-gray-300 rounded-md px-3 py-3 md:py-4"
+                            required
+                        />
+                    </div>
+                    <button type="submit" className="w-full md:w-fit btn-primary-sm" disabled={loadingA}>
+                        {loadingA ? 'Saving...' : 'Save Address'}
+                    </button>
                 </form>
-
             </div>
 
-             {/* Profile Information Section */}
-            <div
-                className="bg-white border border-gray-200 rounded-md w-[90%] max-w-full md:w-full p-6 md:py-4 mx-4 my-2 md:my-4 md:mx-auto flex flex-col justify-start items-start gap-6"
-            >
-                <div>
-                    <h2 className="text-xl font-semibold text-gray-600">Profile Information</h2>
-                    <p className="text-sm text-gray-600 mt-1">
-                        Update your account's profile information and email address.
-                    </p>
+            {/* Profile Information */}
+            <div className="bg-white border border-gray-200 rounded-md w-[90%] max-w-full md:w-full p-6 md:py-4 mx-4 my-2 md:my-4 md:mx-auto flex flex-col gap-6">
+                <h2 className="text-xl font-semibold text-gray-600">Profile Information</h2>
+                <p className="text-sm text-gray-600 mt-1">Update your account's profile information and email address.</p>
+                <div className="my-2 md:my-4 md:w-lg">
+                    <label className="text-gray-600">Fullname:</label>
+                    <input
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        className="flex-1 outline-none text-sm text-gray-700 placeholder-gray-400 w-full border border-gray-300 rounded-md px-3 py-3 md:py-4"
+                        required
+                    />
                 </div>
-
-                {/* form */}
-                <form action="" className="w-full">
-                     <div className="my-2 md:my-4 md:w-lg">
-
-                        <label htmlFor="name" className="text-gray-600">Fullname:</label>
-                        <div className="flex items-center gap-2 bg-white border border-gray-300 rounded-md px-3 py-3 md:py-4 w-full max-w-full md:max-w-lg focus-within:shadow-sm focus-within:border-[var(--color-primary)]">
-                            <input
-                                type="text"
-                                name="name"
-                                placeholder=""
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                                className="flex-1 outline-none text-sm text-gray-700 placeholder-gray-400 w-full"
-                                required
-                            />
-                        </div>
-                    </div>
-                     <div className="my-2 md:my-4 md:w-lg">
-
-                        <label htmlFor="email" className="text-gray-600">Email:</label>
-                        <div className="flex items-center gap-2 bg-white border border-gray-300 rounded-md px-3 py-3 md:py-4 w-full max-w-full md:max-w-lg focus-within:shadow-sm focus-within:border-[var(--color-primary)]">
-                            <input
-                                type="email"
-                                name="email"
-                                placeholder=""
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                className="flex-1 outline-none text-sm text-gray-700 placeholder-gray-400 w-full"
-                                required
-                            />
-                        </div>
-                    </div>
-
-                    <button type="button" className="w-full md:w-fit btn-primary-sm" >Save Profile</button>
-
-                </form>
-
-            </div>
-
-            {/* Change Password Section */}
-            <div
-                className="bg-white border border-gray-200 rounded-md w-[90%] max-w-full md:w-full p-6 md:py-4 mx-4 my-2 md:my-4 md:mx-auto flex flex-col justify-start items-start gap-6"
-            >
-                <div>
-                    <h2 className="text-xl font-semibold text-gray-600">Change Password</h2>
-                    <p className="text-sm text-gray-600 mt-1">
-                        Update your account's password.
-                    </p>
+                <div className="my-2 md:my-4 md:w-lg">
+                    <label className="text-gray-600">Email:</label>
+                    <input
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className="flex-1 outline-none text-sm text-gray-700 placeholder-gray-400 w-full border border-gray-300 rounded-md px-3 py-3 md:py-4"
+                        required
+                    />
                 </div>
-
-                {/* form */}
-                <form action="" className="w-full">
-                     <div className="my-2 md:my-4 md:w-lg">
-
-                        <label htmlFor="currentPassword" className="text-gray-600">Current Password:</label>
-                        <div className="flex items-center gap-2 bg-white border border-gray-300 rounded-md px-3 py-3 md:py-4 w-full max-w-full md:max-w-lg focus-within:shadow-sm focus-within:border-[var(--color-primary)]">
-                            <input
-                                type="password"
-                                name="currentPassword"
-                                placeholder=""
-                                value={currentPassword}
-                                onChange={(e) => setCurrentPassword(e.target.value)}
-                                className="flex-1 outline-none text-sm text-gray-700 placeholder-gray-400 w-full"
-                                required
-                            />
-                        </div>
-                    </div>
-                     <div className="my-2 md:my-4 md:w-lg">
-
-                        <label htmlFor="newPassword" className="text-gray-600">New Password:</label>
-                        <div className="flex items-center gap-2 bg-white border border-gray-300 rounded-md px-3 py-3 md:py-4 w-full max-w-full md:max-w-lg focus-within:shadow-sm focus-within:border-[var(--color-primary)]">
-                            <input
-                                type="password"
-                                name="newPassword"
-                                placeholder=""
-                                value={newPassword}
-                                onChange={(e) => setNewPassword(e.target.value)}
-                                className="flex-1 outline-none text-sm text-gray-700 placeholder-gray-400 w-full"
-                                required
-                            />
-                        </div>
-                    </div>
-                     <div className="my-2 md:my-4 md:w-lg">
-
-                        <label htmlFor="confirmNewPassword" className="text-gray-600">Confirm New Password:</label>
-                        <div className="flex items-center gap-2 bg-white border border-gray-300 rounded-md px-3 py-3 md:py-4 w-full max-w-full md:max-w-lg focus-within:shadow-sm focus-within:border-[var(--color-primary)]">
-                            <input
-                                type="password"
-                                name="confirmNewPassword"
-                                placeholder=""
-                                value={confirmNewPassword}
-                                onChange={(e) => setConfirmNewPassword(e.target.value)}
-                                className="flex-1 outline-none text-sm text-gray-700 placeholder-gray-400 w-full"
-                                required
-                            />
-                        </div>
-                    </div>
-
-                    <button type="button" className="w-full md:w-fit btn-primary-sm" >Save Password</button>
-
-                </form>
-
+                <button type="button" className="w-full md:w-fit btn-primary-sm" onClick={handleSaveProfile} disabled={loadingProfile}>
+                    {loadingProfile ? 'Saving...' : 'Save Profile'}
+                </button>
             </div>
-            
+
+            {/* Change Password */}
+            <div className="bg-white border border-gray-200 rounded-md w-[90%] max-w-full md:w-full p-6 md:py-4 mx-4 my-2 md:my-4 md:mx-auto flex flex-col gap-6">
+                <h2 className="text-xl font-semibold text-gray-600">Change Password</h2>
+                <p className="text-sm text-gray-600 mt-1">Update your account's password.</p>
+                <div className="my-2 md:my-4 md:w-lg">
+                    <label className="text-gray-600">Current Password:</label>
+                    <input
+                        type="password"
+                        value={currentPassword}
+                        onChange={(e) => setCurrentPassword(e.target.value)}
+                        className="flex-1 outline-none text-sm text-gray-700 placeholder-gray-400 w-full border border-gray-300 rounded-md px-3 py-3 md:py-4"
+                        required
+                    />
+                </div>
+                <div className="my-2 md:my-4 md:w-lg">
+                    <label className="text-gray-600">New Password:</label>
+                    <input
+                        type="password"
+                        value={newPassword}
+                        onChange={(e) => setNewPassword(e.target.value)}
+                        className="flex-1 outline-none text-sm text-gray-700 placeholder-gray-400 w-full border border-gray-300 rounded-md px-3 py-3 md:py-4"
+                        required
+                    />
+                </div>
+                <div className="my-2 md:my-4 md:w-lg">
+                    <label className="text-gray-600">Confirm New Password:</label>
+                    <input
+                        type="password"
+                        value={confirmNewPassword}
+                        onChange={(e) => setConfirmNewPassword(e.target.value)}
+                        className="flex-1 outline-none text-sm text-gray-700 placeholder-gray-400 w-full border border-gray-300 rounded-md px-3 py-3 md:py-4"
+                        required
+                    />
+                </div>
+                <button type="button" className="w-full md:w-fit btn-primary-sm" onClick={handleChangePassword} disabled={loadingP}>
+                    {loadingP ? 'Saving...' : 'Save Password'}
+                </button>
+            </div>
         </>
-    )
-}
+    );
+};
 
 export default Settings;
-
-
-/**
- * TODO:
- * - Billing information update linking to Stripe customer portal
- * - Two-factor authentication setup
- * - Notification preferences
- * - Delete account option with confirmation
- */

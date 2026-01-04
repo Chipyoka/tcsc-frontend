@@ -7,12 +7,12 @@ export const useProfileStore = create(
   persist(
     (set) => ({
       address: {
-        loading: false,
+        loading: true,
         status: "not found",
         data: null,
       },
       nav: "Home",
-      setAddress : (nav) => set({ nav }),
+      setAddress : (address) => set({ address }),
       setNav : (nav) => set({ nav }),
     }),
     {

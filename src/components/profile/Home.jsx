@@ -26,10 +26,10 @@ const Home = () => {
                             <p className="text-gray-500 font-medium text-lg">Find newest order</p>
                             <ChevronRight className="h-5 w-5 text-gray-400"/>
                         </div>
-                        <div onClick={() => setNav("Payments")} className=" bg-gray-100 rounded-sm w-full py-3 px-2 border border-transparent hover:border-gray-300 cursor-pointer flex justify-between items-center">
-                            <p className="text-gray-500 font-medium text-lg">View payments or invoices</p>
+                        {/* <div onClick={() => setNav("Payments")} className=" bg-gray-100 rounded-sm w-full py-3 px-2 border border-transparent hover:border-gray-300 cursor-pointer flex justify-between items-center">
+                            <p className="text-gray-500 font-medium text-lg">View all orders</p>
                             <ChevronRight className="h-5 w-5 text-gray-400"/>
-                        </div>
+                        </div> */}
 
                         <div onClick={() => setNav("Subscriptions")} className="bg-gray-100 rounded-sm w-full py-3 px-2 border border-transparent hover:border-gray-300 cursor-pointer flex justify-between items-center">
                             <p className="text-gray-500 font-medium text-lg">View active subscriptions</p>

@@ -84,6 +84,14 @@ const BestSelling = () => {
 
     }, []);
 
+    if (loading) {
+        return (
+              <div className="px-6 md:px-36 py-12 flex flex-col gap-4 items-center justify-center min-h-[30dvh]">
+                <div className="loader"></div>
+            </div>
+        )
+    }
+
 
     return (
         <section className="my-12 mx-auto px-4 flex flex-col justify-center items-center">

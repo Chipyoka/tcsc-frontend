@@ -342,7 +342,7 @@ const Checkout = () => {
 
           {step === 2 && (
             <div className="py-6">
-              <div className="flex items-center justify-between mb-6">
+              <div className="flex flex-col-reverse md:flex-row items-start md:items-center gap-y-4 justify-between mb-6">
                 <h3 className="text-xl font-semibold text-[var(--color-primary)]">
                   Order Confirmation
                 </h3>
@@ -351,7 +351,7 @@ const Checkout = () => {
                   className="flex items-center gap-2 text-sm text-gray-600 hover:text-[var(--color-primary)] transition-colors"
                 >
                   <ArrowLeft className="w-4 h-4" />
-                  Return to Shipping
+                  Return to shipping
                 </button>
               </div>
               

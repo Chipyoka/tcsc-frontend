@@ -161,7 +161,7 @@ const SubscriptionsSection = () => {
     return (
       <div className="px-6 md:px-36 py-12 flex flex-col gap-4 items-center justify-center min-h-[50dvh] w-full bg-white rounded-lg border border-gray-200 mt-4">
         <div className="loader"></div>
-        <p className="text-center text-gray-400">Loading memberships...</p>
+        <p className="text-center text-gray-400">Loading subscriptions and memberships...</p>
       </div>
     );
   }
@@ -183,7 +183,7 @@ const SubscriptionsSection = () => {
           {availableMemberships.map(m => (
             <div
               key={m.id}
-              className="cursor-default hover:shadow-sm px-4 py-2 rounded-sm border border-gray-100 hover:border-gray-200 text-gray-600"
+              className="cursor-default hover:shadow-sm px-4 py-2 rounded-sm border border-gray-200 hover:border-gray-200 text-gray-600"
             >
               <div className="flex flex-col md:flex-row gap-4 justify-between items-center">
                 <div>

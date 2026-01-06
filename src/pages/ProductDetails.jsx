@@ -236,20 +236,20 @@ const ProductDetails = () => {
                 {/* Accepted payments */}
                 <div className="bg-white p-4 md:p-6 my-2 rounded-sm flex flex-col items-start justify-start gap-x-1">
                   <p>We accept:</p>
-               <div className="flex flex-wrap items-center justify-start gap-x-4 mt-2">
-                  {[Visa, Mastercard, Amex, Gpay, Apay].map((icon, idx) => (
-                    <div
-                      key={idx}
-                      className="w-12 flex items-center justify-center overflow-hidden"
-                    >
-                      <img
-                        src={icon}
-                        alt=""
-                        className="max-h-full max-w-full object-cover"
-                      />
+                  <div className="flex flex-wrap items-center justify-start gap-4 mt-2">
+                      {[Visa, Mastercard, Amex, Gpay, Apay].map((icon, idx) => (
+                        <div
+                          key={idx}
+                          className="w-12 flex items-center justify-center overflow-hidden"
+                        >
+                          <img
+                            src={icon}
+                            alt=""
+                            className="max-h-full max-w-full object-cover"
+                          />
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
 
                 </div>
 

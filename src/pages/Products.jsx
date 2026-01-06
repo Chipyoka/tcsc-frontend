@@ -76,7 +76,7 @@ const Products = () => {
                           'Network or client error while fetching products:',
                           error.message
                       );
-                      setError(true);
+                      // setError(true);
                       // setErrorMessage('Service is currently unavailable. Our engineers are working on it. Thank you for your understanding');
                   }
               } else if (error.name === 'CanceledError') {
@@ -180,7 +180,7 @@ const Products = () => {
             )}
 
             {/* When we an error, show the error message */}
-            {error && (
+            {error && totalProducts < 0 &&(
                <div className="px-2 my-4 mb-12 md:px-36  flex flex-col items-center justify-center">
                   <h4 className="text-xl my-2 font-medium text-gray-600">Something went wrong.</h4>
                   <p className=" w-[90%] text-center text-gray-400">{errorMessage ?? "Refresh to try again."}</p>

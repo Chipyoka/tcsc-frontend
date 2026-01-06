@@ -181,7 +181,14 @@ const Navbar = () => {
       <nav className="sticky top-0 z-50 w-full md:hidden flex justify-between items-center bg-white px-6 py-4 shadow-sm">
         <img src={Logo} alt="TCSC Logo" className="w-36 cursor-pointer" onClick={() => navigate(`/`)} />
         <div className="flex items-center gap-4">
-          <ShoppingCart className="w-9 h-9 text-[var(--color-primary)] cursor-pointer" onClick={() => navigate("/cart")} />
+          <div className="relative cursor-pointer" onClick={() => navigate("/cart")}>
+            <ShoppingCart className="w-9 h-9 text-[var(--color-primary)]" />
+            {totalItems > 0 && (
+              <span className="absolute -top-2 -right-2 bg-[var(--color-secondary)] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                {totalItems}
+              </span>
+            )}
+          </div>
           <button onClick={() => setMenuOpen(!menuOpen)} className="text-(--color-primary)">
             {menuOpen ? <X className="w-9 h-9" /> : <Menu className="w-9 h-9" />}
           </button>

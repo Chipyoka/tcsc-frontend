@@ -174,59 +174,61 @@ const SubscriptionsSection = () => {
     <div className="w-full bg-white rounded-sm border border-gray-200 mt-4">
       <div className="px-6 py-4">
         <h4 className="capitalize">Subcriptions and Memberships</h4>
+        {availableMemberships.length > 0 && (
 
-        <div className="my-4 px-4">
-          <p className="text-xs my-4 font-medium text-gray-500">
-            Available memberships to Join
-          </p>
+          <div className="my-4 px-4 border-b border-gray-100">
+            <p className="text-xs my-4 font-medium text-gray-500">
+              Available memberships to Join
+            </p>
 
-          {availableMemberships.map(m => (
-            <div
-              key={m.id}
-              className="cursor-default hover:shadow-sm px-4 py-2 rounded-sm border border-gray-200 hover:border-gray-200 text-gray-600"
-            >
-              <div className="flex flex-col md:flex-row gap-4 justify-between items-center">
-                <div>
-                  <h4>{m.name}</h4>
-                  <p className="text-sm">{m.description}</p>
+            {availableMemberships.map(m => (
+              <div
+                key={m.id}
+                className="cursor-default hover:shadow-sm px-4 py-2 rounded-sm border border-gray-200 hover:border-gray-200 text-gray-600"
+              >
+                <div className="flex flex-col md:flex-row gap-4 justify-between items-center">
+                  <div>
+                    <h4>{m.name}</h4>
+                    <p className="text-sm">{m.description}</p>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => handleJoinMembership(m.id)}
+                    disabled={joiningId === m.id}
+                    className="w-full md:w-fit btn-primary-outlined-sm"
+                  >
+                    {joiningId === m.id ? 'Joining…' : 'Join'}
+                  </button>
                 </div>
 
-                <button
-                  type="button"
-                  onClick={() => handleJoinMembership(m.id)}
-                  disabled={joiningId === m.id}
-                  className="w-full md:w-fit btn-primary-outlined-sm"
+                <p
+                  className="text-sm text-(--color-primary) border-b border-transparent hover:border-(--color-primary) w-fit cursor-pointer my-1"
+                  onClick={() => toggleMembershipDetails(m.id)}
                 >
-                  {joiningId === m.id ? 'Joining…' : 'Join'}
-                </button>
+                  {activeDetailsId === m.id ? 'Hide Benefits' : 'Show Benefits'}
+                </p>
+
+                {activeDetailsId === m.id &&
+                  (loadingDetails ? (
+                    <p className="text-sm text-gray-400">Loading details…</p>
+                  ) : (
+                    membershipDetails?.benefits?.map(b => (
+                      <p
+                        key={b.id}
+                        className="bg-gray-50 w-full p-4 border-y border-gray-100 hover:bg-gray-100"
+                      >
+                        {formatBenefitType(b.benefit_type)}
+                        {b.value && <span> - {Number(b.value)}%</span>}
+                      </p>
+                    ))
+                  ))}
               </div>
+            ))}
+          </div>
+        )}
 
-              <p
-                className="text-sm text-(--color-primary) border-b border-transparent hover:border-(--color-primary) w-fit cursor-pointer my-1"
-                onClick={() => toggleMembershipDetails(m.id)}
-              >
-                {activeDetailsId === m.id ? 'Hide Benefits' : 'Show Benefits'}
-              </p>
-
-              {activeDetailsId === m.id &&
-                (loadingDetails ? (
-                  <p className="text-sm text-gray-400">Loading details…</p>
-                ) : (
-                  membershipDetails?.benefits?.map(b => (
-                    <p
-                      key={b.id}
-                      className="bg-gray-50 w-full p-4 border-y border-gray-100 hover:bg-gray-100"
-                    >
-                      {formatBenefitType(b.benefit_type)}
-                      {b.value && <span> - {Number(b.value)}%</span>}
-                    </p>
-                  ))
-                ))}
-            </div>
-          ))}
-        </div>
-
-        <div className="px-6 py-4 border-t border-gray-100">
+        <div className="px-6 py-4 ">
           <p className="text-xs my-4 font-medium text-gray-500">
             Your active memberships
           </p>
@@ -248,7 +250,7 @@ const SubscriptionsSection = () => {
             joinedMemberships.map(m => (
               <div
                 key={m.id}
-                className="px-4 py-2 rounded-sm border border-gray-100 text-gray-600"
+                className="px-4 py-2 rounded-sm border border-gray-100 hover:border-gray-200 text-gray-600 hover:bg-gray-50 cursor-default"
               >
                 <h4>{m.name}</h4>
                 <p className="text-sm">{m.description}</p>

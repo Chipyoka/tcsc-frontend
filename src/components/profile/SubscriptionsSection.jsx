@@ -1,164 +1,244 @@
-import React, { useState, useEffect } from 'react';
-import {
-  Pause,
-  XCircle,
-  CheckCircle,
-  Clock
-} from 'lucide-react';
-
-import useAuthStore from '../../store/auth.store.js';
-import { useProfileStore } from "../../store/profile.store.js";
-
-import axiosInstance from '../../api/axiosInstance'; 
-
+import React, { useEffect, useMemo, useState } from 'react';
+import axiosInstance from '../../api/axiosInstance';
 
 const SubscriptionsSection = () => {
-  const [subscriptions, setSubscriptions] = useState([]);
   const [memberships, setMemberships] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [timedOut, setTimedOut] = useState (false);
-  const [expandedId, setExpandedId] = useState(null);
-  const [showCancelConfirm, setShowCancelConfirm] = useState(null);
-  const { setAddress, address } = useProfileStore();
-  const { accessToken, user, updateUser } = useAuthStore();
+
+  const [userMemberships, setUserMemberships] = useState([]);
+  const [userMembershipsError, setUserMembershipsError] = useState(false);
+  const [loadingUserMemberships, setLoadingUserMemberships] = useState(true);
+
+  const [activeDetailsId, setActiveDetailsId] = useState(null);
+  const [membershipDetails, setMembershipDetails] = useState(null);
+  const [loadingDetails, setLoadingDetails] = useState(false);
+
+  const [loadingCatalog, setLoadingCatalog] = useState(true);
+  const [catalogError, setCatalogError] = useState(false);
+
+  /* ----------------------------------------
+     Utilities
+  ---------------------------------------- */
+
+  const formatBenefitType = (value = '') =>
+    value
+      .replace(/_/g, ' ')
+      .replace(/\b\w/g, char => char.toUpperCase());
+
+  /* ----------------------------------------
+     Fetch catalog (authoritative)
+  ---------------------------------------- */
 
   useEffect(() => {
-    fetchSubscriptions();
+    const fetchCatalog = async () => {
+      setLoadingCatalog(true);
+      setCatalogError(false);
+
+      try {
+        const res = await axiosInstance.get('/memberships', {
+          timeout: 15000,
+        });
+        setMemberships(res.data || []);
+      } catch (err) {
+        console.error('Failed to load memberships catalog:', err);
+        setCatalogError(true);
+      } finally {
+        setLoadingCatalog(false);
+      }
+    };
+
+    fetchCatalog();
   }, []);
 
-  const fetchSubscriptions = async () => {
-    setLoading(true);
+  /* ----------------------------------------
+     Fetch user memberships (non-blocking)
+  ---------------------------------------- */
+
+  useEffect(() => {
+    const fetchUserMemberships = async () => {
+      setLoadingUserMemberships(true);
+      setUserMembershipsError(false);
+
+      try {
+        const res = await axiosInstance.get('/memberships/me', {
+          timeout: 15000,
+        });
+        setUserMemberships(res.data || []);
+      } catch (err) {
+        console.warn('User memberships unavailable:', err);
+        setUserMemberships([]);
+        setUserMembershipsError(true);
+      } finally {
+        setLoadingUserMemberships(false);
+      }
+    };
+
+    fetchUserMemberships();
+  }, []);
+
+  /* ----------------------------------------
+     Domain reconciliation (defensive)
+  ---------------------------------------- */
+
+  const joinedMembershipIds = useMemo(() => {
+    if (userMembershipsError || !Array.isArray(userMemberships)) {
+      return new Set();
+    }
+    return new Set(userMemberships.map(um => um.membership_type_id));
+  }, [userMemberships, userMembershipsError]);
+
+  const availableMemberships = useMemo(
+    () => memberships.filter(m => !joinedMembershipIds.has(m.id)),
+    [memberships, joinedMembershipIds]
+  );
+
+  const joinedMemberships = useMemo(
+    () => memberships.filter(m => joinedMembershipIds.has(m.id)),
+    [memberships, joinedMembershipIds]
+  );
+
+  /* ----------------------------------------
+     Membership details (on-demand)
+  ---------------------------------------- */
+
+  const toggleMembershipDetails = async (id) => {
+    if (activeDetailsId === id) {
+      setActiveDetailsId(null);
+      setMembershipDetails(null);
+      return;
+    }
+
+    setActiveDetailsId(id);
+    setLoadingDetails(true);
 
     try {
-      const response = await axiosInstance.get('/memberships/me', {
-         timeout: 15000,
+      const res = await axiosInstance.get(`/memberships/${id}`, {
+        timeout: 15000,
       });
-
-      console.log("Fetched memberships: ", response.data);
-      setMemberships(response.data);
-
-    } catch (error) {
-      if (error.code === 'ECONNABORTED') {
-        console.error('Request timed out after 15 seconds');
-        setTimedOut(true);
-      } else {
-        console.error('Failed to fetch memberships:', error);
-      }
+      setMembershipDetails(res.data);
+    } catch (err) {
+      console.error('Failed to load membership details:', err);
+      setMembershipDetails(null);
     } finally {
-      setLoading(false);
+      setLoadingDetails(false);
     }
   };
 
-  const formatCurrency = (amount, currency = 'GBP') => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: currency,
-      minimumFractionDigits: 2
-    }).format(amount / 100);
-  };
+  /* ----------------------------------------
+     Loading gate (catalog only)
+  ---------------------------------------- */
 
-  const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
-  };
-
-  const getIntervalLabel = (interval) => {
-    const labels = {
-      weekly: 'Weekly',
-      monthly: 'Monthly',
-      bi_monthly: 'Every 2 months',
-      quarterly: 'Quarterly',
-      yearly: 'Yearly'
-    };
-    return labels[interval] || interval;
-  };
-
-  const getStatusBadge = (status) => {
-    const config = {
-      active: { bg: 'bg-green-50', text: 'text-green-700', border: 'border-green-200', icon: CheckCircle },
-      paused: { bg: 'bg-yellow-50', text: 'text-yellow-700', border: 'border-yellow-200', icon: Pause },
-      cancelled: { bg: 'bg-gray-100', text: 'text-gray-600', border: 'border-gray-300', icon: XCircle },
-      pending: { bg: 'bg-blue-50', text: 'text-blue-700', border: 'border-blue-200', icon: Clock }
-    };
-
-    const { bg, text, border, icon: Icon } = config[status] || config.pending;
-
+  if (loadingCatalog) {
     return (
-      <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium ${bg} ${text} ${border} border`}>
-        <Icon size={12} />
-        {status.charAt(0).toUpperCase() + status.slice(1)}
-      </span>
-    );
-  };
-
-  const handlePauseSubscription = (subscriptionId, days) => {
-    console.log(`Pause subscription ${subscriptionId} for ${days} days`);
-    // Implement pause logic
-  };
-
-  const handleSkipDelivery = (subscriptionId, deliveryIndex) => {
-    console.log(`Skip delivery ${deliveryIndex} for subscription ${subscriptionId}`);
-    // Implement skip logic
-  };
-
-  const handleCancelSubscription = (subscriptionId) => {
-    console.log(`Cancel subscription ${subscriptionId}`);
-    setShowCancelConfirm(null);
-    // Implement cancel logic
-  };
-
-  const handleUpdatePaymentMethod = (subscriptionId) => {
-    console.log(`Update payment method for ${subscriptionId}`);
-    // Implement payment method update
-  };
-
-  const handleDownloadInvoice = (subscriptionId, period) => {
-    console.log(`Download invoice for ${subscriptionId} - ${period}`);
-    // Implement invoice download
-  };
-
-  if (loading) {
-    return (
-       <div className="px-6 md:px-36 py-12 flex flex-col gap-4 items-center justify-center min-h-[50dvh] w-full bg-white rounded-lg border border-gray-200 mt-4">
-          <div className="loader"></div>
-          <p className="text-center text-gray-400">Loading your subscriptions...</p>
-        </div>
+      <div className="px-6 md:px-36 py-12 flex flex-col gap-4 items-center justify-center min-h-[50dvh] w-full bg-white rounded-lg border border-gray-200 mt-4">
+        <div className="loader"></div>
+        <p className="text-center text-gray-400">
+          Loading memberships...
+        </p>
+      </div>
     );
   }
 
-  return (
-    <div className="w-full bg-white rounded-sm border border-gray-200 mt-4 ">
-      {/* <h4 className="capitalize">Subcriptions and Memberships</h4> */}
-      <div className="flex flex-col justify-center items-center min-h-[40dvh]">
-        {!timedOut && (
-          <>
-            {memberships.length > 1 ? (
-              <div>
-                  <h4 className="capitalize">Subcriptions and Memberships</h4>
-                  {memberships.map((m)=>(
-                    <div key={m.id} className="rounded-sm bg-gray-50 border border-transparent hover:border-gray-200 text-gray-600">
-                        <p>{m.name ?? "unknown"}</p>
-                    </div>
-                  ))}
-              </div>
-            ):(
-              <div>
-                <p>No subscriptions to show</p>
-              </div>
-            )}
-          </>
-        )}
+  /* ----------------------------------------
+     Render
+  ---------------------------------------- */
 
-        {/* Show service unavailable on timeout */}
-        {timedOut && (
-          <> 
-            <p className="text-lg">Service unavailable.</p>
-            <p className="t-sm text-gray-400">Our team is currently working on it.</p>
-          </>
-        )}
+  return (
+    <div className="w-full bg-white rounded-sm border border-gray-200 mt-4">
+      <div>
+
+        {/* ===============================
+            MEMBERSHIP CATALOG (ALWAYS)
+        =============================== */}
+
+        <div className="px-6 py-4">
+          <h4 className="capitalize">Subcriptions and Memberships</h4>
+
+          <div className="my-4 px-4">
+            <p className="text-xs my-4 font-medium text-gray-500">
+              Available memberships to Join
+            </p>
+
+            {availableMemberships.map(m => (
+              <div
+                key={m.id}
+                className="cursor-default hover:shadow-sm px-4 py-2 rounded-sm border border-gray-100 hover:border-gray-200 text-gray-600"
+              >
+                <div className="flex justify-between items-center">
+                  <div>
+                    <h4>{m.name}</h4>
+                    <p className="text-sm">{m.description}</p>
+                  </div>
+                  <button className="btn-primary-outlined-sm">
+                    Join
+                  </button>
+                </div>
+
+                <p
+                  className="text-sm text-(--color-primary) border-b border-transparent hover:border-(--color-primary) w-fit cursor-pointer my-1"
+                  onClick={() => toggleMembershipDetails(m.id)}
+                >
+                  {activeDetailsId === m.id
+                    ? 'Hide Benefits'
+                    : 'Show Benefits'}
+                </p>
+
+                {activeDetailsId === m.id && (
+                  loadingDetails ? (
+                    <div className="px-6 md:px-36 py-12 flex flex-col gap-4 items-center justify-center w-full bg-white rounded-sm mt-4">
+                      <div className="loader"></div>
+                      <p className="text-center text-gray-400">
+                        Loading details...
+                      </p>
+                    </div>
+                  ) : membershipDetails?.benefits?.length ? (
+                    <div>
+                      {membershipDetails.benefits.map(b => (
+                        <p key={b.id} className=" bg-gray-50 w-full py-4 border-y border-gray-100">
+                          {formatBenefitType(b.benefit_type)} {b.value && (
+                            <span>- {Number(b.value)}%</span>
+                          )}
+                        </p>
+                      ))}
+                    </div>
+                  ) : null
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ===============================
+            USER MEMBERSHIPS (OPTIONAL)
+        =============================== */}
+
+        <div className="px-6 py-4 border-t border-gray-100">
+          <p className="text-xs my-4 font-medium text-gray-500">
+            Your active memberships
+          </p>
+
+          {loadingUserMemberships && (
+            <p className="text-sm text-gray-400">
+              Loading your memberships...
+            </p>
+          )}
+
+          {userMembershipsError && (
+            <p className="text-sm text-(--color-warning)">
+              Unable to load your memberships at this time.
+            </p>
+          )}
+
+          {!loadingUserMemberships && !userMembershipsError && joinedMemberships.map(m => (
+            <div
+              key={m.id}
+              className="px-4 py-2 rounded-sm border border-gray-100 text-gray-600"
+            >
+              <h4>{m.name}</h4>
+              <p className="text-sm">{m.description}</p>
+            </div>
+          ))}
+        </div>
+
       </div>
     </div>
   );

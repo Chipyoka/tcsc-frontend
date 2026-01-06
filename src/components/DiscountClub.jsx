@@ -2,10 +2,18 @@ import {Check, ArrowRight} from 'lucide-react';
 import Delivery from '../assets/images/discount-club.avif';
 import {useNavigate} from 'react-router-dom';
 
+
+import { useProfileStore } from '../store/profile.store.js';
+
 const DiscountClub = () => {
 
     const navigate = useNavigate();
+    const { nav, setNav } = useProfileStore();
 
+    const handleJoin = () => {
+        setNav("Subscriptions");
+        navigate("/profile");
+    }
 
     return(
         <section className="bg-[var(--color-accent-1)] mt-6 p-6 md:p-16  gap-12 flex flex-col md:flex-row justify-between items-center border-b-24 border-[var(--color-primary)]">
@@ -60,7 +68,7 @@ const DiscountClub = () => {
 
                 <div className="mt-6">
                     <button 
-                        onClick={() => navigate('/profile')}
+                        onClick={handleJoin}
                         className="btn-primary-outlined-lg-2 w-full md:w-fit flex items-center justify-center hover:shadow-lg transition-all duration-300"
                     >
                         Join Now <span><ArrowRight  className="w-5 h-5 ml-2"/></span>

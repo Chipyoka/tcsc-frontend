@@ -14,6 +14,9 @@ import Footer from "../components/Footer";
 import FAQSection from "../components/FAQSection";
 
 import Visa from '../assets/icons/visa.webp';
+import Gpay from '../assets/icons/gpay.webp';
+import Amex from '../assets/icons/amex.png';
+import Apay from '../assets/icons/apay.png';
 import L from '../assets/images/default_product.png';
 import Mastercard from '../assets/icons/mastercard.jpg';
 import useAuthStore from '../store/auth.store.js';
@@ -208,11 +211,21 @@ const ProductDetails = () => {
                     </select>
                   </div>
                 )} */}
+                {purchaseType === "subscription" && (
+                  <>
+                    <div className="text-gray-600 flex flex-col my-6 bg-gray-50 rounded-sm px-6 py-2 w-full md:w-fit border border-amber-200">
+                      <p>This product will be added to your <b>cart</b>, <br /> Then it will be added to your <b>recurring orders after checkout</b>.</p>
+                      <p className="t-sm">You can <b>edit or cancel </b> this subscription in your profile page.</p>
+                    </div>
+
+                    <p className="mt-2 mb-4 italic text-gray-400 text-sm">You have to checkout in order to complete this subscription.</p>
+                  </>
+                )}
 
                 {/* Add to cart */}
                 <div className="text-sm flex justify-start gap-6 items-center">
                   <button onClick={handleAddToCart} className="btn-primary-sm w-full md:w-70 flex items-center gap-x-4 justify-center">
-                    <ShoppingCart /> {purchaseType === 'one-time' ? "Add to Cart" : "Sign Up"}
+                    <ShoppingCart /> {purchaseType === 'one-time' ? "Add to Cart" : "Add & Subscribe"}
                   </button>
 
                   {/* <button className="text-[var(--color-primary)] mt-2 flex gap-x-2 items-center border-3 border-[var(--color-primary)] px-4 py-2 rounded-lg">
@@ -223,10 +236,21 @@ const ProductDetails = () => {
                 {/* Accepted payments */}
                 <div className="bg-white my-6 md:my-8 rounded-sm flex items-center justify-start gap-x-2">
                   <p>We accept:</p>
-                  <div className="flex items-center justify-start gap-x-2">
-                    <div className="w-12 overflow-hidden"><img src={Visa} alt="Visa" /></div>
-                    <div className="w-12 overflow-hidden"><img src={Mastercard} alt="Mastercard" /></div>
-                  </div>
+               <div className="flex items-center justify-start gap-x-4">
+                  {[Visa, Mastercard, Amex, Gpay, Apay].map((icon, idx) => (
+                    <div
+                      key={idx}
+                      className="w-14 h-12 flex items-center justify-center overflow-hidden"
+                    >
+                      <img
+                        src={icon}
+                        alt=""
+                        className="max-h-full max-w-full object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
+
                 </div>
 
             

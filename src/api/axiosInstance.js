@@ -1,73 +1,108 @@
 import axios from 'axios';
-import useAuthStore from '../store/auth.store'; // adjust path
+import useAuthStore from '../store/auth.store';
 
 const URL = import.meta.env.VITE_API_BASE_URL;
 
 if (!URL) {
   throw new Error('VITE_API_BASE_URL is not defined in environment variables');
-} else {
-  console.log('API Base URL:', URL);
 }
 
 // ---------------------------
 // Axios Instances
 // ---------------------------
 
-// Main Axios instance for all API calls
 const axiosInstance = axios.create({
   baseURL: URL,
   headers: { 'Content-Type': 'application/json' },
-  withCredentials: true, // send HTTP-only cookies
+  withCredentials: true,
 });
 
-// Dedicated Axios instance for refresh token requests
 const refreshClient = axios.create({
   baseURL: URL,
-  withCredentials: true, // browser will attach refresh cookie
+  withCredentials: true,
 });
+
+// ---------------------------
+// Refresh Coordination State
+// ---------------------------
+
+let isRefreshing = false;
+let failedQueue = [];
+
+const processQueue = (error, token = null) => {
+  failedQueue.forEach(({ resolve, reject }) => {
+    if (error) {
+      reject(error);
+    } else {
+      resolve(token);
+    }
+  });
+  failedQueue = [];
+};
 
 // ---------------------------
 // Request Interceptor
 // ---------------------------
+
 axiosInstance.interceptors.request.use((config) => {
   const { accessToken } = useAuthStore.getState();
+
   if (accessToken) {
     config.headers.Authorization = `Bearer ${accessToken}`;
   }
+
   return config;
 });
 
 // ---------------------------
 // Response Interceptor
 // ---------------------------
+
 axiosInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
 
-    // Do not attempt refresh on refresh endpoint itself
-    if (originalRequest.url?.includes('/auth/refresh')) {
+    // Never intercept refresh endpoint
+    if (originalRequest?.url?.includes('/auth/refresh')) {
       return Promise.reject(error);
     }
 
-    // Only retry once
+    // Only handle 401 once per request
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
+      // If refresh already in progress, queue request
+      if (isRefreshing) {
+        return new Promise((resolve, reject) => {
+          failedQueue.push({
+            resolve: (token) => {
+              originalRequest.headers.Authorization = `Bearer ${token}`;
+              resolve(axiosInstance(originalRequest));
+            },
+            reject,
+          });
+        });
+      }
+
+      isRefreshing = true;
+
       try {
-        // Refresh access token using dedicated client
         const { data } = await refreshClient.post('/auth/refresh');
 
-        // Update access token in memory
+        // Update global auth state
         useAuthStore.getState().setAccessToken(data.accessToken);
 
-        // Retry original request with new access token
+        processQueue(null, data.accessToken);
+
+        // Retry original request
         originalRequest.headers.Authorization = `Bearer ${data.accessToken}`;
         return axiosInstance(originalRequest);
       } catch (err) {
-        // Refresh failed → optional: logout user
-        // useAuthStore.getState().logout();
+        processQueue(err, null);
         return Promise.reject(err);
+      } finally {
+        isRefreshing = false;
       }
     }
 

@@ -3,9 +3,12 @@ import { X, Info } from 'lucide-react';
 import Topbar from '../components/Topbar';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import Visa from '../assets/icons/visa.webp';
+import Visa from '../assets/icons/visa.png';
+import Gpay from '../assets/icons/gpay.png';
+import Amex from '../assets/icons/amex.png';
+import Apay from '../assets/icons/apay.png';
+import Mastercard from '../assets/icons/mastercard.png';
 import L from '../assets/images/default_product.png'
-import Mastercard from '../assets/icons/mastercard.jpg';
 import useCartStore from '../store/cart.store';
 import { useState } from 'react';
 import { useNavStore } from '../store/nav.store.js';
@@ -151,12 +154,22 @@ const Cart = () => {
               </div>
             </div>
 
-            <div className="bg-white p-4 md:p-6 my-2 rounded-sm flex items-center justify-start gap-x-2">
+            <div className="bg-white p-4 md:p-6 my-2 rounded-sm flex flex-col items-start justify-start gap-x-1">
               <p>We accept:</p>
-              <div className="flex items-center justify-start gap-x-2">
-                <div className="w-10 overflow-hidden"><img src={Visa} alt="Visa" /></div>
-                <div className="w-10 overflow-hidden"><img src={Mastercard} alt="Mastercard" /></div>
-              </div>
+              <div className="flex flex-wrap items-center justify-start gap-x-4 mt-2">
+                  {[Visa, Mastercard, Amex, Gpay, Apay].map((icon, idx) => (
+                    <div
+                      key={idx}
+                      className="w-12 flex items-center justify-center overflow-hidden"
+                    >
+                      <img
+                        src={icon}
+                        alt=""
+                        className="max-h-full max-w-full object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
             </div>
           </div>
         </div>

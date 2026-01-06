@@ -13,12 +13,12 @@ import DiscountClub from '../components/DiscountClub';
 import Footer from "../components/Footer";
 import FAQSection from "../components/FAQSection";
 
-import Visa from '../assets/icons/visa.webp';
-import Gpay from '../assets/icons/gpay.webp';
+import Mastercard from '../assets/icons/mastercard.png';
+import Visa from '../assets/icons/visa.png';
+import Gpay from '../assets/icons/gpay.png';
 import Amex from '../assets/icons/amex.png';
 import Apay from '../assets/icons/apay.png';
 import L from '../assets/images/default_product.png';
-import Mastercard from '../assets/icons/mastercard.jpg';
 import useAuthStore from '../store/auth.store.js';
 
 const ProductDetails = () => {
@@ -234,13 +234,13 @@ const ProductDetails = () => {
                 </div>
 
                 {/* Accepted payments */}
-                <div className="bg-white my-6 md:my-8 rounded-sm flex items-center justify-start gap-x-2">
+                <div className="bg-white p-4 md:p-6 my-2 rounded-sm flex flex-col items-start justify-start gap-x-1">
                   <p>We accept:</p>
-               <div className="flex items-center justify-start gap-x-4">
+               <div className="flex flex-wrap items-center justify-start gap-x-4 mt-2">
                   {[Visa, Mastercard, Amex, Gpay, Apay].map((icon, idx) => (
                     <div
                       key={idx}
-                      className="w-14 h-12 flex items-center justify-center overflow-hidden"
+                      className="w-12 flex items-center justify-center overflow-hidden"
                     >
                       <img
                         src={icon}

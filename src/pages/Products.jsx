@@ -76,7 +76,7 @@ const Products = () => {
                           'Network or client error while fetching products:',
                           error.message
                       );
-                      // setError(true);
+                      setError(true);
                       // setErrorMessage('Service is currently unavailable. Our engineers are working on it. Thank you for your understanding');
                   }
               } else if (error.name === 'CanceledError') {

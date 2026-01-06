@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Logo from "../assets/images/logo-l.png";
-import Visa from "../assets/icons/visa.webp";
-import Mastercard from "../assets/icons/mastercard.jpg";
+import Mastercard from '../assets/icons/mastercard.png';
+import Visa from '../assets/icons/visa.png';
+import Gpay from '../assets/icons/gpay.png';
+import Amex from '../assets/icons/amex.png';
+import Apay from '../assets/icons/apay.png';
 import { Info, CheckCircle2, Loader2 } from "lucide-react";
 import useCartStore from "../store/cart.store";
 import useCheckoutStore from "../store/checkout.store";

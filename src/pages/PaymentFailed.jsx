@@ -7,6 +7,7 @@ import { X, Loader2, AlertTriangle, CreditCard, Shield, RefreshCw, ShoppingCart,
 import axiosInstance from '../api/axiosInstance';
 import useAuthStore from "../store/auth.store";
 
+
 const PaymentFailed = () => {
     const [searchParams] = useSearchParams();
     const sessionId = searchParams.get('session_id');
@@ -90,7 +91,7 @@ const PaymentFailed = () => {
     };
 
     const handleContactSupport = () => {
-        navigate('/contact');
+        navigate('/contact-us');
     };
 
     const handleBackToCheckout = () => {

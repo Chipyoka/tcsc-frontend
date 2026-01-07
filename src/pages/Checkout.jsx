@@ -13,6 +13,8 @@ import useAuthStore from "../store/auth.store";
 import { useProfileStore } from "../store/profile.store";
 import { useNavStore } from "../store/nav.store";
 
+import axiosInstance from '../api/axiosInstance'; 
+
 import {
   validateUKPhone,
   validateUKPostcode,
@@ -247,26 +249,16 @@ const Checkout = () => {
       console.log("Stripe payload:", stripePayload);
       
       // Send to backend to create Stripe Checkout Session
-      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/stripe/create-checkout-session`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${accessToken}`
-        },
-        body: JSON.stringify(stripePayload)
-      });
+      const { data } = await axiosInstance.post(
+        '/stripe/create-checkout-session',
+        stripePayload
+      );
 
-      const result = await response.json();
-      
-      if (!response.ok) {
-        throw new Error(result.message || 'Failed to create checkout session');
-      }
-
-      if (result.success && result.data?.url) {
+      if (data.success && data.data?.url) {
         // Redirect to Stripe Checkout
-        window.location.href = result.data.url;
+        window.location.href = data.data.url;
       } else {
-        throw new Error('No checkout URL received');
+        throw new Error(data.message || 'No checkout URL received');
       }
       
     } catch (error) {
@@ -282,7 +274,7 @@ const Checkout = () => {
     setShippingFee(0);
     clearCheckout();
     setTimeout(() => {
-      navigate("/orders");
+      navigate("/profile");
     }, 2000);
   };
 

@@ -76,12 +76,12 @@ const PaymentSuccess = () => {
      */
     const handleToShopping = () => {
         if (!productCategory?.subcat) {
-            navigate('/');
-            return;
+        navigate('/');
+        return;
         }
 
         navigate(
-            `/products/${productCategory.cat}/${productCategory.subcat}/${productCategory.slug}`
+        `/products/${productCategory?.cat?.tag}/${productCategory?.subcat?.subcat}/${productCategory?.slug?.subsub}`
         );
     };
 

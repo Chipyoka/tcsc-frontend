@@ -70,6 +70,9 @@ const ProductDetails = () => {
           const plansResponse = await axiosInstance.get('/subscription/plans', {
             timeout: 6000,
           });
+
+          console.log("Fetched Plans:", plansResponse);
+          
           if (plansResponse.data.success) {
             setAvailableSubscriptionPlans(plansResponse.data.data || []);
             if (plansResponse.data.data.length > 0) {

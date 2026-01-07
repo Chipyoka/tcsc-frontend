@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Topbar from '../components/Topbar';
 import Navbar from '../components/Navbar';
@@ -12,13 +12,21 @@ import axiosInstance from '../api/axiosInstance';
 import { toast } from 'react-toastify';
 
 const Login = () => {
-  const { login } = useAuthStore();
+  const { login, isAuthenticated } = useAuthStore();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
   window.document.title = 'Login | The Cleaning Supplies Co.';
+
+  useEffect(() => {
+    if (isAuthenticated){
+      navigate('/profile');
+      return
+    }
+  }, []);
+
 
   const handleLogin = async (e) => {
     e.preventDefault();

@@ -40,3 +40,10 @@ export const validateExpiry = (expiry) => {
 };
 
 export const validateCVV = (cvv) => /^[0-9]{3,4}$/.test(cvv);
+
+// RFC-compliant, pragmatic email validation (frontend-safe)
+export const validateEmail = (email) => {
+  const pattern =
+    /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  return pattern.test(email.trim().toLowerCase());
+};

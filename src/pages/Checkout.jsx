@@ -15,6 +15,8 @@ import { useNavStore } from "../store/nav.store";
 
 import axiosInstance from '../api/axiosInstance'; 
 
+import { toast } from 'react-toastify';
+
 import {
   validateUKPhone,
   validateUKPostcode,
@@ -92,7 +94,7 @@ const Checkout = () => {
   // --- Shipping Data with Prefilled User Info ---
   const [formData, setFormData] = useState({
     email: user?.email || "",
-    fullName: user?.full_name || "",
+    fullName: user?.fullName || "",
     streetAddress: address?.data?.line1 || "",
     country: "GB",
     postcode: address?.data?.postal_code || "",
@@ -254,12 +256,32 @@ const Checkout = () => {
         stripePayload
       );
 
+      console.log("Data Received: ", data);
       if (data.success && data.data?.url) {
         // Redirect to Stripe Checkout
         window.location.href = data.data.url;
       } else {
         throw new Error(data.message || 'No checkout URL received');
       }
+
+      // Send to backend to create Stripe Checkout Session 
+      // const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/stripe/create-checkout-session`, 
+      //   { method: 'POST', 
+      //     headers: { 
+      //       'Content-Type': 'application/json', 
+      //       'Authorization': `Bearer ${accessToken} `}, 
+      //       body: JSON.stringify(stripePayload) }); 
+      //       const result = await response.json(); 
+      //       console.log("Result from checkout:, ", result);
+
+      //       if (!response.ok) { 
+      //         throw new Error(result.message || 'Failed to create checkout session'); 
+      //       } if (result.success && result.data?.url) 
+      //         { // Redirect to Stripe Checkout 
+      //         window.location.href = result.data.url; } 
+      //         else { throw new Error('No checkout URL received'); 
+
+      //         }
       
     } catch (error) {
       console.error("Payment error:", error);
@@ -290,7 +312,7 @@ const Checkout = () => {
         value={formData[name]}
         onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}
         placeholder={placeholder}
-        className={`w-full border rounded-lg px-4 py-3 text-sm outline-none transition-all ${
+        className={`w-full border rounded-sm px-4 py-3 text-sm outline-none transition-all ${
           errors[name]
             ? "border-red-400 ring-2 ring-red-100"
             : "border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
@@ -353,7 +375,7 @@ const Checkout = () => {
 
   if (validationError) return (
     <div className="px-6 md:px-36 py-12 flex flex-col items-center justify-center min-h-[100dvh]">
-      <div className="bg-red-50 border border-red-200 rounded-lg p-8 max-w-md text-center">
+      <div className="bg-red-50 border border-red-200 rounded-sm p-8 max-w-md text-center">
         <p className="text-red-600 font-semibold text-lg mb-4">Cart Validation Error</p>
         <p className="text-gray-700 mb-6">{validationError}</p>
         <button 
@@ -386,13 +408,7 @@ const Checkout = () => {
               <span className="text-gray-700 font-medium">Shipping & Payment</span>
             </p>
           </div>
-          
-          <div className="flex items-center gap-2 mt-4 md:mt-0">
-            <Shield className="w-5 h-5 text-green-600" />
-            <span className="text-sm text-gray-600">
-              Secure checkout • Your data is protected
-            </span>
-          </div>
+        
         </div>
 
         {renderSteps()}
@@ -400,7 +416,7 @@ const Checkout = () => {
         <div className="flex flex-col lg:flex-row gap-8">
           {/* LEFT SECTION - Main Form */}
           <div className="lg:w-2/3">
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="bg-white rounded-sm  border border-gray-200 p-6">
               {step === 1 ? (
                 <form onSubmit={handleShippingSubmit}>
                   <div className="flex items-center justify-between mb-6">
@@ -422,7 +438,7 @@ const Checkout = () => {
                           type="email"
                           value={formData.email}
                           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          className={`w-full border rounded-lg px-4 py-3 text-sm outline-none transition-all ${
+                          className={`w-full border rounded-sm px-4 py-3 text-sm outline-none transition-all ${
                             errors.email ? "border-red-400 ring-2 ring-red-100" : "border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
                           }`}
                           placeholder="your@email.com"
@@ -440,7 +456,7 @@ const Checkout = () => {
                           type="tel"
                           value={formData.phone}
                           onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                          className={`w-full border rounded-lg px-4 py-3 text-sm outline-none transition-all ${
+                          className={`w-full border rounded-sm px-4 py-3 text-sm outline-none transition-all ${
                             errors.phone ? "border-red-400 ring-2 ring-red-100" : "border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
                           }`}
                           placeholder="+44 20 7123 4567"
@@ -459,7 +475,7 @@ const Checkout = () => {
                         type="text"
                         value={formData.fullName}
                         onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                        className={`w-full border rounded-lg px-4 py-3 text-sm outline-none transition-all ${
+                        className={`w-full border rounded-sm px-4 py-3 text-sm outline-none transition-all ${
                           errors.fullName ? "border-red-400 ring-2 ring-red-100" : "border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
                         }`}
                         placeholder="John Smith"
@@ -477,7 +493,7 @@ const Checkout = () => {
                         type="text"
                         value={formData.streetAddress}
                         onChange={(e) => setFormData({ ...formData, streetAddress: e.target.value })}
-                        className={`w-full border rounded-lg px-4 py-3 text-sm outline-none transition-all ${
+                        className={`w-full border rounded-sm px-4 py-3 text-sm outline-none transition-all ${
                           errors.streetAddress ? "border-red-400 ring-2 ring-red-100" : "border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
                         }`}
                         placeholder="123 Main Street"
@@ -496,7 +512,7 @@ const Checkout = () => {
                           type="text"
                           value={formData.town}
                           onChange={(e) => setFormData({ ...formData, town: e.target.value })}
-                          className={`w-full border rounded-lg px-4 py-3 text-sm outline-none transition-all ${
+                          className={`w-full border rounded-sm px-4 py-3 text-sm outline-none transition-all ${
                             errors.town ? "border-red-400 ring-2 ring-red-100" : "border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
                           }`}
                           placeholder="London"
@@ -514,7 +530,7 @@ const Checkout = () => {
                           type="text"
                           value={formData.postcode}
                           onChange={(e) => setFormData({ ...formData, postcode: e.target.value.toUpperCase() })}
-                          className={`w-full border rounded-lg px-4 py-3 text-sm outline-none transition-all ${
+                          className={`w-full border rounded-sm px-4 py-3 text-sm outline-none transition-all ${
                             errors.postcode ? "border-red-400 ring-2 ring-red-100" : "border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
                           }`}
                           placeholder="SW1A 1AA"
@@ -526,7 +542,7 @@ const Checkout = () => {
                     </div>
 
                     {formData.town && shippingFee > 0 && (
-                      <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 mt-4">
+                      <div className="bg-blue-50 border border-blue-100 rounded-sm p-4 mt-4">
                         <p className="text-blue-700">
                           <span className="font-medium">Shipping to {formData.town}:</span> 
                           <span className="font-bold ml-2">£{shippingFee.toFixed(2)}</span>
@@ -587,7 +603,7 @@ const Checkout = () => {
                     <h4 className="font-semibold text-lg text-gray-700 mb-4 flex items-center gap-2">
                       Shipping Information
                     </h4>
-                    <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
+                    <div className="bg-gray-50 rounded-sm p-6 border border-gray-200">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                           <p className="text-sm text-gray-600">Contact</p>
@@ -612,15 +628,13 @@ const Checkout = () => {
                     {getOneTimeItems().length > 0 && (
                       <div className="mb-6">
                         <h5 className="font-medium text-gray-700 mb-3">One-Time Purchases</h5>
-                        <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                        <div className="bg-gray-50 rounded-sm p-4 border border-gray-200">
                           {getOneTimeItems().map(item => (
                             <div key={item.cartItemId} className="flex justify-between items-center py-3 border-b border-gray-100 last:border-b-0">
                               <div className="flex items-center gap-3">
-                                <div className="w-12 h-12 border border-gray-200 rounded overflow-hidden">
-                                  <img src={item.image || L} alt={item.name} className="w-full h-full object-cover" />
-                                </div>
+                             
                                 <div>
-                                  <p className="font-medium">{item.name}</p>
+                                  <p className="font-medium w-3/4 text-wrap">{item.name}</p>
                                   <p className="text-sm text-gray-600">Qty: {item.quantity} × £{item.price.toFixed(2)}</p>
                                 </div>
                               </div>
@@ -638,7 +652,7 @@ const Checkout = () => {
                           <Calendar className="w-5 h-5" />
                           Subscription Items
                         </h5>
-                        <div className="bg-green-50 rounded-lg p-4 border border-green-200">
+                        <div className="bg-green-50 rounded-sm p-4 border border-green-200">
                           {getSubscriptionItems().map(item => (
                             <div key={item.cartItemId} className="flex justify-between items-center py-3 border-b border-green-100 last:border-b-0">
                               <div className="flex items-center gap-3">
@@ -679,7 +693,7 @@ const Checkout = () => {
                     )}
 
                     {/* Order Totals */}
-                    <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
+                    <div className="bg-gray-50 rounded-sm p-6 border border-gray-200">
                       <div className="space-y-3">
                         {getOneTimeItems().length > 0 && (
                           <div className="flex justify-between">
@@ -782,7 +796,7 @@ const Checkout = () => {
                     
                     {status === "failed" && (
                       <>
-                        <div className="bg-red-50 border border-red-200 rounded-lg p-6 mb-6">
+                        <div className="bg-red-50 border border-red-200 rounded-sm p-6 mb-6">
                           <p className="text-red-600 font-semibold text-lg mb-2">Payment Failed</p>
                           <p className="text-gray-700">Please try again or contact support if the issue persists.</p>
                         </div>
@@ -807,12 +821,12 @@ const Checkout = () => {
           <div className="lg:w-1/3">
             <div className="sticky top-24 space-y-6">
               {/* Order Summary Card */}
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+              <div className="bg-white rounded-sm  border border-gray-200 p-6">
                 <h3 className="font-semibold text-lg text-gray-800 mb-4">Order Summary</h3>
                 
                 <div className="space-y-3">
                   {hasMixedItems() && (
-                    <div className="bg-blue-50 border border-blue-100 rounded-lg p-3 mb-3">
+                    <div className="bg-blue-50 border border-blue-100 rounded-sm p-3 mb-3">
                       <p className="text-sm text-blue-700">
                         <span className="font-medium">Mixed Order:</span> Contains both one-time and subscription items
                       </p>
@@ -843,42 +857,17 @@ const Checkout = () => {
                 </div>
                 
                 {getSubscriptionItems().length > 0 && (
-                  <div className="mt-4 p-3 bg-green-50 border border-green-100 rounded-lg">
+                  <div className="mt-4 p-3 bg-green-50 border border-green-100 rounded-sm">
                     <p className="text-sm text-green-700">
                       <span className="font-medium">Subscription Benefits:</span> Save with recurring deliveries
                     </p>
                   </div>
                 )}
               </div>
-              
-              {/* Security Card */}
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                <div className="flex items-center gap-3 mb-4">
-                  <Shield className="w-6 h-6 text-green-600" />
-                  <h4 className="font-semibold text-gray-800">Secure Checkout</h4>
-                </div>
-                <ul className="text-sm text-gray-600 space-y-2">
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-green-500" />
-                    <span>256-bit SSL encryption</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-green-500" />
-                    <span>PCI DSS compliant</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-green-500" />
-                    <span>Powered by Stripe</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-green-500" />
-                    <span>Your data is never stored</span>
-                  </li>
-                </ul>
-              </div>
+
               
               {/* Need Help Card */}
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+              <div className="bg-white rounded-sm  border border-gray-200 p-6">
                 <h4 className="font-semibold text-gray-800 mb-3">Need Help?</h4>
                 <p className="text-sm text-gray-600 mb-4">
                   Have questions about your order or need assistance?

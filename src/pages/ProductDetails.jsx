@@ -147,19 +147,19 @@ const ProductDetails = () => {
         });
 
       // Also add to subscription store
-      addSubscription({
-        productId: product.id,
-        name: product.name,
-        price: product.price,
-        quantity: quantity,
-        frequency: selectedPlan.interval_type,
-        intervalCount: selectedPlan.interval_count,
-        subscriptionPlanId: selectedPlanId,
-        stripePriceId: selectedPlan.stripe_price_id,
-        image: primaryImage,
-      });
+      // addSubscription({
+      //   productId: product.id,
+      //   name: product.name,
+      //   price: product.price,
+      //   quantity: quantity,
+      //   frequency: selectedPlan.interval_type,
+      //   intervalCount: selectedPlan.interval_count,
+      //   subscriptionPlanId: selectedPlanId,
+      //   stripePriceId: selectedPlan.stripe_price_id,
+      //   image: primaryImage,
+      // });
 
-      toast.success(`Added to cart as ${selectedPlan.interval_type} subscription!`);
+      // toast.success(`Added to cart as ${selectedPlan.interval_type} subscription!`);
 
     } else {
       // One-time purchase
@@ -173,7 +173,7 @@ const ProductDetails = () => {
         isSubscription: false,
       });
 
-      toast.success('Product added to cart!');
+      // toast.success('Product added to cart!');
     }
   };
 

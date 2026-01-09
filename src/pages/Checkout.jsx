@@ -873,7 +873,7 @@ const Checkout = () => {
                   Have questions about your order or need assistance?
                 </p>
                 <button
-                  onClick={() => navigate('/contact')}
+                  onClick={() => navigate('/contact-us')}
                   className="btn-primary-outlined-sm w-full"
                 >
                   Contact Support

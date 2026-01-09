@@ -443,7 +443,7 @@ const PaymentSuccess = () => {
                                         Have questions about your order or need assistance with your subscription?
                                     </p>
                                     <button
-                                        onClick={() => navigate("/contact")}
+                                        onClick={() => navigate("/contact-us")}
                                         className="btn-primary-outlined-sm w-full"
                                     >
                                         Contact Support

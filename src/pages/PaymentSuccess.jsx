@@ -41,7 +41,7 @@ const PaymentSuccess = () => {
 
             try {
                 // Call backend to verify session
-                const response = await axiosInstance.get(`/payments/verify-session?session_id=${sessionId}`);
+                const response = await axiosInstance.get(`/stripe/verify-session?session_id=${sessionId}`);
                 
                 if (response.data.success) {
                     setOrderDetails(response.data);

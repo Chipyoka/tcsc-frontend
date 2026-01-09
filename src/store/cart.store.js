@@ -187,7 +187,7 @@ const useCartStore = create(
           cartId: get().cartId,
           items: items.map(item => ({
             productId: item.id,
-            variantId: item.variantId || item.id, // Use variantId if available
+            variantId: item.variantId || null, // Use variantId if available
             name: item.name,
             price: item.price,
             quantity: item.quantity,

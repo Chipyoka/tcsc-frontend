@@ -49,6 +49,8 @@ const ProductDetails = () => {
         const productResponse = await axiosInstance.get(`/products/${selectedProductId}`);
         const backendProduct = productResponse.data.data;
 
+        console.log("Fetched Product:", backendProduct);
+
         if (!isMounted) return;
 
         const firstVariant = backendProduct.variants?.find(v => v.active) || backendProduct.variants?.[0];
@@ -140,6 +142,7 @@ const ProductDetails = () => {
           price: product.price,
           image: primaryImage,
           sku: product.sku,
+          variantId: product.variants?.[0]?.id || null,
           quantity: quantity,
           isSubscription: purchaseType === "subscription",
           subscriptionPlanId: selectedPlanId,
@@ -170,6 +173,7 @@ const ProductDetails = () => {
         id: product.id,
         name: product.name,
         price: product.price,
+        variantId: product.variants?.[0]?.id || null,
         image: primaryImage,
         sku: product.sku,
         quantity,

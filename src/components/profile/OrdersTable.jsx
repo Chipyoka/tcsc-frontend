@@ -64,7 +64,7 @@ const OrdersTable = ({ tenantId, userId }) => {
         status: order.status || 'draft',
         created_at: order.created_at,
         // Currency from backend when available, default to USD
-        currency: order.currency || 'USD'
+        currency: order.currency || 'GBP'
       };
 
       // Conditionally add fields that might come in future API updates
@@ -191,6 +191,13 @@ const OrdersTable = ({ tenantId, userId }) => {
         icon: Clock,
         label: 'Pending'
       },
+      pending_payment: { 
+        bg: 'bg-yellow-50', 
+        text: 'text-yellow-700', 
+        border: 'border-yellow-200', 
+        icon: Clock,
+        label: 'Pending'
+      },
       cancelled: { 
         bg: 'bg-gray-100', 
         text: 'text-gray-600', 
@@ -264,7 +271,9 @@ const OrdersTable = ({ tenantId, userId }) => {
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'short',
-      day: 'numeric'
+      day: 'numeric',
+      hour: '2-digit', 
+      minute: '2-digit', 
     });
   };
 
@@ -467,20 +476,9 @@ const OrdersTable = ({ tenantId, userId }) => {
                   </td>
                   <td className="px-6 py-4">
                     <div className="text-sm font-medium text-gray-900">{order.order_number}</div>
-                    <div className="text-xs text-gray-500">
-                      {order.item_count || '?'} item{order.item_count !== 1 ? 's' : ''}
-                    </div>
-                    {/* Future field: Show address info if available */}
-                    {order.shipping_address_id && (
-                      <div className="flex items-center gap-1 text-xs text-gray-500 mt-1">
-                        <MapPin size={10} />
-                        <span>Shipped</span>
-                      </div>
-                    )}
-                  </td>
+                   </td>
                   <td className="px-6 py-4">
                     <div className="text-sm text-gray-900">{formatDate(order.placed_at)}</div>
-                    <div className="text-xs text-gray-500">Created: {formatDate(order.created_at)}</div>
                   </td>
                   <td className="px-6 py-4">
                     <StatusBadge status={order.status} />
@@ -492,48 +490,19 @@ const OrdersTable = ({ tenantId, userId }) => {
                     <div className="text-sm font-medium text-gray-900">
                       {formatCurrency(order.total_amount, order.currency)}
                     </div>
-                    {/* Future fields: Show breakdown if available */}
-                    {(order.subtotal_amount !== undefined || order.shipping_amount !== undefined) && (
-                      <div className="text-xs text-gray-500 space-y-0.5">
-                        {order.subtotal_amount !== undefined && (
-                          <div>Subtotal: {formatCurrency(order.subtotal_amount, order.currency)}</div>
-                        )}
-                        {order.shipping_amount !== undefined && (
-                          <div>Shipping: {formatCurrency(order.shipping_amount, order.currency)}</div>
-                        )}
-                        {order.discounts_amount !== undefined && order.discounts_amount > 0 && (
-                          <div className="text-green-600">
-                            Discount: -{formatCurrency(order.discounts_amount, order.currency)}
-                          </div>
-                        )}
-                      </div>
-                    )}
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => handleViewDetails(order)}
-                        className="p-1.5 text-gray-500 hover:text-(--color-primary) hover:bg-blue-50 rounded transition-colors"
+                        className="p-1.5 flex items-center text-sm gap-1 text-gray-500 hover:text-(--color-primary) hover:bg-blue-50 rounded transition-colors"
                         title="View Details"
                       >
                         <Eye size={16} />
+                        View
                       </button>
-                      <button
-                        onClick={() => handleDownloadDocuments(order)}
-                        className="p-1.5 text-gray-500 hover:text-(--color-primary) hover:bg-blue-50 rounded transition-colors"
-                        title="Download Documents"
-                      >
-                        <Download size={16} />
-                      </button>
-                      {order.status === 'completed' && (
-                        <button
-                          onClick={() => handleReorder(order)}
-                          className="p-1.5 text-gray-500 hover:text-green-600 hover:bg-green-50 rounded transition-colors"
-                          title="Reorder"
-                        >
-                          <ShoppingCart size={16} />
-                        </button>
-                      )}
+                    
+                    
                     </div>
                   </td>
                 </tr>
@@ -605,7 +574,6 @@ const OrdersTable = ({ tenantId, userId }) => {
       <div className="px-6 py-3 border-t border-gray-200 bg-gray-50 text-xs text-gray-500">
         <div className="flex items-start gap-y-4 md:items-center justify-between flex-col md:flex-row">
           <div>
-            • Orders can be reordered up to 30 days after completion
             • Refund requests available within 14 days
           </div>
           <button

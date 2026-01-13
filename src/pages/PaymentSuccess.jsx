@@ -187,11 +187,9 @@ const PaymentSuccess = () => {
                             <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mb-6">
                                 <CheckCircle2 className="w-12 h-12" />
                             </div>
-                            <h1 className="text-3xl md:text-4xl font-bold mb-3">Payment Successful!</h1>
+                            <h1 className="text-3xl md:text-4xl font-bold mb-3">Success!</h1>
                             <p className="text-lg opacity-90 max-w-2xl">
-                                Thank you for your order. {orderDetails?.hasSubscriptions 
-                                    ? "Your subscription is now active and your first order is being processed."
-                                    : "Your order is being processed and will be shipped soon."}
+                                Thank you for your order
                             </p>
                         </div>
                     </div>
@@ -280,6 +278,18 @@ const PaymentSuccess = () => {
                         </div>
 
                     
+                    </div>
+                    <div className="flex flex-col md:flex-row gap-2 justify-end">
+                        <button 
+                        onClick={()=>{navigate('/profile')}}
+                        className="-full md:-fit btn-primary-outlined-sm">
+                            Visit Profile
+                        </button>
+                        <button 
+                        onClick={handleGoHome}
+                        className="-full md:-fit btn-primary-sm">
+                            Go to home
+                        </button>
                     </div>
                 </div>
             </div>

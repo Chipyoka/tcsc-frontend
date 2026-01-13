@@ -644,7 +644,10 @@ const Checkout = () => {
                           {getOneTimeItems().map(item => (
                             <div key={item.cartItemId} className="flex justify-between items-center py-3 border-b border-gray-100 last:border-b-0">
                               <div className="flex items-center gap-3">
+                                    <div className="hidden md:inline-flex w-12 h-12 border border-gray-200 rounded overflow-hidden relative">
+                                  <img src={item.image || L} alt={item.name} className="w-full h-full object-cover" />
                              
+                                </div>
                                 <div>
                                   <p className="font-medium w-3/4 text-wrap">{item.name}</p>
                                   <p className="text-sm text-gray-600">Qty: {item.quantity} × £{item.price.toFixed(2)}</p>
@@ -661,18 +664,16 @@ const Checkout = () => {
                     {getSubscriptionItems().length > 0 && (
                       <div className="mb-6">
                         <h5 className="font-medium text-gray-700 mb-3 flex items-center gap-2">
-                          <Calendar className="w-5 h-5" />
+                        
                           Subscription Items
                         </h5>
                         <div className="bg-green-50 rounded-sm p-4 border border-green-200">
                           {getSubscriptionItems().map(item => (
                             <div key={item.cartItemId} className="flex justify-between items-center py-3 border-b border-green-100 last:border-b-0">
                               <div className="flex items-center gap-3">
-                                <div className="w-12 h-12 border border-gray-200 rounded overflow-hidden relative">
+                                <div className="w-12 h-12 hidden md:flex border border-gray-200 rounded overflow-hidden relative">
                                   <img src={item.image || L} alt={item.name} className="w-full h-full object-cover" />
-                                  <div className="absolute -top-2 -right-2 bg-green-600 text-white text-xs px-2 py-1 rounded-full">
-                                    SUB
-                                  </div>
+                             
                                 </div>
                                 <div>
                                   <p className="font-medium">{item.name}</p>
@@ -774,7 +775,7 @@ const Checkout = () => {
                             </>
                           ) : (
                             <>
-                              <Lock className="w-5 h-5 inline mr-2" />
+                             
                               Proceed to Secure Payment
                             </>
                           )}

@@ -21,6 +21,8 @@ import {
 } from 'lucide-react';
 import axiosInstance from '../../api/axiosInstance'; // Adjust path as needed
 
+import OrderDetailsModal from "./OrderDetailsModal";
+
 const OrdersTable = ({ tenantId, userId }) => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -31,6 +33,9 @@ const OrdersTable = ({ tenantId, userId }) => {
   const [selectedOrders, setSelectedOrders] = useState(new Set());
   const [sortConfig, setSortConfig] = useState({ key: 'created_at', direction: 'desc' });
   const itemsPerPage = 10;
+
+  const [selectedOrderId, setSelectedOrderId] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
 
   // Fetch orders from actual API
   useEffect(() => {
@@ -291,6 +296,11 @@ const OrdersTable = ({ tenantId, userId }) => {
     // Navigate to order detail page or open modal
   };
 
+  const handleView = (id) => {
+    setSelectedOrderId(id);
+    setModalOpen(true);
+  };
+
   const handleDownloadDocuments = (order) => {
     console.log('Download documents for:', order.id);
     // Trigger document download
@@ -494,7 +504,7 @@ const OrdersTable = ({ tenantId, userId }) => {
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-2">
                       <button
-                        onClick={() => handleViewDetails(order)}
+                         onClick={() => handleView(order.id)}
                         className="p-1.5 flex items-center text-sm gap-1 text-gray-500 hover:text-(--color-primary) hover:bg-blue-50 rounded transition-colors"
                         title="View Details"
                       >
@@ -585,6 +595,13 @@ const OrdersTable = ({ tenantId, userId }) => {
           </button>
         </div>
       </div>
+
+      
+      <OrderDetailsModal
+        orderId={selectedOrderId}
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+      />
     </div>
   );
 };

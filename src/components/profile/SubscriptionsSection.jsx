@@ -250,7 +250,7 @@ const SubscriptionsSection = () => {
             joinedMemberships.map(m => (
               <div
                 key={m.id}
-                className="px-4 py-2 rounded-sm border border-gray-100 hover:border-gray-200 text-gray-600 hover:bg-gray-50 cursor-default"
+                className="px-4 py-2 rounded-sm border border-blue-100 hover:border-blue-200 text-gray-600 hover:bg-gray-50 cursor-default"
               >
                 <h4>{m.name}</h4>
                 <p className="text-sm">{m.description}</p>

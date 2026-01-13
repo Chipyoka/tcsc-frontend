@@ -105,7 +105,6 @@ const useCartStore = create(
           const updatedItems = items.filter((item) => item.cartItemId !== cartItemId);
           set({ items: updatedItems });
           
-          toast.info(`${itemToRemove.name} removed from cart`);
         }
       },
 
@@ -145,7 +144,6 @@ const useCartStore = create(
 
       clearCart: () => {
         set({ items: [], cartId: null });
-        toast.info("Cart cleared");
       },
 
       toggleCart: () => set({ isOpen: !get().isOpen }),
@@ -280,7 +278,6 @@ const useCartStore = create(
         set({
           items: get().items.filter(item => !item.isSubscription)
         });
-        toast.info("Subscription items removed");
       },
 
       // Clear only one-time items
@@ -288,7 +285,6 @@ const useCartStore = create(
         set({
           items: get().items.filter(item => item.isSubscription)
         });
-        toast.info("One-time items removed");
       }
     }),
 

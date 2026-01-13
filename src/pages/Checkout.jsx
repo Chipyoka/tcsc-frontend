@@ -45,7 +45,7 @@ const Checkout = () => {
   } = useCartStore();
   
   const { setProductCategory } = useNavStore();
-  const { setAddress, address } = useProfileStore();
+  const { setAddress, address, isDiscountMember } = useProfileStore();
   const { accessToken, user, updateUser, isAuthenticated } = useAuthStore();
 
   // State
@@ -55,11 +55,17 @@ const Checkout = () => {
   const [noItems, setNoItems] = useState(true);
   const [status, setStatus] = useState("processing");
   const [validationError, setValidationError] = useState("");
+ 
 
   // Calculations
   const subtotal = getSubtotal();
   const vatRate = 0.2;
   const vat = subtotal * vatRate;
+
+  // if is a discount club member, compute discount
+  const discount_club_rate = import.meta.env.VITE_DCR;
+  const dcr = discount_club_rate * subtotal;
+
   const totalItems = getTotalItems();
   const cartSummary = getCartSummary();
 
@@ -119,7 +125,15 @@ const Checkout = () => {
     }
   }, [formData.town]);
 
-  const total = subtotal + vat + shippingFee;
+  const getTotal = () => {
+    const total = subtotal + vat + shippingFee;
+
+      if(isDiscountMember){
+        return total - dcr;
+      }
+   
+    return total
+  }
 
   // --- VALIDATIONS ---
   const validateShipping = () => {
@@ -166,7 +180,7 @@ const Checkout = () => {
         subtotal, 
         vat, 
         shippingFee, 
-        total,
+        total: getTotal(),
         oneTimeSubtotal: getOneTimeSubtotal(),
         subscriptionSubtotal: getSubscriptionSubtotal()
       },
@@ -330,7 +344,7 @@ const Checkout = () => {
         <div key={i} className="flex flex-col items-center w-1/2">
           <div
             className={`w-10 h-10 flex items-center justify-center rounded-full text-white font-bold transition-all ${
-              step > i ? "bg-green-500" : step === i + 1 ? "bg-[var(--color-primary)]" : "bg-gray-300"
+              step > i ? "bg-(--color-primary)" : step === i + 1 ? "bg-[var(--color-primary)]" : "bg-gray-300"
             }`}
           >
             {step > i ? <CheckCircle2 className="w-6 h-6" /> : i + 1}
@@ -423,9 +437,7 @@ const Checkout = () => {
                     <h3 className="text-xl font-semibold text-gray-800">
                       Shipping Information
                     </h3>
-                    <span className="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
-                      Step 1 of 2
-                    </span>
+                  
                   </div>
 
                   <div className="space-y-4">
@@ -542,12 +554,12 @@ const Checkout = () => {
                     </div>
 
                     {formData.town && shippingFee > 0 && (
-                      <div className="bg-blue-50 border border-blue-100 rounded-sm p-4 mt-4">
-                        <p className="text-blue-700">
+                      <div className="bg-(--color-primary)/5 border border-(--color-primary)/20 rounded-sm p-4 mt-4">
+                        <p className="text-(--color-primary)">
                           <span className="font-medium">Shipping to {formData.town}:</span> 
                           <span className="font-bold ml-2">£{shippingFee.toFixed(2)}</span>
                         </p>
-                        <p className="text-sm text-blue-600 mt-1">
+                        <p className="text-sm text-(--color-primary) mt-1">
                           Estimated delivery: 2-3 business days
                         </p>
                       </div>
@@ -570,7 +582,7 @@ const Checkout = () => {
                       )}
                     </button>
                     
-                    <p className="text-center text-sm text-gray-500 mt-4">
+                    <p className="text-center text-xs items-center flex justify-center text-gray-500 mt-4">
                       <Lock className="w-4 h-4 inline mr-1" />
                       Your information is secure and encrypted
                     </p>
@@ -731,7 +743,7 @@ const Checkout = () => {
                         
                         <div className="flex justify-between pt-4 border-t border-gray-200 font-bold text-lg">
                           <span>Total</span>
-                          <span>£{total.toFixed(2)}</span>
+                          <span>£{getTotal().toFixed(2)}</span>
                         </div>
                         
                         {getSubscriptionItems().length > 0 && (
@@ -827,7 +839,7 @@ const Checkout = () => {
                 <div className="space-y-3">
                   {hasMixedItems() && (
                     <div className="bg-blue-50 border border-blue-100 rounded-sm p-3 mb-3">
-                      <p className="text-sm text-blue-700">
+                      <p className="text-sm text-(--color-primary)">
                         <span className="font-medium">Mixed Order:</span> Contains both one-time and subscription items
                       </p>
                     </div>
@@ -848,10 +860,26 @@ const Checkout = () => {
                     <span>£{vat.toFixed(2)}</span>
                   </div>
                   
+                  {isDiscountMember && (
+
+                  <div className="pt-3 border-t border-gray-200">
+                    <div className="flex justify-between text-amber-600 font-bold text-lg">
+                      <span>Membership Discount</span>
+
+                      <span>£{dcr.toFixed(2)}</span>
+                    </div>
+                  </div>
+                  )}
+
                   <div className="pt-3 border-t border-gray-200">
                     <div className="flex justify-between font-bold text-lg">
+
                       <span>Total</span>
-                      <span>£{total.toFixed(2)}</span>
+                      <div className="flex flex-col">
+
+                      <span>£{getTotal().toFixed(2)}</span>
+                        <span className="text-gray-500 text-lg font-normal line-through">{(getTotal() + dcr).toFixed(2) }</span>
+                      </div>
                     </div>
                   </div>
                 </div>

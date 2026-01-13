@@ -21,9 +21,10 @@ const Products = () => {
      * Fetch products by category
      */
   useEffect(() => {
-      const controller = new AbortController();
-
-      const fetchProducts = async () => {
+    const controller = new AbortController();
+    
+    const fetchProducts = async () => {
+        setLoading(true);
           const categoryId = productCategory?.slug?.id;
 
           if (!categoryId) {
@@ -33,12 +34,11 @@ const Products = () => {
           }
 
           try {
-              setLoading(true);
 
               const response = await axiosInstance.get(
                   `/products/category/${categoryId}`,
                   {
-                      timeout: 15000, // 15s hard timeout
+                      timeout: 30000, // 15s hard timeout
                       signal: controller.signal,
                   }
               );
@@ -76,7 +76,7 @@ const Products = () => {
                           'Network or client error while fetching products:',
                           error.message
                       );
-                      // setError(true);
+                      setError(true);
                       // setErrorMessage('Service is currently unavailable. Our engineers are working on it. Thank you for your understanding');
                   }
               } else if (error.name === 'CanceledError') {
@@ -161,7 +161,7 @@ const Products = () => {
         ) : (
           <>
             {/* When we have products and no error, show products */}
-            {totalProducts > 0 && !error && (
+            {totalProducts > 0 && (
               <div className={`px-8 pb-6 md:px-12 gap-y-20 my-12 mx-auto gap-x-14 flex ${totalProducts < 3 ? "justify-start" :"justify-evenly"} items-start flex-wrap `}>
                 {products.slice(0, visibleCount).map((product) => (
                   <div key={product.id}>
@@ -174,8 +174,8 @@ const Products = () => {
             {/* When we have no products and no error show product unavailable */}
             {totalProducts < 1 && !error && !loading && (
                <div className="px-2 my-4 py-6 md:py-24 mb-12 md:px-36  flex flex-col items-center justify-center">
-                  <h4 className="text-xl my-2 font-medium text-gray-600">Products Not Yet Available</h4>
-                  <p className=" w-[90%] text-center text-gray-400">We are still expanding our catalog, kindly check back in a few days.</p>
+                  <h4 className="text-xl my-2 font-medium text-gray-600">Products Unvailable</h4>
+                  <p className=" w-[90%] text-center text-gray-400">We are still expanding our catalog, kindly check back in a bit.</p>
               </div>
             )}
 

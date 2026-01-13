@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ShoppingCart, Heart, Check, Info, Calendar } from 'lucide-react';
+import { ShoppingCart, Heart, Check, Info, Calendar, Truck } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import useCartStore from '../store/cart.store';
 import { useNavStore } from "../store/nav.store.js";
@@ -283,7 +283,7 @@ const ProductDetails = () => {
                   type="button"
                   onClick={() => setPurchaseType("one-time")}
                   className={`px-4 py-3 rounded-lg border-2 transition-all duration-200 ${purchaseType === "one-time" 
-                    ? "border-[var(--color-primary)] bg-[var(--color-primary)] text-white" 
+                    ? "border-(--color-primary) text-(--color-primary)" 
                     : "border-gray-300 text-gray-700 hover:border-gray-400"}`}
                 >
                   One-time purchase
@@ -299,7 +299,7 @@ const ProductDetails = () => {
                     setPurchaseType("subscription");
                   }}
                   className={`px-4 py-3 rounded-lg border-2 transition-all duration-200 ${purchaseType === "subscription" 
-                    ? "border-green-600 bg-green-600 text-white" 
+                    ? "border-(--color-primary) text-(--color-primary)" 
                     : "border-gray-300 text-gray-700 hover:border-gray-400"}`}
                 >
                   Subscribe & Save
@@ -310,82 +310,19 @@ const ProductDetails = () => {
             {/* Subscription plan selection */}
             {purchaseType === "subscription" && (
               <div className="mb-6">
-                <label className="font-semibold text-gray-700 text-lg mb-3 flex items-center gap-2">
-                  <Calendar className="w-5 h-5" />
-                  Delivery Frequency
+                <label className="font-semibold text-gray-500 text-m mb-3 flex items-center gap-2">
+                  <Truck className="w-5 h-5" />
+                 You get recurring deliveries
                 </label>
+                <p className="text-xs text-gray-500">Only monthly frequency is available for now. Complete checkout to activate</p>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {availableSubscriptionPlans.map((plan) => {
-                    const savings = calculateSubscriptionSavings(plan);
-                    
-                    return (
-                      <div
-                        key={plan.id}
-                        onClick={() => {
-                          setSelectedPlanId(plan.id);
-                          setFrequency(plan.interval_type);
-                        }}
-                        className={`border-2 rounded-lg p-4 cursor-pointer transition-all duration-200 ${selectedPlanId === plan.id 
-                          ? "border-green-600 bg-green-50" 
-                          : "border-gray-200 hover:border-gray-300"}`}
-                      >
-                        <div className="flex justify-between items-start">
-                          <div>
-                            <h4 className="font-semibold text-gray-800 capitalize">
-                              {plan.interval_type} Delivery
-                            </h4>
-                            <p className="text-sm text-gray-600">{plan.description}</p>
-                          </div>
-                          <div className="flex items-center">
-                            <div className={`w-5 h-5 rounded-full border ${selectedPlanId === plan.id 
-                              ? "border-green-600 bg-green-600" 
-                              : "border-gray-300"}`}>
-                              {selectedPlanId === plan.id && (
-                                <Check className="w-4 h-4 text-white" />
-                              )}
-                            </div>
-                          </div>
-                        </div>
-                        
-                        {savings && (
-                          <div className="mt-3 p-2 bg-green-100 rounded-md">
-                            <p className="text-sm text-green-800 font-medium">
-                              Save {savings.discountPercentage}% • £{savings.savingsPerMonth.toFixed(2)} per delivery
-                            </p>
-                            <p className="text-xs text-green-700">
-                              £{savings.originalPrice.toFixed(2)} → £{savings.discountedPrice.toFixed(2)}
-                            </p>
-                          </div>
-                        )}
-                        
-                        <div className="mt-2 text-xs text-gray-500">
-                          {plan.interval_count > 1 ? `Every ${plan.interval_count} ${plan.interval_type}s` : `Every ${plan.interval_type}`}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
+          
                 
                 {availableSubscriptionPlans.length === 0 && (
                   <div className="text-gray-500 italic text-sm">
                     No subscription plans available for this product.
                   </div>
                 )}
-
-                {/* Subscription benefits */}
-                <div className="mt-4 p-4 bg-blue-50 rounded-lg border border-blue-100">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Info className="w-5 h-5 text-blue-600" />
-                    <h4 className="font-semibold text-blue-800">Subscription Benefits</h4>
-                  </div>
-                  <ul className="text-sm text-blue-700 space-y-1">
-                    <li>• Free shipping on all subscription orders</li>
-                    <li>• Easy cancellation anytime from your account</li>
-                    <li>• Skip or modify deliveries as needed</li>
-                    <li>• Priority customer support</li>
-                  </ul>
-                </div>
               </div>
             )}
 
@@ -401,7 +338,7 @@ const ProductDetails = () => {
             </div>
 
             {/* Accepted payments */}
-            <div className="bg-white p-4 md:p-6 my-6 rounded-sm flex flex-col items-start justify-start gap-x-1">
+            <div className="bg-white border border-gray-200 w-full md:w-sm p-4 md:p-6 my-6 rounded-sm flex flex-col items-start justify-start gap-x-1">
               <p className="text-gray-600 mb-2">We accept:</p>
               <div className="flex flex-wrap items-center justify-start gap-4 mt-2">
                 {[Visa, Mastercard, Amex, Gpay, Apay].map((icon, idx) => (

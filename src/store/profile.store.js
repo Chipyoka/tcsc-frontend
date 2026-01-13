@@ -12,8 +12,11 @@ export const useProfileStore = create(
         data: null,
       },
       nav: "Home",
+      isDiscountMember: false,
+
       setAddress : (address) => set({ address }),
       setNav : (nav) => set({ nav }),
+      setIsDiscountMember : (isDiscountMember) => set({ isDiscountMember }),
     }),
     {
       name: 'tcsc-profile-storage', // localStorage key

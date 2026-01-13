@@ -70,7 +70,7 @@ const Cart = () => {
       toast.success('Product removed from cart.');
     } catch (error) {
       toast.warning('Failed to remove product.');
-      console.error("Error removing product from cart:", error);
+      console.error("Error removing product from cart");
     }
   };
 
@@ -129,34 +129,7 @@ const Cart = () => {
           <div className="flex flex-col lg:flex-row gap-8">
             {/* Cart Items Section */}
             <div className="lg:w-2/3">
-              {/* Cart Summary Banner */}
-              {hasMixedItems() && (
-                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <h3 className="font-semibold text-blue-800">Mixed Cart Detected</h3>
-                      <p className="text-sm text-blue-700">
-                        Your cart contains both one-time purchases and subscription items.
-                        You can checkout both together.
-                      </p>
-                    </div>
-                    <div className="flex gap-2">
-                      <button
-                        onClick={handleClearSubscriptions}
-                        className="px-3 py-1 text-sm bg-red-100 text-red-700 rounded hover:bg-red-200 transition"
-                      >
-                        Clear Subscriptions
-                      </button>
-                      <button
-                        onClick={handleClearOneTimeItems}
-                        className="px-3 py-1 text-sm bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition"
-                      >
-                        Clear One-Time
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              )}
+             
 
               {/* One-Time Items Section */}
               {getOneTimeItems().length > 0 && (
@@ -165,9 +138,7 @@ const Cart = () => {
                     <h2 className="text-xl font-semibold text-gray-800">
                       One-Time Purchases
                     </h2>
-                    <span className="text-gray-600">
-                      {getOneTimeItems().reduce((sum, item) => sum + item.quantity, 0)} items
-                    </span>
+    
                   </div>
                   
                   <div className="bg-white rounded-lg  border border-gray-200 overflow-hidden">
@@ -233,19 +204,24 @@ const Cart = () => {
               {/* Subscription Items Section */}
               {getSubscriptionItems().length > 0 && (
                 <div>
-                  <div className="flex items-center justify-between mb-4">
+                  <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-4">
                     <h2 className="text-xl font-semibold text-gray-800 flex items-center gap-2">
-                      <RefreshCw size={20} />
-                      Subscription Items
+                      
+                      Subscription Items (monthly)
                     </h2>
-                    <span className="text-gray-600">
-                      {getSubscriptionItems().length} subscription{getSubscriptionItems().length !== 1 ? 's' : ''}
-                    </span>
+                     <div className="my-2 bg-gray-100 border border-gray-300 w-fit py-1 px-2 rounded-sm">
+                        <p className="text-gray-600 text-sm">Next Billing:
+
+                        <span className="ml-2 text-gray-700 font-medium text-sm">
+                          {new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toLocaleDateString('en-GB')}
+                        </span>
+                        </p>
+                  
+                      </div>
                   </div>
                   
                   <div className="bg-white rounded-lg  border border-gray-200 overflow-hidden">
                     {getSubscriptionItems().map((item) => {
-                      const savings = calculateSubscriptionSavings(item);
                       
                       return (
                         <div key={item.cartItemId} className="p-4 border-b border-gray-100 last:border-b-0">
@@ -256,50 +232,26 @@ const Cart = () => {
                                 alt={item.name}
                                 className="w-full h-full object-cover"
                               />
-                              <div className="absolute top-2 left-2 bg-green-600 text-white text-xs px-2 py-1 rounded">
-                                SUBSCRIBE
-                              </div>
+                            
                             </div>
                             
                             <div className="flex-1">
                               <div className="flex justify-between">
                                 <div>
                                   <h3 className="font-medium text-gray-800">{item.name}</h3>
-                                  <div className="flex items-center gap-3 mt-2">
-                                    <span className="inline-flex items-center gap-1 text-sm bg-green-100 text-green-800 px-2 py-1 rounded">
-                                      <Calendar size={14} />
-                                      {formatFrequency(item)}
-                                    </span>
-                                    
-                                    {savings && (
-                                      <span className="inline-flex items-center gap-1 text-sm bg-amber-100 text-amber-800 px-2 py-1 rounded">
-                                        <Tag size={14} />
-                                        Save {savings.discountPercentage}%
-                                      </span>
-                                    )}
-                                  </div>
+                          
+                                  
                                   
                                   <div className="mt-2">
                                     <p className="font-bold text-lg text-[var(--color-primary)]">
                                       £{(item.price * item.quantity).toFixed(2)}
-                                      {savings && (
-                                        <span className="text-sm font-normal text-gray-500 ml-2">
-                                          (Regular: £{(savings.discountedPrice * item.quantity).toFixed(2)})
-                                        </span>
-                                      )}
                                     </p>
                                     <p className="text-sm text-gray-600">
                                       £{item.price.toFixed(2)} each • {item.quantity} item{item.quantity !== 1 ? 's' : ''}
                                     </p>
                                   </div>
                                   
-                                  {savings && (
-                                    <div className="mt-2 p-2 bg-green-50 rounded border border-green-100">
-                                      <p className="text-sm text-green-700">
-                                        You save £{savings.savings.toFixed(2)} per delivery with this subscription
-                                      </p>
-                                    </div>
-                                  )}
+                                
                                 </div>
                                 
                                 <div className="flex flex-col items-end gap-2">
@@ -310,46 +262,9 @@ const Cart = () => {
                                   >
                                     <X size={20} />
                                   </button>
-                                  
-                                  <button
-                                    onClick={() => toggleSubscriptionDetails(item.cartItemId)}
-                                    className="text-sm text-blue-600 hover:text-blue-800"
-                                  >
-                                    {showSubscriptionDetails[item.cartItemId] ? 'Hide Details' : 'View Details'}
-                                  </button>
                                 </div>
                               </div>
-                              
-                              {/* Subscription Details */}
-                              {showSubscriptionDetails[item.cartItemId] && (
-                                <div className="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
-                                  <h4 className="font-medium text-gray-700 mb-2">Subscription Details</h4>
-                                  <div className="grid grid-cols-2 gap-4 text-sm">
-                                    <div>
-                                      <p className="text-gray-600">Plan ID:</p>
-                                      <p className="font-medium">{item.subscriptionPlanId?.substring(0, 8)}...</p>
-                                    </div>
-                                    <div>
-                                      <p className="text-gray-600">Frequency:</p>
-                                      <p className="font-medium capitalize">{item.frequency}</p>
-                                    </div>
-                                    <div>
-                                      <p className="text-gray-600">Next Billing:</p>
-                                      <p className="font-medium">
-                                        {new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toLocaleDateString('en-GB')}
-                                      </p>
-                                    </div>
-                                    <div>
-                                      <p className="text-gray-600">Status:</p>
-                                      <p className="font-medium text-green-600">Active after checkout</p>
-                                    </div>
-                                  </div>
-                                  <p className="text-xs text-gray-500 mt-3">
-                                    You can manage or cancel this subscription anytime from your account page.
-                                  </p>
-                                </div>
-                              )}
-                              
+             
                               <div className="flex items-center justify-between mt-4">
                                 <div className="flex items-center gap-2">
                                   <button
@@ -368,15 +283,7 @@ const Cart = () => {
                                   </button>
                                 </div>
                                 
-                                <button
-                                  onClick={() => {
-                                    // This would navigate to change subscription frequency
-                                    toast.info('Changing subscription frequency would be implemented here');
-                                  }}
-                                  className="text-sm text-blue-600 hover:text-blue-800"
-                                >
-                                  Change Frequency
-                                </button>
+                              
                               </div>
                             </div>
                           </div>
@@ -389,12 +296,10 @@ const Cart = () => {
 
               {/* Empty Cart State */}
               {items.length === 0 && (
-                <div className="bg-white rounded-lg  border border-gray-200 p-12 text-center">
-                  <div className="w-24 h-24 mx-auto mb-6 bg-gray-100 rounded-full flex items-center justify-center">
-                    <X size={48} className="text-gray-400" />
-                  </div>
+                <div className="bg-white rounded-lg  border border-gray-200 p-4 min-h-[45dvh] flex flex-col items-center justify-center text-center">
+       
                   <h3 className="text-2xl font-semibold text-gray-700 mb-2">Your cart is empty</h3>
-                  <p className="text-gray-600 mb-8 max-w-md mx-auto">
+                  <p className="text-gray-500 mb-8 max-w-md mx-auto">
                     Looks like you haven't added any products to your cart yet. Start shopping to find amazing cleaning supplies!
                   </p>
                   <button
@@ -408,7 +313,8 @@ const Cart = () => {
             </div>
 
             {/* Order Summary Sidebar */}
-            {items.length > 0 && (
+            {/* {items.length > 0 && (
+            )} */}
               <div className="lg:w-1/3">
                 <div className="sticky top-24">
                   <div className="bg-white rounded-lg  border border-gray-200 p-6">
@@ -491,20 +397,22 @@ const Cart = () => {
                       </div>
                     </div>
                     
-                    <div className="mt-8 space-y-3">
-                      <button
-                        onClick={() => navigate('/checkout')}
-                        className="w-full btn-primary-sm py-3 text-lg"
-                      >
-                        Proceed to Checkout
-                      </button>
-                      <button
-                        onClick={handleContinueShopping}
-                        className="w-full btn-primary-outlined-sm py-3"
-                      >
-                        Continue Shopping
-                      </button>
-                    </div>
+                        {items.length > 0 && (
+                        <div className="mt-8 space-y-3">
+                              <button
+                                onClick={() => navigate('/checkout')}
+                                className="w-full btn-primary-sm py-3 text-lg"
+                              >
+                                Proceed to Checkout
+                              </button>
+                            <button
+                              onClick={handleContinueShopping}
+                              className="w-full btn-primary-outlined-sm py-3"
+                            >
+                              Continue Shopping
+                            </button>
+                        </div>
+                         )}
                     
                     <p className="text-sm text-gray-500 mt-6">
                       <span className="text-red-600">*</span> Shipping will be calculated during checkout based on your location.
@@ -535,14 +443,14 @@ const Cart = () => {
                   
                   {/* Subscription Info */}
                   {getSubscriptionItems().length > 0 && (
-                    <div className="bg-green-50 border border-green-200 rounded-lg p-6 mt-6">
-                      <h3 className="font-medium text-green-800 mb-2 flex items-center gap-2">
-                        <RefreshCw size={18} />
+                    <div className="bg-(--color-primary)/5 border border-(--color-primary)/20 rounded-lg p-6 mt-6">
+                      <h3 className="font-medium text-(--color-primary) mb-2 flex items-center gap-2">
+                        
                         Subscription Benefits
                       </h3>
-                      <ul className="text-sm text-green-700 space-y-2">
+                      <ul className="text-sm text-(--color-primary) space-y-2">
                         <li>• Free shipping on all subscription orders</li>
-                        <li>• Save up to 20% compared to one-time purchases</li>
+                        <li>• Save up to 20%</li>
                         <li>• Modify, skip, or cancel anytime</li>
                         <li>• Never run out of essential supplies</li>
                       </ul>
@@ -550,7 +458,6 @@ const Cart = () => {
                   )}
                 </div>
               </div>
-            )}
           </div>
         </div>
       </section>

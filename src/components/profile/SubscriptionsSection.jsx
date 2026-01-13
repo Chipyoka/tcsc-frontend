@@ -62,6 +62,7 @@ const SubscriptionsSection = () => {
           timeout: 15000,
         });
         setUserMemberships(res.data || []);
+ 
       } catch (err) {
         console.warn('User memberships unavailable:', err);
         setUserMemberships([]);

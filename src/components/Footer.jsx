@@ -79,7 +79,7 @@ const Footer = () => {
             </footer>
             <div className="bg-black px-4  md:px-16 py-4 text-white flex flex-col md:flex-row gap-2 justify-between items-start md:items-center text-sm text-left">
                 <p>Copyright © {getCopyrightYear()}. All Rights Reserved.</p>
-                <p>🪄 Magic by: <strong className="hover:underline"><a href="https://chipyoka.vercel.app/" target="_blank" >Moontipo</a></strong></p>
+                <p>A <strong className="hover:underline"><a href="https://www.linkedin.com/in/chipyoka-mwape-8b897623b/" target="_blank" >Moontipo</a></strong> touch 🪄</p>
             </div>
         </>
     )

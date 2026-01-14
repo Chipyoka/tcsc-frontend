@@ -382,7 +382,7 @@ const OrdersTable = ({ tenantId, userId }) => {
                 <option value="all">All Status</option>
                 <option value="completed">Completed</option>
                 <option value="processing">Processing</option>
-                <option value="pending">Pending</option>
+                <option value="pending_payment">Pending</option>
                 <option value="cancelled">Cancelled</option>
                 <option value="draft">Draft</option>
               </select>

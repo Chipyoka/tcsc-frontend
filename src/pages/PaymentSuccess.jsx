@@ -129,7 +129,7 @@ const PaymentSuccess = () => {
                 </div>
                 <div className="flex-1 flex flex-col items-center justify-center px-4 py-12">
                     <div className="bg-white rounded-sm  max-w-md w-full p-8 text-center">
-                        <h2 className="text-2xl font-bold text-gray-800 mb-3">Verification Failed</h2>
+                        <h2 className="text-2xl font-bold mb-3 text-red-400">Verification Failed</h2>
                         <p className="text-gray-600 mb-6">{error}</p>
                         <div className="space-y-3">
                             <button 

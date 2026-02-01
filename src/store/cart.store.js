@@ -160,7 +160,7 @@ const useCartStore = create(
 
       // --- CHECKOUT PREPARATION ---
       // Prepare payload for checkout
-      prepareCheckoutPayload: () => {
+      prepareCheckoutPayload: (x) => {
         const items = get().items;
         
         // Group items by type
@@ -202,7 +202,7 @@ const useCartStore = create(
             oneTimeSubtotal: oneTimeTotal,
             subscriptionSubtotal: subscriptionTotal,
             subtotal: total,
-            total: total // Will have tax/shipping added later
+            total: x
           },
           subscriptionPlans,
           hasMixedItems: get().hasMixedItems(),

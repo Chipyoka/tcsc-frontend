@@ -205,6 +205,10 @@ const Checkout = () => {
     setStep(1);
   };
 
+  const discountedTotalForStripe = Number(getTotal().toFixed(2));
+
+  // console.log("DTFS:", discountedTotalForStripe);
+
   // Construct Stripe payload for backend
   const constructStripePayload = () => {
     const oneTimeItems = getOneTimeItems();
@@ -232,7 +236,7 @@ const Checkout = () => {
           }
         }
       },
-      cartData: prepareCheckoutPayload(),
+      cartData: prepareCheckoutPayload(discountedTotalForStripe),
       metadata: {
         userId: user?.id,
         customerEmail: formData.email,

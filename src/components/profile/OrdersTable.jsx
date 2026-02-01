@@ -175,7 +175,7 @@ const OrdersTable = ({ tenantId, userId }) => {
   // Status badge component
   const StatusBadge = ({ status }) => {
     const statusConfig = {
-      completed: { 
+      paid: { 
         bg: 'bg-green-50', 
         text: 'text-green-700', 
         border: 'border-green-200', 

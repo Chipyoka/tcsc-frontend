@@ -14,7 +14,7 @@ import axiosInstance from "../../api/axiosInstance";
 
 /**
  * Order Details Modal
- * Designed to align visually and architecturally with OrdersTable
+ * Fully aligned with OrdersTable design, helpers, and API shape
  */
 export default function OrderDetailsModal({ orderId, isOpen, onClose }) {
   const [order, setOrder] = useState(null);
@@ -51,6 +51,13 @@ export default function OrderDetailsModal({ orderId, isOpen, onClose }) {
 
   const StatusBadge = ({ status }) => {
     const config = {
+      paid: {
+        bg: "bg-green-50",
+        text: "text-green-700",
+        border: "border-green-200",
+        icon: CheckCircle,
+        label: "Paid",
+      },
       completed: {
         bg: "bg-green-50",
         text: "text-green-700",
@@ -118,7 +125,7 @@ export default function OrderDetailsModal({ orderId, isOpen, onClose }) {
         }, 5000);
 
         const { data } = await axiosInstance.get(`/orders/${orderId}`);
-        setOrder(data.data);
+        setOrder(data?.data ?? null);
       } catch (err) {
         setError(err.response?.data?.message || "Failed to load order details.");
       } finally {
@@ -133,6 +140,8 @@ export default function OrderDetailsModal({ orderId, isOpen, onClose }) {
 
   if (!isOpen) return null;
 
+  const primaryPayment = order?.payments?.[0];
+
   /* ----------------------------------
    * Render
    * ---------------------------------- */
@@ -143,7 +152,9 @@ export default function OrderDetailsModal({ orderId, isOpen, onClose }) {
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
           <div>
-            <h2 className="text-lg font-semibold text-gray-700">Order Details</h2>
+            <h2 className="text-lg font-semibold text-gray-700">
+              Order Details
+            </h2>
             {order?.order_number && (
               <p className="text-sm text-gray-500">{order.order_number}</p>
             )}
@@ -182,12 +193,15 @@ export default function OrderDetailsModal({ orderId, isOpen, onClose }) {
               <div className="flex flex-wrap gap-4 items-center">
                 <StatusBadge status={order.status} />
                 <span className="text-sm text-gray-500">
-                  Placed on <span className="font-bold text-(--color-primary)">{formatDate(order.placed_at || order.created_at)} </span>
+                  Placed on{" "}
+                  <span className="font-medium text-(--color-primary)">
+                    {formatDate(order.placed_at || order.created_at)}
+                  </span>
                 </span>
               </div>
 
               {/* Financial Summary */}
-              <div className="bg-gray-100 grid grid-cols-2 md:grid-cols-4 gap-4 border border-gray-200 rounded-sm p-4">
+              <div className="bg-gray-50 grid grid-cols-2 md:grid-cols-4 gap-4 border border-gray-200 rounded-sm p-4">
                 <div>
                   <p className="text-xs text-gray-500">Subtotal</p>
                   <p className="font-medium">
@@ -214,12 +228,41 @@ export default function OrderDetailsModal({ orderId, isOpen, onClose }) {
                 </div>
               </div>
 
+              {/* Payment Summary */}
+              {primaryPayment && (
+                <div>
+                  <h3 className="text-sm font-semibold mb-2 flex items-center gap-2">
+                    <CreditCard size={16} /> Payment
+                  </h3>
+                  <div className="border border-gray-200 rounded-sm p-4 text-sm grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                      <p className="text-xs text-gray-500">Provider</p>
+                      <p className="font-medium capitalize">
+                        {primaryPayment.provider}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-500">Status</p>
+                      <p className="font-medium capitalize">
+                        {primaryPayment.status}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-500">Paid On</p>
+                      <p className="font-medium">
+                        {formatDate(primaryPayment.created_at)}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
               {/* Items */}
               <div>
                 <h3 className="text-sm font-semibold mb-2 flex items-center gap-2">
                   <Package size={16} /> Items
                 </h3>
-                <div className="divide-y divide-gray-300 border border-gray-200 rounded-sm">
+                <div className="divide-y divide-gray-200 border border-gray-200 rounded-sm">
                   {order.items?.map((item) => (
                     <div
                       key={item.id}
@@ -265,9 +308,10 @@ export default function OrderDetailsModal({ orderId, isOpen, onClose }) {
                 </div>
               )}
 
-              <div>
-                <p className="text-xs text-gray-600">If any of the information is incorrect, kindly contact support</p>
-              </div>
+              <p className="text-xs text-gray-500">
+                If any of the information above is incorrect, please contact
+                support.
+              </p>
             </div>
           )}
         </div>

@@ -224,7 +224,7 @@ const OrdersTable = ({ tenantId, userId }) => {
 
     return (
       <div className="flex flex-col gap-1">
-        <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium ${config.bg} ${config.text} ${config.border} border`}>
+        <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-medium ${config.bg} ${config.text} ${config.border} border`}>
           <Icon size={12} />
           {config.label}
         </span>
@@ -430,9 +430,7 @@ const OrdersTable = ({ tenantId, userId }) => {
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Status
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Payment
-              </th>
+          
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 <button
                   onClick={() => handleSort('total_amount')}
@@ -492,9 +490,6 @@ const OrdersTable = ({ tenantId, userId }) => {
                   </td>
                   <td className="px-6 py-4">
                     <StatusBadge status={order.status} />
-                  </td>
-                  <td className="px-6 py-4">
-                    <PaymentBadge status={order.payment_status} />
                   </td>
                   <td className="px-6 py-4">
                     <div className="text-sm font-medium text-gray-900">

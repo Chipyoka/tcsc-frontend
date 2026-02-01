@@ -191,6 +191,11 @@ export default function OrderDetailsModal({ orderId, isOpen, onClose }) {
             <div className="space-y-6 text-gray-700">
               {/* Meta */}
               <div className="flex flex-wrap gap-4 items-center">
+                 <div>
+                  <p className="font-semibold text-2xl text-gray-700">
+                    {formatCurrency(order.total_amount, order.currency)}
+                  </p>
+                </div>
                 <StatusBadge status={order.status} />
                 <span className="text-sm text-gray-500">
                   Placed on{" "}
@@ -198,34 +203,6 @@ export default function OrderDetailsModal({ orderId, isOpen, onClose }) {
                     {formatDate(order.placed_at || order.created_at)}
                   </span>
                 </span>
-              </div>
-
-              {/* Financial Summary */}
-              <div className="bg-gray-50 grid grid-cols-2 md:grid-cols-4 gap-4 border border-gray-200 rounded-sm p-4">
-                <div>
-                  <p className="text-xs text-gray-500">Subtotal</p>
-                  <p className="font-medium">
-                    {formatCurrency(order.subtotal_amount, order.currency)}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-xs text-gray-500">Shipping</p>
-                  <p className="font-medium">
-                    {formatCurrency(order.shipping_amount, order.currency)}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-xs text-gray-500">Tax</p>
-                  <p className="font-medium">
-                    {formatCurrency(order.taxes_amount, order.currency)}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-xs text-gray-500">Total</p>
-                  <p className="font-semibold text-gray-900">
-                    {formatCurrency(order.total_amount, order.currency)}
-                  </p>
-                </div>
               </div>
 
               {/* Payment Summary */}
@@ -284,29 +261,6 @@ export default function OrderDetailsModal({ orderId, isOpen, onClose }) {
                   ))}
                 </div>
               </div>
-
-              {/* Shipping Address */}
-              {order.shipping_address && (
-                <div>
-                  <h3 className="text-sm font-semibold mb-2 flex items-center gap-2">
-                    <MapPin size={16} /> Shipping Address
-                  </h3>
-                  <div className="border border-gray-200 rounded-sm p-4 text-sm text-gray-600">
-                    <p className="font-medium">
-                      {order.shipping_address.full_name}
-                    </p>
-                    <p>{order.shipping_address.line1}</p>
-                    {order.shipping_address.line2 && (
-                      <p>{order.shipping_address.line2}</p>
-                    )}
-                    <p>
-                      {order.shipping_address.city},{" "}
-                      {order.shipping_address.postal_code}
-                    </p>
-                    <p>{order.shipping_address.country}</p>
-                  </div>
-                </div>
-              )}
 
               <p className="text-xs text-gray-500">
                 If any of the information above is incorrect, please contact

@@ -288,7 +288,8 @@ const ProductDetails = () => {
                 >
                   One-time purchase
                 </button>
-                <button
+                {/* <button
+           
                   type="button"
                   onClick={() => {
                     if (!isAuthenticated) {
@@ -303,7 +304,7 @@ const ProductDetails = () => {
                     : "border-gray-300 text-gray-700 hover:border-gray-400"}`}
                 >
                   Subscribe & Save
-                </button>
+                </button> */}
               </div>
             </div>
 

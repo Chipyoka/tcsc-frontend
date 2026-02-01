@@ -380,7 +380,7 @@ const OrdersTable = ({ tenantId, userId }) => {
                 className="appearance-none pl-4 pr-10 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-(--color-primary) focus:border-transparent"
               >
                 <option value="all">All Status</option>
-                <option value="completed">Completed</option>
+                <option value="paid">Completed</option>
                 <option value="processing">Processing</option>
                 <option value="pending_payment">Pending</option>
                 <option value="cancelled">Cancelled</option>

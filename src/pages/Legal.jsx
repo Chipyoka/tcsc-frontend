@@ -102,7 +102,11 @@ const Legal = () => {
                             <li>All major credit/debit cards accepted via Stripe</li>
                             <li>Business invoicing available for approved accounts</li>
                             <li>Payment terms: Net 30 for qualified businesses</li>
+                            <li>Credit terms may be withdrawn at any time</li>
                         </ul>
+                        <p className="my-2">Late payments may accrue statutory interest and recovery costs under the Late Payment of Commercial Debts (Interest) Act 1998.</p>
+                        <p><strong>Brimu Ventures reserves the right to suspend deliveries, subscriptions, or account access where payment is overdue.</strong></p>
+                        
                         </section>
 
                         <section>
@@ -117,7 +121,7 @@ const Legal = () => {
                             </ul>
                         </div>
                         <p>
-                            Subscription plans are available on weekly, monthly, bi-monthly, and quarterly bases. You may modify or cancel your subscription with 7 days' notice before the next billing cycle.
+                            Subscriptions may be modified or cancelled with seven (7) days’ notice prior to the next billing or delivery cycle.
                         </p>
                         </section>
 
@@ -129,10 +133,58 @@ const Legal = () => {
                         </section>
 
                         <section>
-                        <h3 className="text-lg font-semibold text-gray-700 mb-3">6. Limitation of Liability</h3>
+                        <h3 className="text-lg font-semibold text-gray-700 mb-3">6. Risk & Title</h3>
                         <p>
-                            Brimu Ventures (The Cleaning Supplies Co.) shall not be liable for any indirect, incidental, or consequential damages arising from the use of our products. Our total liability shall not exceed the purchase price of the products in question.
+                            Risk in the goods passes to the customer upon delivery.
                         </p>
+                        <p>
+
+                            Title to the goods remains with Brimu Ventures until full payment of all outstanding sums has been received.
+                        </p>
+                        </section>
+
+                        <section>
+                        <h3 className="text-lg font-semibold text-gray-700 mb-3">7. Product Use & Safety</h3>
+                        <p>
+                            All products must be used strictly in accordance with manufacturer instructions, safety data sheets, and applicable regulations.
+                        </p>
+                        <br />
+                        <p>
+
+                            Where stated, products are intended for professional or commercial use only.
+                        </p>
+                        <br />
+                        <p>Brimu Ventures accepts no liability for loss, damage, or injury arising from misuse, improper storage, or failure to follow safety guidance.</p>
+                        </section>
+
+                        <section>
+                        <h3 className="text-lg font-semibold text-gray-700 mb-3">8. Limitation of Liability</h3>
+                        <p>
+                            Brimu Ventures (The Cleaning Supplies Co.) shall not be liable for any indirect, incidental, or consequential 
+                            damages arising from the use of our products. Our total liability shall not exceed the purchase price of the products supplied.
+                        </p>
+                        <br />
+                        <p>
+                            Nothing in these terms limits liability for death or personal injury caused by negligence or for fraud.
+                        </p>
+                        </section>
+
+                        <section>
+                        <h3 className="text-lg font-semibold text-gray-700 mb-3">9. Force Majeure</h3>
+                        <p>
+                            We shall not be liable for failure or delay in performance caused by events beyond our reasonable control, including but 
+                            not limited to supplier failure, transport disruption, strikes, extreme weather, pandemics, or government action.
+                        </p>
+                    
+                        </section>
+
+                        <section>
+                        <h3 className="text-lg font-semibold text-gray-700 mb-3">10. Governing Law</h3>
+                        <p>
+                          These Terms and Conditions are governed by the laws of England and Wales.
+                        The courts of England and Wales shall have exclusive jurisdiction.
+                        </p>
+                    
                         </section>
                     </div>
                     </div>
@@ -395,11 +447,7 @@ const Legal = () => {
                     </div>
                     </div>
                     <p className="mt-4 text-sm text-gray-500">
-                    Last Updated: {new Date().toLocaleDateString('en-GB', { 
-                        day: 'numeric', 
-                        month: 'long', 
-                        year: 'numeric' 
-                    })}
+                    Last Updated: 9th February 2026.
                     </p>
                 </div>
                 </div>

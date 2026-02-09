@@ -33,7 +33,7 @@ const Footer = () => {
                            
                         </p>
 
-                        {/* <h6>The Cleaning Supplies Co. is a Trademark of <strong>BRIMU VENTURES</strong>.</h6> */}
+                        <h6>The Cleaning Supplies Co. is a Trading name of <strong>BRIMU VENTURES</strong>.</h6>
                     </div>
 
                 </div>

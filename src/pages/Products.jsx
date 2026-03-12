@@ -38,7 +38,7 @@ const Products = () => {
               const response = await axiosInstance.get(
                   `/products/category/${categoryId}`,
                   {
-                      timeout: 30000, // 15s hard timeout
+                      timeout: 600000, // 60s hard timeout
                       signal: controller.signal,
                   }
               );

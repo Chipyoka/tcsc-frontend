@@ -117,6 +117,7 @@ const Checkout = () => {
       let fee = 5; // base rate
       if (["london", "manchester", "birmingham"].includes(town)) fee = 3.5;
       else if (["glasgow", "leeds", "liverpool"].includes(town)) fee = 4.5;
+      else if (["kasama", "ndola", "kitwe"].includes(town)) fee = 0.0;
       else if (["oxford", "cambridge", "reading"].includes(town)) fee = 4.0;
       else fee = 6; // remote/default
       setShippingFee(fee);

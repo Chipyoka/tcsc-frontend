@@ -85,7 +85,7 @@ const Topbar = () => {
                     <br />
                     <p 
                     className="text-sm text-gray-400 font-normal max-w-[80%] truncate"
-                    >{user?.fullName ?? ""}</p>
+                    >{user?.fullName ?? user?.full_name ?? ""}</p>
                 </h4>
                 
             </div>

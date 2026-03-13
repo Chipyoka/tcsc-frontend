@@ -100,7 +100,7 @@ const Checkout = () => {
   // --- Shipping Data with Prefilled User Info ---
   const [formData, setFormData] = useState({
     email: user?.email || "",
-    fullName: user?.fullName || "",
+    fullName: user?.fullName || user?.full_name || "",
     streetAddress: address?.data?.line1 || "",
     country: "GB",
     postcode: address?.data?.postal_code || "",
@@ -219,7 +219,7 @@ const Checkout = () => {
       customerDetails: {
         userId: user?.id,
         email: formData.email,
-        name: formData.fullName,
+        name: formData.fullName || user?.fullName || user?.full_name || "Customer",
         address: {
           line1: formData.streetAddress,
           city: formData.town,

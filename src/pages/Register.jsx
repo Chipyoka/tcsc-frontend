@@ -126,7 +126,9 @@ const Register = () => {
                     </div>
 
                     <div className="mt-8 mb-4">
-                        <button type="submit" className="btn-primary-sm w-full" disabled={loading}>{loading ? 'Registering...' : 'Register'}</button>
+                        <button type="submit" className="btn-primary-sm w-full" disabled={loading}>
+                            {loading ? 'Registering...' : 'Register'}
+                            </button>
                     </div>
 
                     <div className="my-4">
